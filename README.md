@@ -54,7 +54,7 @@ Sigue estos pasos para levantar el entorno de desarrollo local.
 Abre tu terminal y ejecuta el siguiente comando:
 
 ```bash
-git clone [https://github.com/xenthrall/CronoSENA.git](https://github.com/xenthrall/CronoSENA.git)
+git clone https://github.com/xenthrall/CronoSENA.git
 cd CronoSENA
 
 ```
@@ -85,7 +85,7 @@ docker compose up -d --build
 
 Puedes verificar que los contenedores estén activos con 
 ```bash
-docker compose ps.
+docker compose ps
 ```
 4. Instalar Dependencias
 Ejecuta los siguientes comandos para instalar las dependencias de PHP y Node.js dentro del contenedor de la aplicación:
@@ -98,8 +98,8 @@ docker compose exec app composer install
 # Instalar dependencias de NPM (Node.js)
 docker compose exec app npm install
 
-# Compilar los assets con Vite (para desarrollo)
-docker compose exec app npm run dev
+# Compilar los assets con Vite (para desarrollo) solo si es necesario
+docker compose exec app npm run dev #o docker compose exec app npm run build
 ```
 
 5. Configurar la Aplicación
