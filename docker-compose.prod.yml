@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # Contenedor PHP-FPM (Laravel)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cronosena-app
+    container_name: cronosena_app
+    restart: unless-stopped
+    volumes:
+      - ./src:/var/www/html
+    networks:
+      - cronosena
+    command: sh -c "chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && php-fpm"
+
+  # Contenedor Nginx (ahora es el "web")
+  nginx:
+    image: nginx:alpine
+    container_name: cronosena_nginx
+    restart: unless-stopped
+    ports:
+      # Puertos estándar para producción: HTTP y HTTPS
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/prod.conf:/etc/nginx/conf.d/default.conf
+      # Volúmenes compartidos con Certbot para los certificados SSL
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - app
+    networks:
+      - cronosena
+
+  # Contenedor MySQL
+  db:
+    image: mysql:8.0
+    container_name: cronosena_db
+    restart: always
+    environment:
+      # Usa un archivo .env para las contraseñas en producción
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - cronosena
+
+  # Nuevo contenedor para Certbot (Let's Encrypt)
+  certbot:
+    image: certbot/certbot
+    container_name: cronosena_certbot
+    volumes:
+      # Volúmenes compartidos con Nginx
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+
+networks:
+  cronosena:
+    driver: bridge
+
+volumes:
+  db_data:
+    driver: local
