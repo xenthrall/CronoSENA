@@ -51,10 +51,12 @@ services:
     networks:
       - cronosena
 
-  # Nuevo contenedor para Certbot (Let's Encrypt)
+  # Contenedor para Certbot (Let's Encrypt)
   certbot:
     image: certbot/certbot
     container_name: cronosena_certbot
+    ##ports:
+    ##  - "80:80"
     volumes:
       # Volúmenes compartidos con Nginx
       - ./certbot/conf:/etc/letsencrypt
