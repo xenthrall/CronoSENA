@@ -13,4 +13,12 @@ class TipoCompetencia extends Model
         'nombre', 
         'descripcion'
     ];
+
+    /**
+     * Relación: un tipo de competencia tiene muchas competencias.
+     */
+    public function competencias()
+    {
+        return $this->hasMany(Competencia::class, 'tipo_competencia_id');
+    }
 }

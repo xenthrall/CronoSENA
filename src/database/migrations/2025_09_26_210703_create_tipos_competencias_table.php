@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipos_competencia', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('nombre', 100)->unique();
             $table->text('descripcion')->nullable();
             $table->timestamps();
         });
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tipo_competencias');
+        Schema::dropIfExists('tipos_competencia');
     }
 };
