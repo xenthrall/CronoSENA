@@ -16,6 +16,7 @@ return new class extends Migration
 
             // Relación con tipos_competencia
             $table->foreignId('tipo_competencia_id')
+                ->nullable()
                 ->constrained('tipos_competencia')
                 ->cascadeOnUpdate()
                 ->restrictOnDelete();
