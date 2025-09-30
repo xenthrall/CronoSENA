@@ -150,6 +150,7 @@
 
           <div class="actions">
             <a class="button btn-primary" href="https://github.com/xenthrall/CronoSENA" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
+            <a class="button btn-primary" href="https://cronosena.site/admin" target="" rel="noopener noreferrer">Try Demo</a>
           </div>
         </article>
 
@@ -157,8 +158,9 @@
           <h3 id="resumen-rapido">Instalación Rápida</h3>
           <p class="muted">Para ejecutar el proyecto localmente, clona el repositorio y utiliza Docker Compose.</p>
           <pre class="cmd">git clone https://github.com/xenthrall/CronoSENA.git
-cd CronoSENA
-docker compose up -d --build</pre>
+            cd CronoSENA
+            docker compose up -d --build
+          </pre>
           <div class="muted" style="font-size:13px;margin-top:12px">Consulta el archivo <code>README.md</code> para ver instrucciones detalladas y configuración de variables de entorno.</div>
         </aside>
       </section>

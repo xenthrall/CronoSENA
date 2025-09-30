@@ -1,0 +1,182 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Competencia;
+
+class CompetenciaSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $competencias = [
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220201501',
+                'nombre' => 'FISICA',
+                'descripcion_norma' => 'APLICACIÓN DE CONOCIMIENTOS DE LAS CIENCIAS NATURALES DE ACUERDO CON SITUACIONES DEL CONTEXTO PRODUCTIVO Y SOCIAL.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220601501',
+                'nombre' => 'PROTECCIÓN PARA LA SALUD Y EL MEDIO AMBIENTE.',
+                'descripcion_norma' => 'APLICAR PRÁCTICAS DE PROTECCIÓN AMBIENTAL, SEGURIDAD Y SALUD EN EL TRABAJO DE ACUERDO CON LAS POLÍTICAS ORGANIZACIONALES Y LA NORMATIVIDAD VIGENTE.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501098',
+                'nombre' => 'ADOPCIÓN DE BUENAS PRÁCTICAS EN EL PROCESO DE DESARROLLO DE SOFTWARE.',
+                'descripcion_norma' => 'Controlar la calidad del servicio de software de acuerdo con los estándares técnicos',
+                'duracion_horas' => 144,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501096',
+                'nombre' => 'CONSTRUCCIÓN DEL SOFTWARE.',
+                'descripcion_norma' => 'DESARROLLAR LA SOLUCIÓN DE SOFTWARE DE ACUERDO CON EL DISEÑO Y METODOLOGÍAS DE DESARROLLO',
+                'duracion_horas' => 1008,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240201524',
+                'nombre' => 'COMUNICACIÓN',
+                'descripcion_norma' => 'DESARROLLAR PROCESOS DE COMUNICACIÓN EFICACES Y EFECTIVOS, TENIENDO EN CUENTA SITUACIONES DE ORDEN SOCIAL, PERSONAL Y PRODUCTIVO.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501095',
+                'nombre' => 'MODELADO DE LOS ARTEFACTOS DEL SOFTWARE.',
+                'descripcion_norma' => 'Diseñar la solución de software de acuerdo con procedimientos y requisitos técnicos',
+                'duracion_horas' => 336,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '210201501',
+                'nombre' => 'Ejercer derechos fundamentales del trabajo',
+                'descripcion_norma' => 'Ejercer derechos fundamentales del trabajo en el marco de la constitución política y los convenios internacionales.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240201526',
+                'nombre' => 'ETICA PARA LA CONSTRUCCIÓN DE UNA CULTURA DE PAZ.',
+                'descripcion_norma' => 'Enrique Low Murtra-Interactuar en el contexto productivo y social de acuerdo con principios éticos para la construcción de una cultura de paz.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501092',
+                'nombre' => 'ESPECIFICACIÓN DE REQUISITOS DEL SOFTWARE.',
+                'descripcion_norma' => 'Establecer requisitos de la solución de software de acuerdo con estándares y procedimiento técnico',
+                'duracion_horas' => 144,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501094',
+                'nombre' => 'ELABORACIÓN DE LA PROPUESTA TÉCNICA DEL SOFTWARE.',
+                'descripcion_norma' => 'Estructurar propuesta técnica de servicio de tecnología de la información según requisitos técnicos y normativa',
+                'duracion_horas' => 144,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501093',
+                'nombre' => 'ANÁLISIS DE LA ESPECIFICACIÓN DE REQUISITOS DEL SOFTWARE.',
+                'descripcion_norma' => 'Evaluar requisitos de la solución de software de acuerdo con metodologías de análisis y estándares',
+                'duracion_horas' => 288,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '230101507',
+                'nombre' => 'ACTIVIDAD FÍSICA Y HÁBITOS DE VIDA SALUDABLE',
+                'descripcion_norma' => 'GENERAR HÁBITOS SALUDABLES DE VIDA MEDIANTE LA APLICACIÓN DE PROGRAMAS DE ACTIVIDAD FÍSICA EN LOS CONTEXTOS PRODUCTIVOS Y SOCIALES.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240201529',
+                'nombre' => 'CULTURA EMPRENDEDORA Y EMPRESARIAL.',
+                'descripcion_norma' => 'Gestionar procesos propios de la cultura emprendedora y empresarial de acuerdo con el perfil personal y los requerimientos de los contextos productivo y social.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501097',
+                'nombre' => 'IMPLANTACIÓN DEL SOFTWARE.',
+                'descripcion_norma' => 'Implementar la solución de software de acuerdo con los requisitos de operación y modelos de referencia',
+                'duracion_horas' => 144,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240202501',
+                'nombre' => 'INGLES',
+                'descripcion_norma' => 'INTERACTUAR EN LENGUA INGLESA DE FORMA ORAL Y ESCRITA DENTRO DE CONTEXTOS SOCIALES Y LABORALES SEGÚN LOS CRITERIOS ESTABLECIDOS POR EL MARCO COMÚN EUROPEO DE REFERENCIA PARA LAS LENGUAS.',
+                'duracion_horas' => 384,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240201064',
+                'nombre' => 'INVESTIGACIÓN',
+                'descripcion_norma' => 'Orientar investigación formativa según referentes técnicos',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240201528',
+                'nombre' => 'MATEMÁTICAS',
+                'descripcion_norma' => 'Razonar cuantitativamente frente a situaciones susceptibles de ser abordadas de manera matemática en contextos laborales, sociales y personales.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '240201530',
+                'nombre' => 'INDUCCIÓN',
+                'descripcion_norma' => 'Resultado de Aprendizaje de la Inducción.',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '999999999',
+                'nombre' => 'RESULTADOS DE APRENDIZAJE ETAPA PRACTICA',
+                'descripcion_norma' => 'RESULTADOS DE APRENDIZAJE ETAPA PRACTICA',
+                'duracion_horas' => 864,
+                'version' => '1',
+            ],
+            [
+                'tipo_competencia_id' => 1,
+                'codigo_norma' => '220501046',
+                'nombre' => 'TIC',
+                'descripcion_norma' => 'Utilizar herramientas informáticas de acuerdo con las necesidades de manejo de información',
+                'duracion_horas' => 48,
+                'version' => '1',
+            ],
+        ];
+
+        foreach ($competencias as $data) {
+            Competencia::create($data);
+        }
+    }
+}
