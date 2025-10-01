@@ -19,6 +19,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationGroup;
+use Filament\Support\Assets\Css;
+use Filament\Support\Assets\Js;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -71,11 +74,12 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
-
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
+            //->spa() //Habilitar la aplicación de una sola página (SPA)
+            ->unsavedChangesAlerts()
             //->sidebarFullyCollapsibleOnDesktop() //Contraer la barra lateral completamente
-            ;
+        ;
     }
 }
