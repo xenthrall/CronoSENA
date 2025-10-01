@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\TipoCompetencias\Schemas;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\TextArea;
+use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
 
 class TipoCompetenciaForm
