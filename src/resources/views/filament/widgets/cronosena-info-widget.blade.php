@@ -3,6 +3,8 @@
         <div class="w-full max-w-2xl mx-auto">
 
         <!-- Widget Card -->
+         <!-- Scripts and styles are bundled using Vite 
+        @vite(['resources/css/app.css', 'resources/js/app.js'])-->
             <div class="flex items-center gap-4">
                 
                 <!-- Logo / Enlace a GitHub (SVG más pequeño) -->
