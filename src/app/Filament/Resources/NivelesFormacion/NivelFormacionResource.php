@@ -29,6 +29,8 @@ class NivelFormacionResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'programas';
 
+    protected static ?int $navigationSort = 4;
+
 
     public static function form(Schema $schema): Schema
     {
