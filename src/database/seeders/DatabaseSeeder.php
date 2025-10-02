@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             TiposCompetenciaSeeder::class,
             CompetenciaSeeder::class,
             NombreProgramaEspecialSeeder::class,
+            NivelFormacionSeeder::class,
         ]);
     }
 }
