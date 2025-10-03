@@ -13,12 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-       $this->call([
+        $this->call([
             AdminUserSeeder::class,
             TiposCompetenciaSeeder::class,
             CompetenciaSeeder::class,
             NombreProgramaEspecialSeeder::class,
             NivelFormacionSeeder::class,
+            ProgramaSeeder::class,
+
         ]);
     }
 }
