@@ -13,7 +13,8 @@ class ProgramaForm
         return $schema
             ->components([
                 TextInput::make('codigo_programa')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord: true),
                 TextInput::make('nombre')
                     ->required(),
                 TextInput::make('duracion_total_horas')
