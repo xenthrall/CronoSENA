@@ -60,6 +60,7 @@ class CompetenciasTable
             ->filters([
                 //Filtrar por tipo de competencia
                 SelectFilter::make('tipo_competencia_id')
+                    ->label('Tipo de Competencia')
                     ->relationship('tipoCompetencia', 'nombre', hasEmptyOption: true)
                     ->emptyRelationshipOptionLabel('Sin asignar'),
 
