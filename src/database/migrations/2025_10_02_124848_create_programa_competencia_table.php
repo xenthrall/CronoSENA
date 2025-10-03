@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('programa_competencia', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('programa_id')->constrained('programas')->onDelete('cascade');
             $table->foreignId('competencia_id')->constrained('competencias')->onDelete('cascade');
-            $table->timestamps();
+
+            $table->primary(['programa_id', 'competencia_id']);// Llave primaria compuesta
         });
     }
 
