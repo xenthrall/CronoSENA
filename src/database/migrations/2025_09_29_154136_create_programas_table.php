@@ -13,13 +13,21 @@ return new class extends Migration
     {
         Schema::create('programas', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo_programa');
+            $table->string('codigo_programa')->unique();
             $table->string('nombre');
-            $table->string('duracion_total_horas');
-            $table->timestamps();
+            $table->integer('duracion_total_horas');
 
-            $table->foreignId('nivel_formacion_id')->constrained('niveles_formacion')->onDelete('cascade');
-            $table->foreignId('nombre_programa_especial_id')->constrained('nombre_programa_especial')->onDelete('cascade');
+            $table->foreignId('nivel_formacion_id')
+                ->nullable()
+                ->constrained('niveles_formacion')
+                ->onDelete('cascade');
+
+            $table->foreignId('nombre_programa_especial_id')
+                ->nullable()
+                ->constrained('nombre_programa_especial')
+                ->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 

@@ -18,6 +18,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Navigation\NavigationGroup;
+use Filament\Support\Assets\Css;
+use Filament\Support\Assets\Js;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,6 +57,34 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('programas')
+                    ->icon('heroicon-o-book-open')
+                    ->collapsed(), //contraible deshabilitado -> false
+                NavigationGroup::make()
+                    ->label('Blog')
+                    ->icon('heroicon-o-pencil'),
+                NavigationGroup::make()
+                    ->label(fn(): string => __('navigation.settings'))
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->collapsed(),
+
+
+            ])
+
+            ->assets([
+                Css::make('custom-stylesheet', resource_path('css/custom.css')),
+                //Js::make('custom-script', resource_path('js/custom.js')),
+            ])
+            //->topNavigation() //Habilitar la barra de navegación superior
+
+            ->sidebarCollapsibleOnDesktop()
+            //->spa() //Habilitar la aplicación de una sola página (SPA)
+            ->unsavedChangesAlerts()
+            //->sidebarFullyCollapsibleOnDesktop() //Contraer la barra lateral completamente
+        ;
     }
 }

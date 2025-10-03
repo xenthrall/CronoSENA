@@ -1,38 +1,36 @@
 <?php
 
-namespace App\Filament\Resources\TipoCompetencias;
+namespace App\Filament\Resources\NivelesFormacion;
 
-use App\Filament\Resources\TipoCompetencias\Pages\ManageTipoCompetencias;
-use App\Models\TipoCompetencia;
+use App\Filament\Resources\NivelesFormacion\Pages\ManageNivelesFormacion;
+use App\Models\NivelFormacion;
 use BackedEnum;
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Navigation\NavigationGroup;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class TipoCompetenciaResource extends Resource
+class NivelFormacionResource extends Resource
 {
-    protected static ?string $model = TipoCompetencia::class;
+    protected static ?string $model = NivelFormacion::class;
 
     //protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'nombre';
 
-    protected static ?string $navigationLabel = 'Tipos de Competencias';
+    protected static ?string $navigationLabel = 'Niveles de Formación';
 
     protected static string|\UnitEnum|null $navigationGroup = 'programas';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
+
 
     public static function form(Schema $schema): Schema
     {
@@ -40,21 +38,6 @@ class TipoCompetenciaResource extends Resource
             ->components([
                 TextInput::make('nombre')
                     ->required(),
-                Textarea::make('descripcion')
-                    ->columnSpanFull(),
-            ]);
-    }
-
-    public static function infolist(Schema $schema): Schema
-    {
-        return $schema
-            ->components([
-                TextEntry::make('nombre'),
-                TextEntry::make('descripcion'),
-                TextEntry::make('created_at')
-                    ->dateTime(),
-                TextEntry::make('updated_at')
-                    ->dateTime(),
             ]);
     }
 
@@ -65,18 +48,15 @@ class TipoCompetenciaResource extends Resource
             ->columns([
                 TextColumn::make('nombre')
                     ->searchable(),
-                TextColumn::make('descripcion')
-                    ->limit(50)
-                    ->toggleable(isToggledHiddenByDefault: true) //  ocultar por defecto
-                    ->tooltip(fn($record) => $record->descripcion), //  muestra completo al pasar mouse
-
+                TextColumn::make('deleted_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->label('Creado')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Actualizado')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -85,7 +65,6 @@ class TipoCompetenciaResource extends Resource
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])
@@ -99,7 +78,7 @@ class TipoCompetenciaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageTipoCompetencias::route('/'),
+            'index' => ManageNivelesFormacion::route('/'),
         ];
     }
 }
