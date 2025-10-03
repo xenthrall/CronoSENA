@@ -4,9 +4,9 @@ namespace App\Filament\Resources\TipoCompetencias\Pages;
 
 use App\Filament\Resources\TipoCompetencias\TipoCompetenciaResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListTipoCompetencias extends ListRecords
+class ManageTipoCompetencias extends ManageRecords
 {
     protected static string $resource = TipoCompetenciaResource::class;
 
