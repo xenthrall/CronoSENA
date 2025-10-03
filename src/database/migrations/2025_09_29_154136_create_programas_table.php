@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('nombre');
             $table->integer('duracion_total_horas');
 
+            $table->string('version')->default('1')->nullable();
+
             $table->foreignId('nivel_formacion_id')
                 ->nullable()
                 ->constrained('niveles_formacion')

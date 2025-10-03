@@ -13,6 +13,7 @@ class Programa extends Model
         'codigo_programa',
         'nombre',
         'duracion_total_horas',
+        'version',
         'nivel_formacion_id',
         'nombre_programa_especial_id',
     ];

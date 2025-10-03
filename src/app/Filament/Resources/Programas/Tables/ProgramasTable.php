@@ -44,6 +44,11 @@ class ProgramasTable
                     ->icons([
                         'heroicon-m-x-circle' => fn($state): bool => $state === 'Sin asignar',
                     ]),
+
+                TextColumn::make('version')
+                    ->label('Versión')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                    
                 TextColumn::make('created_at')
                     ->label('Creado')
                     ->dateTime()

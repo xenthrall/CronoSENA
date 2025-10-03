@@ -29,6 +29,10 @@ class ProgramaForm
                     ->nullable()
                     ->searchable()
                     ->preload(),
+                TextInput::make('version')
+                    ->label('Versión')
+                    ->maxLength(20)
+                    ->default('1'),
             ]);
     }
 }
