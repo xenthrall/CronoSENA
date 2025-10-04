@@ -12,6 +12,9 @@ class EstadoFicha extends Model
     protected $fillable = ['nombre', 'codigo', 'color', 'orden', 'activo'];
 
 
+    /**
+     * Un estado de ficha tiene muchas fichas
+     */
     public function fichas()
     {
         return $this->hasMany(Ficha::class);

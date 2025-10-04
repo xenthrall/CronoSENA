@@ -18,7 +18,7 @@ class Programa extends Model
         'nombre_programa_especial_id',
     ];
 
-    
+
     public function nivelFormacion()
     {
         return $this->belongsTo(NivelFormacion::class, 'nivel_formacion_id');
@@ -29,11 +29,19 @@ class Programa extends Model
         return $this->belongsTo(NombreProgramaEspecial::class, 'nombre_programa_especial_id');
     }
 
+    /*
+    * Una programa tiene muchas fichas
+    */
+    public function fichas()
+    {
+        return $this->hasMany(Ficha::class);
+    }
+
 
     /**
      * Las competencias que pertenecen al programa.
      */
-    public function competencias():BelongsToMany
+    public function competencias(): BelongsToMany
     {
         return $this->belongsToMany(Competencia::class, 'programa_competencia', 'programa_id', 'competencia_id');
     }

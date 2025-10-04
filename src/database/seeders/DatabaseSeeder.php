@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             NivelFormacionSeeder::class,
             ProgramaSeeder::class,
             JornadaSeeder::class,
+            EstadosFichaSeeder::class,
 
         ]);
     }
