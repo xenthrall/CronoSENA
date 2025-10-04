@@ -22,12 +22,12 @@ return new class extends Migration
             $table->foreignId('nivel_formacion_id')
                 ->nullable()
                 ->constrained('niveles_formacion')
-                ->onDelete('cascade');
+                ->nullOnDelete();
 
             $table->foreignId('nombre_programa_especial_id')
                 ->nullable()
                 ->constrained('nombre_programa_especial')
-                ->onDelete('cascade');
+                ->nullOnDelete();
 
             $table->timestamps();
         });
