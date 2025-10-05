@@ -4,8 +4,6 @@ namespace App\Filament\Resources\Jornadas;
 
 use App\Filament\Resources\Jornadas\Pages\ManageJornadas;
 use App\Models\Jornada;
-use BackedEnum;
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -16,7 +14,6 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -27,7 +24,11 @@ class JornadaResource extends Resource
 {
     protected static ?string $model = Jornada::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?string $navigationLabel = 'Jornadas';
+
+    protected static string|\UnitEnum|null $navigationGroup = 'fichas';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $recordTitleAttribute = 'nombre';
 
