@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Municipio;
+use App\Models\Municipality;
 
-class MunicipioSeeder extends Seeder
+class MunicipalitySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,12 +14,12 @@ class MunicipioSeeder extends Seeder
     public function run(): void
     {
         $municipios = [
-            ['nombre' => 'Municipio 1'],
-            ['nombre' => 'Municipio 2'],
-            ['nombre' => 'Municipio 3'],
+            ['name' => 'Municipio 1'],
+            ['name' => 'Municipio 2'],
+            ['name' => 'Municipio 3'],
         ];
         foreach ($municipios as $municipio){
-            Municipio::firstOrCreate(['nombre' => $municipio['nombre']], $municipio);
+            Municipality::firstOrCreate(['name' => $municipio['name']], $municipio);
         }
     }
 }

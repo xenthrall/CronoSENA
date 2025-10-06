@@ -25,7 +25,7 @@ class Ficha extends Model
      */
     public function programa()
     {
-        return $this->belongsTo(Programa::class);
+        return $this->belongsTo(Program::class);
     }
 
     public function estado()

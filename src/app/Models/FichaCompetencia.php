@@ -29,7 +29,7 @@ class FichaCompetencia extends Model
 
     public function competencia()
     {
-        return $this->belongsTo(Competencia::class);
+        return $this->belongsTo(Competency::class);
     }
 
     /*

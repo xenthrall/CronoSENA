@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             CompetencySeeder::class,
             TrainingLevelSeeder::class,
             SpecialProgramNameSeeder::class,
+            MunicipalitySeeder::class,
 
         ]);
     }

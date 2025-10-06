@@ -46,8 +46,7 @@ class InstructorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\CompetenciasRelationManager::class,
-        ];
+            ];
     }
 
     public static function getPages(): array
