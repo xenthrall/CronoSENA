@@ -1,42 +1,41 @@
 <?php
 
-namespace App\Filament\Resources\NivelesFormacion;
+namespace App\Filament\Resources\TrainingLevels;
 
-use App\Filament\Resources\NivelesFormacion\Pages\ManageNivelesFormacion;
-use App\Models\NivelFormacion;
-use BackedEnum;
+use App\Filament\Resources\TrainingLevels\Pages\ManageTrainingLevels;
+use App\Models\TrainingLevel;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
-use Filament\Navigation\NavigationGroup;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class NivelFormacionResource extends Resource
+class TrainingLevelResource extends Resource
 {
-    protected static ?string $model = NivelFormacion::class;
-
-    //protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'nombre';
+    protected static ?string $model = TrainingLevel::class;
 
     protected static ?string $navigationLabel = 'Niveles de Formación';
 
+    protected static ?string $pluralModelLabel = 'Niveles de Formación';
+
+    protected static ?string $modelLabel = 'Nivel de Formación';
+
     protected static string|\UnitEnum|null $navigationGroup = 'programas';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
 
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('nombre')
+                TextInput::make('name')
+                    ->label('Nombre')
                     ->required(),
             ]);
     }
@@ -44,19 +43,18 @@ class NivelFormacionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('nombre')
+            ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('nombre')
+                TextColumn::make('name')
+                    ->label('Nombre')
                     ->searchable(),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
+                    ->label('Creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Actualización')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -78,7 +76,7 @@ class NivelFormacionResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageNivelesFormacion::route('/'),
+            'index' => ManageTrainingLevels::route('/'),
         ];
     }
 }

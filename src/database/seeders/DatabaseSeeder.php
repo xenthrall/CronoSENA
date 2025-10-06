@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             CompetencyTypeSeeder::class,
             CompetencySeeder::class,
+            TrainingLevelSeeder::class,
 
         ]);
     }
