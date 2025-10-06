@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Instructor extends Model
 {
-     protected $table = 'instructores';
+    protected $table = 'instructores';
     protected $fillable = [
         'documento',
         'tipo_documento',
@@ -37,4 +38,9 @@ class Instructor extends Model
         return $this->belongsTo(Profesion::class, 'profesion_id');
     }
     */
+
+    protected $casts = [
+        'activo' => 'boolean',
+    ];
+
 }
