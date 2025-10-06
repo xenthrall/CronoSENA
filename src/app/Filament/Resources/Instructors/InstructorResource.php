@@ -8,10 +8,8 @@ use App\Filament\Resources\Instructors\Pages\ListInstructors;
 use App\Filament\Resources\Instructors\Schemas\InstructorForm;
 use App\Filament\Resources\Instructors\Tables\InstructorsTable;
 use App\Models\Instructor;
-use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 
 class InstructorResource extends Resource
@@ -48,7 +46,7 @@ class InstructorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CompetenciasRelationManager::class,
         ];
     }
 
