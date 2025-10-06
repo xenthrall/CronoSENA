@@ -42,7 +42,7 @@ class Competencia extends Model
     /**
      * Relación: una competencia puede ser asignada en instructores.
      */
-    public function instructors(): BelongsToMany
+    public function instructores(): BelongsToMany
     {
         return $this->belongsToMany(Instructor::class, 'instructor_competencia', 'competencia_id', 'instructor_id');
     }

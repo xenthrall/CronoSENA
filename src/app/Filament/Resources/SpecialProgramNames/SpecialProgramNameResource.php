@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\NombreProgramaEspecials;
+namespace App\Filament\Resources\SpecialProgramNames;
 
-use App\Filament\Resources\NombreProgramaEspecials\Pages\ManageNombreProgramaEspecials;
-use App\Models\NombreProgramaEspecial;
+use App\Filament\Resources\SpecialProgramNames\Pages\ManageSpecialProgramNames;
+use App\Models\SpecialProgramName;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -16,25 +16,30 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class NombreProgramaEspecialResource extends Resource
+class SpecialProgramNameResource extends Resource
 {
-    protected static ?string $model = NombreProgramaEspecial::class;
-
-    //protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
-    protected static ?string $recordTitleAttribute = 'nombre';
+    protected static ?string $model = SpecialProgramName::class;
 
     protected static ?string $navigationLabel = 'Programas Especiales';
 
+    protected static ?string $pluralModelLabel = 'Programas Especiales';
+
+    protected static ?string $modelLabel = 'Programa Especial';
+
     protected static string|\UnitEnum|null $navigationGroup = 'programas';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('nombre')
+                TextInput::make('name')
+                    ->label('Nombre del Programa Especial')
+                    ->maxLength(50)
+                    ->unique(ignoreRecord: true)
                     ->required(),
             ]);
     }
@@ -42,16 +47,19 @@ class NombreProgramaEspecialResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('nombre')
+            ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('nombre')
+                TextColumn::make('name')
+                    ->label('Nombre del Programa Especial')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('Creación')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
                     ->dateTime()
+                    ->label('Actualización')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -72,7 +80,7 @@ class NombreProgramaEspecialResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageNombreProgramaEspecials::route('/'),
+            'index' => ManageSpecialProgramNames::route('/'),
         ];
     }
 }
