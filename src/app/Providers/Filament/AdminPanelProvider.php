@@ -65,8 +65,12 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-book-open')
                     ->collapsed(), //contraible deshabilitado -> false
                 NavigationGroup::make()
-                    ->label('Blog')
+                    ->label('fichas')
                     ->icon('heroicon-o-pencil'),
+                NavigationGroup::make()
+                    ->label('instructores')
+                    ->icon('heroicon-o-user-group')
+                    ->collapsed(),
                 NavigationGroup::make()
                     ->label(fn(): string => __('navigation.settings'))
                     ->icon('heroicon-o-cog-6-tooth')

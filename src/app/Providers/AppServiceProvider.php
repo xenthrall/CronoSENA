@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Providers;
+use App\Observers\FichaObserver;
+use App\Models\Ficha;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Ficha::observe(FichaObserver::class);
     }
 }
