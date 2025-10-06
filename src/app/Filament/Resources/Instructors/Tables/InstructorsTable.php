@@ -25,14 +25,45 @@ class InstructorsTable
                     ->label('Instructor')
                     ->searchable() // busca en esta columna
                     ->wrap(),
+                TextColumn::make('documento')
+                    ->label('Documento')
+                    ->searchable()
+                    ->formatStateUsing(fn ($state, $record) => "{$record->tipo_documento} {$record->documento}"),
+                
+                TextColumn::make('equipoEjecutor.nombre')
+                    ->label('Equipo ejecutor')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
 
+                TextColumn::make('especialidad')
+                    ->label('Especialidad')
+                    ->searchable()
+                    ->limit(25)
+                    //->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->tooltip(fn($record) => $record->especialidad),
+                
+                TextColumn::make('correo')
+                    ->label('Correo')
+                    ->searchable()
+                    ->toggleable(),
+
+                TextColumn::make('telefono')
+                    ->label('Teléfono')
+                    ->searchable()
+                    ->toggleable(),
+                    
                 IconColumn::make('activo')
-                    ->boolean(),
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: false),
+
                 TextColumn::make('created_at')
+                    ->label('Creado')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Actualizado')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
