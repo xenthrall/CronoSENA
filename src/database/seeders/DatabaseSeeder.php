@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Shift;
 use App\Models\SpecialProgramName;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
             TrainingLevelSeeder::class,
             SpecialProgramNameSeeder::class,
             MunicipalitySeeder::class,
+            ShiftSeeder::class,
 
         ]);
     }

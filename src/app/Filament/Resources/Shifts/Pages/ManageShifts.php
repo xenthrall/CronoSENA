@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Jornadas\Pages;
+namespace App\Filament\Resources\Shifts\Pages;
 
-use App\Filament\Resources\Jornadas\JornadaResource;
+use App\Filament\Resources\Shifts\ShiftResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ManageRecords;
 
-class ManageJornadas extends ManageRecords
+class ManageShifts extends ManageRecords
 {
-    protected static string $resource = JornadaResource::class;
+    protected static string $resource = ShiftResource::class;
 
     protected function getHeaderActions(): array
     {
