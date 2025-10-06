@@ -10,18 +10,18 @@ class Instructor extends Model
 {
     protected $table = 'instructores';
     protected $fillable = [
-        'documento',
-        'tipo_documento',
-        'nombre_completo',
-        'nombre',
-        'apellido',
-        'correo',
-        'telefono',
-        'equipo_ejecutor_id',
-        'profesion_id',
-        'especialidad',
-        'foto_url',
-        'activo',
+        'document_number',
+        'document_type',
+        'full_name',
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'executing_team_id',
+        'profession_id',
+        'specialty',
+        'photo_url',
+        'is_active',
     ];
 
     /**
@@ -29,10 +29,10 @@ class Instructor extends Model
      */
 
     // Un instructor pertenece a un equipo ejecutor
-    public function equipoEjecutor()
-    {
-        return $this->belongsTo(EquipoEjecutor::class, 'equipo_ejecutor_id');
-    }
+    public function executingTeam()
+{
+    return $this->belongsTo(ExecutingTeam::class, 'executing_team_id');
+}
 
     /*/ Un instructor pertenece a una profesión
     public function profesion()
@@ -41,13 +41,13 @@ class Instructor extends Model
     }
     */
     //Un instructor tiene muchas competencias
-    public function competencias(): BelongsToMany
+    public function competencies(): BelongsToMany
     {
-        return $this->belongsToMany(Competencia::class, 'instructor_competencia', 'instructor_id', 'competencia_id');
+        return $this->belongsToMany(Competency::class, 'instructor_competencia', 'instructor_id', 'competencia_id');
     }
 
     protected $casts = [
-        'activo' => 'boolean',
+        'is_active' => 'boolean',
     ];
 
 }

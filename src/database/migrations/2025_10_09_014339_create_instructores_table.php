@@ -13,30 +13,32 @@ return new class extends Migration
     {
         Schema::create('instructores', function (Blueprint $table) {
             $table->id();
-            $table->string('documento')->unique();
-            $table->string('tipo_documento')->nullable();
-            $table->string('nombre_completo')->nullable();
-            $table->string('nombre')->nullable();
-            $table->string('apellido')->nullable();
-            $table->string('correo')->unique();
-            $table->string('telefono')->nullable();
+            
+            $table->string('document_number')->unique();
+            $table->string('document_type')->nullable();
+            $table->string('full_name')->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('email')->unique();
+            $table->string('phone')->nullable();
 
             // Relaciones
-            $table->foreignId('equipo_ejecutor_id')
+            $table->foreignId('executing_team_id')
                 ->nullable()
-                ->constrained('equipo_ejecutores')
-                ->cascadeOnUpdate()
+                ->constrained('executing_teams')
                 ->nullOnDelete();
 
-            /*$table->foreignId('profesion_id')
-                ->constrained('profesiones')
+            /*
+            $table->foreignId('profession_id')
+                ->nullable()
+                ->constrained('professions')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();
             */
 
-            $table->string('especialidad')->nullable();
-            $table->string('foto_url')->nullable();
-            $table->boolean('activo')->default(true);
+            $table->string('specialty')->nullable();
+            $table->string('photo_url')->nullable();
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
         });

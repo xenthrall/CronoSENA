@@ -28,11 +28,6 @@ class InstructorResource extends Resource
     
     protected static ?string $pluralModelLabel = 'Instructores';
 
-    public static function getSlug(?\Filament\Panel $panel = null): string
-    {
-        return 'instructores'; // slug personalizado
-    }
-
     public static function form(Schema $schema): Schema
     {
         return InstructorForm::configure($schema);

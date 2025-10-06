@@ -20,26 +20,26 @@ class InstructorForm
                 Section::make('Información personal')
                     ->description('Datos básicos del instructor.')
                     ->schema([
-                        TextInput::make('nombre_completo')
+                        TextInput::make('full_name')
                             ->label('Nombre completo')
                             ->required()
                             ->maxLength(50)
                             ->columnSpanFull()
                             ->placeholder('Ej. Carlos Rodríguez'),
                         /*    
-                        TextInput::make('nombre')
+                        TextInput::make('first_name')
                             ->label('Nombres')
                             ->required()
                             ->maxLength(50)
                             ->placeholder('Ej. Carlos'),
-                        TextInput::make('apellido')
+                        TextInput::make('last_name')
                             ->label('Apellidos')
                             ->required()
                             ->maxLength(50)
                             ->placeholder('Ej. Rodríguez'),
                         */
 
-                        Select::make('tipo_documento')
+                        Select::make('document_type')
                             ->label('Tipo de documento')
                             ->options([
                                 'CC' => 'Cédula de ciudadanía',
@@ -49,16 +49,16 @@ class InstructorForm
                             ])
                             ->native(false)
                             ->required(),
-                        TextInput::make('documento')
+                        TextInput::make('document_number')
                             ->label('Número de documento')
                             ->required()
                             ->maxLength(20),
-                        TextInput::make('correo')
+                        TextInput::make('email')
                             ->label('Correo electrónico')
                             ->email()
                             ->maxLength(100)
                             ->placeholder('nombre@misena.edu.co'),
-                        TextInput::make('telefono')
+                        TextInput::make('phone')
                             ->label('Teléfono de contacto')
                             ->tel()
                             ->maxLength(15)
@@ -69,20 +69,20 @@ class InstructorForm
                     ->description('Datos sobre la formación y asignación del instructor.')
                     ->schema([
 
-                        Select::make('equipo_ejecutor_id')
+                        Select::make('executing_team_id')
                             ->label('Equipo ejecutor')
-                            ->relationship('equipoEjecutor', 'nombre') // si existe la relación
+                            ->relationship('executingTeam', 'name') // si existe la relación
                             //->required()
                             ->searchable()
                             ->preload()
                             ->placeholder('Seleccione un equipo'),
-                        TextInput::make('especialidad')
+                        TextInput::make('specialty')
                             ->label('Especialidad')
                             ->maxLength(100)
                             ->placeholder('Ej. Programación, Diseño web, Electricidad...'),
                         Section::make('Foto y estado')
                             ->schema([
-                                FileUpload::make('foto_url')
+                                FileUpload::make('photo_url')
                                     ->label('Foto de perfil')
                                     ->image()
                                     ->avatar()
@@ -92,7 +92,7 @@ class InstructorForm
                                     ->disk('public')
                                     ->visibility('public')
                                     ->maxSize(2048),
-                                Toggle::make('activo')
+                                Toggle::make('is_active')
                                     ->label('Instructor activo')
                                     ->default(true)
                                     ->inline(false)
