@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Competencia;
+use App\Models\Competency;
 
-class CompetenciaSeeder extends Seeder
+class CompetencySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class CompetenciaSeeder extends Seeder
             $competencias = require $file;
 
             foreach ($competencias as $data){
-                Competencia::create($data);
+                Competency::create($data);
             }
         }
     }

@@ -1,43 +1,42 @@
 <?php
 
-namespace App\Filament\Resources\Competencias\Schemas;
+namespace App\Filament\Resources\Competencies\Schemas;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Schemas\Schema;
+use Filament\Forms\Components\Select;
 
-
-class CompetenciaForm
+class CompetencyForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Select::make('tipo_competencia_id')
+                Select::make('competency_type_id')
                     ->label('Tipo de Competencia')
-                    ->relationship('tipoCompetencia', 'nombre')
+                    ->relationship('competencyType', 'name')
                     ->nullable()
                     ->searchable()
                     ->preload(),
 
-                TextInput::make('codigo_norma')
+                TextInput::make('code')
                     ->label('Código Norma')
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(50),
 
-                TextInput::make('nombre')
+                TextInput::make('name')
                     ->label('Nombre')
                     ->required()
                     ->maxLength(255),
 
-                Textarea::make('descripcion_norma')
+                Textarea::make('description')
                     ->label('Descripción')
                     ->rows(4)
                     ->columnSpanFull(),
 
-                TextInput::make('duracion_horas')
+                TextInput::make('duration_hours')
                     ->label('Duración (Horas)')
                     ->numeric()
                     ->required(),

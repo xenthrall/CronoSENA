@@ -16,12 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AdminUserSeeder::class,
             CompetencyTypeSeeder::class,
-            CompetenciaSeeder::class,
-            NombreProgramaEspecialSeeder::class,
-            NivelFormacionSeeder::class,
-            ProgramaSeeder::class,
-            JornadaSeeder::class,
-            EstadosFichaSeeder::class,
+            CompetencySeeder::class,
 
         ]);
     }

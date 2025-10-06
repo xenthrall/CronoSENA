@@ -13,4 +13,9 @@ class CompetencyType extends Model
         'description',
     ];
 
+    public function competencies()
+    {
+        return $this->hasMany(Competency::class);
+    }
+
 }

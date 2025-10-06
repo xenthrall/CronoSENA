@@ -1,31 +1,31 @@
 <?php
 
-namespace App\Filament\Resources\Competencias\Tables;
+namespace App\Filament\Resources\Competencies\Tables;
 
-use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 
-class CompetenciasTable
+class CompetenciesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('codigo_norma')
+                TextColumn::make('code')
                     ->label('Código')
                     ->searchable(),
 
-                TextColumn::make('nombre')
+                TextColumn::make('name')
                     ->label('Nombre')
+                    ->limit(50) // corta el texto largo
+                    ->tooltip(fn($record) => $record->name) //  muestra completo al pasar mouse
                     ->searchable(),
 
-                TextColumn::make('tipoCompetencia.nombre')
+                TextColumn::make('competencyType.name')
                     ->label('Tipo')
                     ->default('Sin asignar')
                     ->badge()
@@ -33,13 +33,13 @@ class CompetenciasTable
                         'gray'    => fn($state): bool => $state === 'Sin asignar', // si no tiene tipo asignado
                     ]),
 
-                TextColumn::make('descripcion_norma')
+                TextColumn::make('description')
                     ->label('Descripción')
                     ->limit(80) // corta el texto largo
                     ->toggleable(isToggledHiddenByDefault: true) //  ocultar por defecto
-                    ->tooltip(fn($record) => $record->descripcion_norma), //  muestra completo al pasar mouse    
+                    ->tooltip(fn($record) => $record->description), //  muestra completo al pasar mouse
 
-                TextColumn::make('duracion_horas')
+                TextColumn::make('duration_hours')
                     ->label('Horas'),
 
                 TextColumn::make('version')
@@ -59,9 +59,9 @@ class CompetenciasTable
             ])
             ->filters([
                 //Filtrar por tipo de competencia
-                SelectFilter::make('tipo_competencia_id')
+                SelectFilter::make('competency_type_id')
                     ->label('Tipo de Competencia')
-                    ->relationship('tipoCompetencia', 'nombre', hasEmptyOption: true)
+                    ->relationship('competencyType', 'name', hasEmptyOption: true)
                     ->emptyRelationshipOptionLabel('Sin asignar'),
 
             ])

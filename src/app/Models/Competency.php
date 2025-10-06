@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Competency extends Model
+{
+    protected $table = 'competencies';
+
+    protected $fillable = [
+        'competency_type_id',
+        'code',
+        'name',
+        'description',
+        'duration_hours',
+        'version',
+    ];
+
+    public function competencyType()
+    {
+        return $this->belongsTo(CompetencyType::class);
+    }
+}
