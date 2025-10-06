@@ -27,4 +27,23 @@ class Competency extends Model
         return $this->belongsToMany(Program::class, 'program_competency')
             ->withPivot([]);
     }
+
+    public function fichas()
+    {
+        return $this->belongsToMany(Ficha::class, 'ficha_competencies')
+            ->using(FichaCompetency::class)
+            ->withPivot([
+                'order',
+                'total_hours_competency',
+                'executed_hours',
+                'status',
+                'notes',
+            ])
+            ->withTimestamps();
+    }
+
+    public function fichaCompetencies()
+    {
+        return $this->hasMany(FichaCompetency::class);
+    }
 }

@@ -39,4 +39,23 @@ class Ficha extends Model
     {
         return $this->belongsTo(Shift::class);
     }
+
+    public function competencies()
+    {
+        return $this->belongsToMany(Competency::class, 'ficha_competencies')
+            ->using(FichaCompetency::class)
+            ->withPivot([
+                'order',
+                'total_hours_competency',
+                'executed_hours',
+                'status',
+                'notes',
+            ])
+            ->withTimestamps();
+    }
+
+    public function fichaCompetencies()
+    {
+        return $this->hasMany(FichaCompetency::class);
+    }
 }
