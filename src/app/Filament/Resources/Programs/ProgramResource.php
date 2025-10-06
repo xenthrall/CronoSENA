@@ -51,6 +51,7 @@ class ProgramResource extends Resource
     {
         return [
             //
+            RelationManagers\CompetenciesRelationManager::class
         ];
     }
 
