@@ -28,12 +28,6 @@ class CompetencyResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Competencias';
 
-    public static function getSlug(?\Filament\Panel $panel = null): string
-    {
-        return 'competencias'; // slug personalizado
-    }
-
-
     public static function form(Schema $schema): Schema
     {
         return CompetencyForm::configure($schema);
