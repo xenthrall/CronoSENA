@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Instructor extends Model
 {
@@ -39,6 +40,11 @@ class Instructor extends Model
         return $this->belongsTo(Profesion::class, 'profesion_id');
     }
     */
+    //Un instructor tiene muchas competencias
+    public function competencias(): BelongsToMany
+    {
+        return $this->belongsToMany(Competencia::class, 'instructor_competencia', 'instructor_id', 'competencia_id');
+    }
 
     protected $casts = [
         'activo' => 'boolean',
