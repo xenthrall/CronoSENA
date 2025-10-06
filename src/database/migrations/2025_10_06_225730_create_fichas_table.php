@@ -13,32 +13,35 @@ return new class extends Migration
     {
         Schema::create('fichas', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo')->unique();
 
-            // Fechas clave
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin_lectiva')->nullable();
-            $table->date('fecha_fin')->nullable();
+            $table->string('code')->unique();
 
-            $table->foreignId('programa_id')
+            // Key dates
+            $table->date('start_date');
+            $table->date('lective_end_date')->nullable(); // Optional academic end date
+            $table->date('end_date')->nullable(); // Optional completion date
+
+            // Relationships
+            $table->foreignId('program_id')
                 ->nullable()
-                ->constrained('programas')
+                ->constrained('programs')
                 ->nullOnDelete();
 
-            $table->foreignId('municipio_id')
+            $table->foreignId('municipality_id')
                 ->nullable()
-                ->constrained('municipios')
-                ->nullOnDelete();
-            
-             $table->foreignId('estado_id')
-                ->nullable()
-                ->constrained('estados_ficha')
+                ->constrained('municipalities')
                 ->nullOnDelete();
 
-            $table->foreignId('jornada_id')
+            $table->foreignId('status_id')
                 ->nullable()
-                ->constrained('jornadas')
+                ->constrained('ficha_statuses')
                 ->nullOnDelete();
+
+            $table->foreignId('shift_id')
+                ->nullable()
+                ->constrained('shifts')
+                ->nullOnDelete();
+
 
             $table->timestamps();
         });

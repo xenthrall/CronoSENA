@@ -2,11 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\Ficha;
-use App\Models\Shift;
-use App\Models\SpecialProgramName;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,11 +12,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            #Usuario administrador
             AdminUserSeeder::class,
+            #Datos iniciales para el sistema
             CompetencyTypeSeeder::class,
             CompetencySeeder::class,
             TrainingLevelSeeder::class,
             SpecialProgramNameSeeder::class,
+            ProgramSeeder::class,
             MunicipalitySeeder::class,
             ShiftSeeder::class,
             FichaStatusSeeder::class,

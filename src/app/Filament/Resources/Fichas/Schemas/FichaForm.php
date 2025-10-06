@@ -17,47 +17,47 @@ class FichaForm
         return $schema
             ->columns(2)
             ->components([
-                TextInput::make('codigo')
+                TextInput::make('code')
                     ->label('Código de la ficha')
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(20)
                     ->columnSpan(1),
 
-                Select::make('municipio_id')
+                Select::make('municipality_id')
                     ->label('Centro de formación / Municipio')
-                    ->relationship('municipio', 'nombre')
+                    ->relationship('municipality', 'name')
                     ->searchable()
                     ->preload()
                     ->columnSpan(1),
 
-                Select::make('programa_id')
+                Select::make('program_id')
                     ->label('Programa de formación')
                     ->relationship(
-                        name: 'programa',
-                        titleAttribute: 'nombre',
-                        modifyQueryUsing: fn($query) => $query->select('id', 'codigo_programa', 'nombre')//limita las columnas consultadas(Optimiza rendimiento).
+                        name: 'program',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn($query) => $query->select('id', 'program_code', 'name')//limita las columnas consultadas(Optimiza rendimiento).
                     )
                     ->getOptionLabelFromRecordUsing(
-                        fn($record) => "{$record->codigo_programa} - {$record->nombre}"
+                        fn($record) => "{$record->program_code} - {$record->name}"
                     )
-                    ->searchable(['nombre', 'codigo_programa'])
+                    ->searchable(['name', 'program_code'])
                     ->searchPrompt('Buscar programa por nombre o código')
                     ->preload()
                     ->required()
                     ->columnSpan(2),
 
-                Select::make('estado_id')
+                Select::make('status_id')
                     ->label('Estado de la ficha')
-                    ->relationship('estado', 'nombre')
+                    ->relationship('status', 'name')
                     ->searchable()
                     ->preload()
                     ->required()
                     ->columnSpan(1),
 
-                Select::make('jornada_id')
+                Select::make('shift_id')
                     ->label('Jornada')
-                    ->relationship('jornada', 'nombre')
+                    ->relationship('shift', 'name')
                     ->searchable()
                     ->preload()
                     ->columnSpan(1),
@@ -65,15 +65,15 @@ class FichaForm
                 Grid::make(3) // Create a grid with 3 columns
                     ->columnSpan(2) // Span the entire width of the form (2 columns)
                     ->schema([
-                        DatePicker::make('fecha_inicio')
+                        DatePicker::make('start_date')
                             ->label('Fecha de inicio')
                             ->required(),
 
-                        DatePicker::make('fecha_fin_lectiva')
+                        DatePicker::make('lective_end_date')
                             ->label('Fin lectiva')
                             ->helperText('Fecha estimada de fin de etapa lectiva'),
 
-                        DatePicker::make('fecha_fin')
+                        DatePicker::make('end_date')
                             ->label('Fin total')
                             ->helperText('Fecha final de etapa productiva o cierre oficial'),
                     ]),

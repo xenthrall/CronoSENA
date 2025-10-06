@@ -6,40 +6,37 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ficha extends Model
 {
-    //
-    protected $table = 'fichas';
-
     protected $fillable = [
-        'codigo',
-        'fecha_inicio',
-        'fecha_fin_lectiva',
-        'fecha_fin',
-        'programa_id',
-        'municipio_id',
-        'estado_id',
-        'jornada_id',
+        'code',
+        'start_date',
+        'lective_end_date',
+        'end_date',
+        'program_id',
+        'municipality_id',
+        'status_id',
+        'shift_id',
     ];
 
     /**
      * Una ficha pertenece a un programa
      */
-    public function programa()
+    public function program()
     {
         return $this->belongsTo(Program::class);
     }
 
-    public function estado()
+    public function status()
     {
-        return $this->belongsTo(EstadoFicha::class);
+        return $this->belongsTo(FichaStatus::class);
     }
 
-    public function municipio()
+    public function municipality()
     {
-        return $this->belongsTo(Municipio::class);
+        return $this->belongsTo(Municipality::class);
     }
 
-    public function jornada()
+    public function shift()
     {
-        return $this->belongsTo(Jornada::class);
+        return $this->belongsTo(Shift::class);
     }
 }
