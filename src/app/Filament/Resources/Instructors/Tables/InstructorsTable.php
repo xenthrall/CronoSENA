@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Filament\Resources\Instructors\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Filament\Tables\Columns\ImageColumn;
+
+class InstructorsTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                ImageColumn::make('photo_url')
+                    ->label('')
+                    ->disk('public')
+                    ->circular()
+                    ->toggleable(false),
+                TextColumn::make('full_name')
+                    ->label('Instructor')
+                    ->searchable() // busca en esta columna
+                    ->wrap(),
+                TextColumn::make('document_number')
+                    ->label('Documento')
+                    ->searchable()
+                    ->formatStateUsing(fn ($state, $record) => "{$record->document_type} {$record->document_number}"),
+
+                TextColumn::make('executingTeam.name')
+                    ->label('Equipo ejecutor')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: false),
+
+                TextColumn::make('specialty')
+                    ->label('Especialidad')
+                    ->searchable()
+                    ->limit(25)
+                    //->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->tooltip(fn($record) => $record->specialty),
+
+                TextColumn::make('email')
+                    ->label('Correo')
+                    ->searchable()
+                    ->toggleable(),
+
+                TextColumn::make('phone')
+                    ->label('Teléfono')
+                    ->searchable()
+                    ->toggleable(),
+
+                IconColumn::make('is_active')
+                    ->boolean()
+                    ->toggleable(isToggledHiddenByDefault: false),
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}
