@@ -21,4 +21,10 @@ class Competency extends Model
     {
         return $this->belongsTo(CompetencyType::class);
     }
+
+    public function programs()
+    {
+        return $this->belongsToMany(Program::class, 'program_competency')
+            ->withPivot([]);
+    }
 }

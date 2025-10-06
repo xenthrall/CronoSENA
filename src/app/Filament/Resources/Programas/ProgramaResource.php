@@ -25,7 +25,6 @@ class ProgramaResource extends Resource
 
     protected static ?string $navigationLabel = 'Programas';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'programas';
 
     protected static ?int $navigationSort = 1;
 
