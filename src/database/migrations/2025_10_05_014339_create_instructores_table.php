@@ -15,13 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('documento')->unique();
             $table->string('tipo_documento')->nullable();
-            $table->string('nombre');
-            $table->string('apellido');
+            $table->string('nombre_completo')->nullable();
+            $table->string('nombre')->nullable();
+            $table->string('apellido')->nullable();
             $table->string('correo')->unique();
             $table->string('telefono')->nullable();
 
             // Relaciones
             $table->foreignId('equipo_ejecutor_id')
+                ->nullable()
                 ->constrained('equipo_ejecutores')
                 ->cascadeOnUpdate()
                 ->nullOnDelete();

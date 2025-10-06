@@ -20,7 +20,13 @@ class InstructorForm
                 Section::make('Información personal')
                     ->description('Datos básicos del instructor.')
                     ->schema([
-
+                        TextInput::make('nombre_completo')
+                            ->label('Nombre completo')
+                            ->required()
+                            ->maxLength(50)
+                            ->columnSpanFull()
+                            ->placeholder('Ej. Carlos Rodríguez'),
+                        /*    
                         TextInput::make('nombre')
                             ->label('Nombres')
                             ->required()
@@ -31,6 +37,8 @@ class InstructorForm
                             ->required()
                             ->maxLength(50)
                             ->placeholder('Ej. Rodríguez'),
+                        */
+
                         Select::make('tipo_documento')
                             ->label('Tipo de documento')
                             ->options([

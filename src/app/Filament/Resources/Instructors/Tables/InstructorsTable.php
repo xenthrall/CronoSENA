@@ -16,28 +16,16 @@ class InstructorsTable
     {
         return $table
             ->columns([
-                TextColumn::make('documento')
-                    ->searchable(),
-                TextColumn::make('tipo_documento')
-                    ->searchable(),
-                TextColumn::make('nombre')
-                    ->searchable(),
-                TextColumn::make('apellido')
-                    ->searchable(),
-                TextColumn::make('correo')
-                    ->searchable(),
-                TextColumn::make('telefono')
-                    ->searchable(),
-                TextColumn::make('equipo_ejecutor_id')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('especialidad')
-                    ->searchable(),
                 ImageColumn::make('foto_url')
-                    ->label('Foto')
+                    ->label('')
                     ->disk('public')
                     ->circular()
-                    ->width(50),
+                    ->toggleable(false),
+                TextColumn::make('nombre_completo')
+                    ->label('Instructor')
+                    ->searchable() // busca en esta columna
+                    ->wrap(),
+
                 IconColumn::make('activo')
                     ->boolean(),
                 TextColumn::make('created_at')

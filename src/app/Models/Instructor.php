@@ -11,6 +11,7 @@ class Instructor extends Model
     protected $fillable = [
         'documento',
         'tipo_documento',
+        'nombre_completo',
         'nombre',
         'apellido',
         'correo',
