@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Instructor extends Model
 {
-    protected $table = 'instructores';
     protected $fillable = [
         'document_number',
         'document_type',

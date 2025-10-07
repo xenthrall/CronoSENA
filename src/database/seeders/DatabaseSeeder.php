@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             MunicipalitySeeder::class,
             ShiftSeeder::class,
             FichaStatusSeeder::class,
+            ExecutingTeamSeeder::class,
 
         ]);
     }

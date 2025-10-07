@@ -52,10 +52,12 @@ class InstructorForm
                         TextInput::make('document_number')
                             ->label('Número de documento')
                             ->required()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(20),
                         TextInput::make('email')
                             ->label('Correo electrónico')
                             ->email()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(100)
                             ->placeholder('nombre@misena.edu.co'),
                         TextInput::make('phone')
