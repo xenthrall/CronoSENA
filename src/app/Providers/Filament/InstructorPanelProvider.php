@@ -18,7 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-
+use App\Filament\Instructor\Pages\Auth\EditProfile;
 class InstructorPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -27,7 +27,7 @@ class InstructorPanelProvider extends PanelProvider
             ->id('instructor')
             ->path('instructor')
             ->login()
-            ->profile()
+            ->profile(EditProfile::class, isSimple: false)
             ->passwordReset()
             ->authGuard('instructor')
             ->registration()
