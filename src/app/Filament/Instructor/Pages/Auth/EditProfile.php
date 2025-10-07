@@ -39,7 +39,6 @@ class EditProfile extends BaseEditProfile
 
                     TextInput::make('last_name')
                         ->label('Apellido')
-                        ->required()
                         ->maxLength(50)
                         ->placeholder('Ej. Rodríguez'),
 

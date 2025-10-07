@@ -52,10 +52,15 @@ class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, Ha
     }
     public function getFilamentName(): string
     {
-        if ($this->full_name) {
-            return $this->full_name;
+
+        if ($this->name && $this->last_name) {
+            return "{$this->name} {$this->last_name}";
+            
         }
-        return "{$this->name} {$this->last_name}";
+        if ($this->name) {
+            return $this->name;
+        }
+        return $this->full_name;
     }
 
     public function getFilamentAvatarUrl(): ?string
