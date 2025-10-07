@@ -11,7 +11,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -70,10 +69,6 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()
                     ->label('instructores')
                     ->icon('heroicon-o-user-group')
-                    ->collapsed(),
-                NavigationGroup::make()
-                    ->label(fn(): string => __('navigation.settings'))
-                    ->icon('heroicon-o-cog-6-tooth')
                     ->collapsed(),
 
 

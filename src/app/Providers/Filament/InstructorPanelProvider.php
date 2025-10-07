@@ -11,7 +11,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -19,6 +18,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Instructor\Pages\Auth\EditProfile;
+use Filament\Support\Assets\Css;
+
 class InstructorPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -42,7 +43,6 @@ class InstructorPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Instructor/Widgets'), for: 'App\Filament\Instructor\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -57,6 +57,17 @@ class InstructorPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+
+            //->topNavigation() //Habilitar la barra de navegación superior
+
+            ->sidebarCollapsibleOnDesktop()
+            
+            ->assets([
+                Css::make('custom-stylesheet', resource_path('css/custom.css')),
+                //Js::make('custom-script', resource_path('js/custom.js')),
             ]);
+            
+            
     }
 }
