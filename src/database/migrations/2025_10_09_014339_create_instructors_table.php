@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('email')->nullable()->unique();
             $table->string('phone')->nullable();
 
+            // Campos de autenticación
+            $table->string('password')->nullable();
+            $table->rememberToken(); // Para el "recuérdame"
+            $table->timestamp('email_verified_at')->nullable(); // (Más adelante para verificación de email)
+
             // Relaciones
             $table->foreignId('executing_team_id')
                 ->nullable()
