@@ -27,9 +27,12 @@ class InstructorPanelProvider extends PanelProvider
             ->id('instructor')
             ->path('instructor')
             ->login()
+            ->profile()
+            ->passwordReset()
             ->authGuard('instructor')
+            ->registration()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Green,
             ])
             ->discoverResources(in: app_path('Filament/Instructor/Resources'), for: 'App\Filament\Instructor\Resources')
             ->discoverPages(in: app_path('Filament/Instructor/Pages'), for: 'App\Filament\Instructor\Pages')
