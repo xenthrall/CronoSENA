@@ -14,11 +14,21 @@ class MunicipalitySeeder extends Seeder
     public function run(): void
     {
         $municipios = [
-            ['name' => 'Municipio 1'],
-            ['name' => 'Municipio 2'],
-            ['name' => 'Municipio 3'],
+            ['name' => 'CAPITANEJO'],
+            ['name' => 'CARCASI'],
+            ['name' => 'CERRITO'],
+            ['name' => 'CONCEPCION'],
+            ['name' => 'ENCISO'],
+            ['name' => 'GUACA'],
+            ['name' => 'MACARAVITA'],
+            ['name' => 'MALAGA'],
+            ['name' => 'MOLAGAVITA'],
+            ['name' => 'SAN ANDRES'],
+            ['name' => 'SAN JOSE DE MIRANDA'],
+            ['name' => 'SAN MIGUEL'],
+            ['name' => 'SOATA']
         ];
-        foreach ($municipios as $municipio){
+        foreach ($municipios as $municipio) {
             Municipality::firstOrCreate(['name' => $municipio['name']], $municipio);
         }
     }

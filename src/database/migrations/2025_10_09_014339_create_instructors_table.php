@@ -11,16 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instructores', function (Blueprint $table) {
+        Schema::create('instructors', function (Blueprint $table) {
             $table->id();
             
             $table->string('document_number')->unique();
             $table->string('document_type')->nullable();
             $table->string('full_name')->nullable();
-            $table->string('first_name')->nullable();
+            $table->string('name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->nullable()->unique();
             $table->string('phone')->nullable();
+
+            // Campos de autenticación
+            $table->string('password')->nullable();
+            $table->rememberToken(); // Para el "recuérdame"
+            $table->timestamp('email_verified_at')->nullable(); // (Más adelante para verificación de email)
 
             // Relaciones
             $table->foreignId('executing_team_id')
@@ -49,6 +54,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instructores');
+        Schema::dropIfExists('instructors');
     }
 };

@@ -17,29 +17,30 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Navigation\NavigationGroup;
+use App\Filament\Instructor\Pages\Auth\EditProfile;
 use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 
-
-class AdminPanelProvider extends PanelProvider
+class InstructorPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('instructor')
+            ->path('instructor')
             ->login()
+            ->profile(EditProfile::class, isSimple: false)
+            ->passwordReset()
+            ->authGuard('instructor')
+            ->registration()
             ->colors([
-                'primary' => Color::Indigo,
+                'primary' => Color::Green,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverResources(in: app_path('Filament/Instructor/Resources'), for: 'App\Filament\Instructor\Resources')
+            ->discoverPages(in: app_path('Filament/Instructor/Pages'), for: 'App\Filament\Instructor\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Instructor/Widgets'), for: 'App\Filament\Instructor\Widgets')
             ->widgets([
                 AccountWidget::class,
             ])
@@ -58,32 +59,15 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
 
-            ->navigationGroups([
-                NavigationGroup::make()
-                    ->label('programas')
-                    ->icon('heroicon-o-book-open')
-                    ->collapsed(), //contraible deshabilitado -> false
-                NavigationGroup::make()
-                    ->label('fichas')
-                    ->icon('heroicon-o-pencil'),
-                NavigationGroup::make()
-                    ->label('instructores')
-                    ->icon('heroicon-o-user-group')
-                    ->collapsed(),
-
-
-            ])
-
-            ->assets([
-                Css::make('custom-stylesheet', resource_path('css/custom.css')),
-                //Js::make('custom-script', resource_path('js/custom.js')),
-            ])
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
-            //->spa() //Habilitar la aplicación de una sola página (SPA)
-            ->unsavedChangesAlerts()
-            //->sidebarFullyCollapsibleOnDesktop() //Contraer la barra lateral completamente
-        ;
+            
+            ->assets([
+                Css::make('custom-stylesheet', resource_path('css/custom.css')),
+                //Js::make('custom-script', resource_path('js/custom.js')),
+            ]);
+            
+            
     }
 }

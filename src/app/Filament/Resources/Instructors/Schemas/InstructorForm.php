@@ -26,12 +26,14 @@ class InstructorForm
                             ->maxLength(50)
                             ->columnSpanFull()
                             ->placeholder('Ej. Carlos Rodríguez'),
-                        /*    
-                        TextInput::make('first_name')
-                            ->label('Nombres')
+                          
+                        TextInput::make('name')
+                            ->label('Nombre de Usuario')
                             ->required()
                             ->maxLength(50)
+                            ->columnSpanFull()
                             ->placeholder('Ej. Carlos'),
+                        /*  
                         TextInput::make('last_name')
                             ->label('Apellidos')
                             ->required()
@@ -52,10 +54,12 @@ class InstructorForm
                         TextInput::make('document_number')
                             ->label('Número de documento')
                             ->required()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(20),
                         TextInput::make('email')
                             ->label('Correo electrónico')
                             ->email()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(100)
                             ->placeholder('nombre@misena.edu.co'),
                         TextInput::make('phone')
