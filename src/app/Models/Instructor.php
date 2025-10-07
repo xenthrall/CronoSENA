@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 
-class Instructor extends Model
+class Instructor extends Authenticatable
 {
+    use Notifiable;
+
     protected $fillable = [
         'document_number',
         'document_type',
@@ -16,6 +19,7 @@ class Instructor extends Model
         'last_name',
         'email',
         'phone',
+        'password',
         'executing_team_id',
         'profession_id',
         'specialty',
@@ -23,15 +27,29 @@ class Instructor extends Model
         'is_active',
     ];
 
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
     /**
      * Relaciones
      */
 
     // Un instructor pertenece a un equipo ejecutor
     public function executingTeam()
-{
-    return $this->belongsTo(ExecutingTeam::class, 'executing_team_id');
-}
+    {
+        return $this->belongsTo(ExecutingTeam::class, 'executing_team_id');
+    }
 
     /*/ Un instructor pertenece a una profesión
     public function profesion()
@@ -44,9 +62,4 @@ class Instructor extends Model
     {
         return $this->belongsToMany(Competency::class, 'instructor_competencia', 'instructor_id', 'competencia_id');
     }
-
-    protected $casts = [
-        'is_active' => 'boolean',
-    ];
-
 }
