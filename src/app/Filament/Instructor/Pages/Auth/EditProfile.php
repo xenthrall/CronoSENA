@@ -20,6 +20,7 @@ class EditProfile extends BaseEditProfile
                 ->schema([
                     FileUpload::make('photo_url')
                         ->label('Foto de perfil')
+                        ->hiddenLabel()
                         ->image()
                         ->avatar()
                         ->imageEditor()
@@ -29,7 +30,8 @@ class EditProfile extends BaseEditProfile
                         ->visibility('public')
                         ->maxSize(2048)
                         ->columnSpanFull()
-                        ->extraAttributes(['class' => 'mx-auto w-32 h-32']),
+                        ->hint('Esta imagen aparecerá en tu tarjeta de instructor y en las fichas asignadas.')
+                        ->extraAttributes(['class' => '']),
 
                     TextInput::make('name')
                         ->label('Nombre')
