@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        // Nuevo guard para instructores
+        'instructor' => [
+            'driver' => 'session',
+            'provider' => 'instructors',
+        ],
     ],
 
     /*
@@ -69,6 +74,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'instructors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Instructor::class,
+        ],
     ],
 
     /*
