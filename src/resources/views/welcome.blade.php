@@ -150,7 +150,9 @@
 
           <div class="actions">
             <a class="button btn-primary" href="https://github.com/xenthrall/CronoSENA" target="_blank" rel="noopener noreferrer">Ver en GitHub</a>
-            <a class="button btn-primary" href="{{ url('/admin') }}" target="" rel="noopener noreferrer">Try Demo</a>
+            <a class="button btn-primary" href="{{ url('/admin') }}" target="" rel="noopener noreferrer">Admin</a>
+            <a class="button btn-primary" href="{{ url('/instructor') }}" target="" rel="noopener noreferrer">Instructor</a>
+
           </div>
         </article>
 
