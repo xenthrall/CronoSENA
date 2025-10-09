@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Instructor;
+use App\Services\ImageOptimizer;
 
 class InstructorObserver
 {
@@ -11,7 +12,17 @@ class InstructorObserver
      */
     public function created(Instructor $instructor): void
     {
-        //
+        if ($instructor->photo_url) {
+            $optimizer = app(ImageOptimizer::class);
+            $optimizedPath = $optimizer->optimize($instructor->photo_url, [
+                'max_width' => 150,
+                'quality' => 80,
+                'webp' => true,
+            ]);
+
+            $instructor->update(['photo_url' => $optimizedPath]);
+        }
+
     }
 
     /**
