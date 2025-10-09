@@ -31,11 +31,18 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Indigo,
             ])
             ->brandName('CronoSENA')
-            //->brandLogo(asset('logo-192.png'))
+            ->brandLogo(asset('images/logo-cata.png'))
+            ->darkModeBrandLogo(asset('images/logo-cata-dark.png'))
+            //->brandLogo(fn () => view('filament.admin.logo'))
+            //->darkModeBrandLogo(fn () => view('filament.admin.logo-dark'))
+
+            ->brandLogoHeight('2.5rem')
+
 
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
