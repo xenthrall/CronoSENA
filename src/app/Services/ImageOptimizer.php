@@ -26,24 +26,28 @@ class ImageOptimizer
 
         $image = Image::read($imageData);
 
-        // Opciones personalizables
+        // Opciones de optimización
         $maxWidth = $options['max_width'] ?? 512;
         $quality = $options['quality'] ?? 80;
-        $convertToWebp = $options['webp'] ?? true;
-        $stripMetadata = $options['strip'] ?? true; // Elimina metadatos (EXIF, GPS, etc.)
+        $deleteOldPath = $options['delete_old_path'] ?? false;
 
         if ($image->width() > $maxWidth) {
             $image = $image->scale(width: $maxWidth);
         }
 
-        // Define formato de salida
-        $format = $convertToWebp ? 'webp' : $image->mime()->subtype;
-        $optimizedName = pathinfo($path, PATHINFO_FILENAME) . '_optimized.' . $format;
-        $optimizedPath = 'optimized/' . $optimizedName;
+        // Formato de salida
+        $format = 'webp';
+        $optimizedName = pathinfo($path, PATHINFO_FILENAME) . '_optimizado.' . $format;
+        $optimizedPath = 'instructores/' . $optimizedName;
 
         // Codifica y guarda con la calidad deseada
         $encoded = $image->encodeByExtension($format, quality: $quality);
         $disk->put($optimizedPath, (string) $encoded, 'public');
+
+        if ($deleteOldPath && $disk->exists($path)) {
+            $disk->delete($path);
+        }
+        
         return $optimizedPath;
     }
 }
