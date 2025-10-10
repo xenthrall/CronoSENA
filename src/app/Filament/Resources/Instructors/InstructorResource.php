@@ -52,4 +52,5 @@ class InstructorResource extends Resource
             'edit' => EditInstructor::route('/{record}/edit'),
         ];
     }
+
 }

@@ -3,7 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Instructor;
-use App\Services\ImageOptimizer;
+use Illuminate\Support\Facades\Storage;
 
 class InstructorObserver
 {
@@ -12,17 +12,8 @@ class InstructorObserver
      */
     public function created(Instructor $instructor): void
     {
-    
-        if ($instructor->photo_url) {
-            $optimizer = app(ImageOptimizer::class);
-            $optimizedPath = $optimizer->optimize($instructor->photo_url, [
-                'max_width' => 150,
-                'quality' => 80,
-                'delete_old_path' => true,
-            ]);
-            $instructor->update(['photo_url' => $optimizedPath]); 
-        }
 
+        
     }
 
     /**
@@ -30,7 +21,7 @@ class InstructorObserver
      */
     public function updated(Instructor $instructor): void
     {
-        //
+       
     }
 
     /**
@@ -38,7 +29,12 @@ class InstructorObserver
      */
     public function deleted(Instructor $instructor): void
     {
-        //
+        if ($instructor->photo_url) {
+            $disk = Storage::disk('public');
+            if ($disk->exists($instructor->photo_url)) {
+                $disk->delete($instructor->photo_url);
+            }
+        }
     }
 
     /**
