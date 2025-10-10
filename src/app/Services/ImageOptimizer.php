@@ -50,7 +50,6 @@ class ImageOptimizer
             $optimizedName = $filenameWithoutExt . '.webp';
             // La ruta de salida respeta el directorio original
             $optimizedPath = $safeDirectory . '/' . $optimizedName;
-            dd($optimizedPath, $safeDirectory, $optimizedName);
 
             $encoded = $image->encodeByExtension($format, quality: $quality);
             $disk->put($optimizedPath, (string) $encoded, 'public');

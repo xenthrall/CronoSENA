@@ -3,9 +3,9 @@
 namespace App\Filament\Resources\Instructors\Pages;
 
 use App\Filament\Resources\Instructors\InstructorResource;
-use App\Services\ImageOptimizer; // <-- 1. Importa el servicio
+use App\Services\ImageOptimizer; 
 use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Support\Facades\Log; // <-- 2. Importa el Log
+use Illuminate\Support\Facades\Log; 
 
 class CreateInstructor extends CreateRecord
 {
@@ -16,8 +16,6 @@ class CreateInstructor extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        dd($data);
-        // Si no se subió una foto, no hacemos nada.
         if (empty($data['photo_url'])) {
             return $data;
         }
@@ -30,14 +28,13 @@ class CreateInstructor extends CreateRecord
                 'delete_original' => true, // Borra la imagen original sin optimizar
             ]);
 
-            // Si la optimización fue exitosa, actualizamos el path en los datos a guardar
             if ($optimizedPath) {
                 $data['photo_url'] = $optimizedPath;
             }
             
         } catch (\Exception $e) {
             Log::error("Fallo al optimizar imagen para nuevo instructor: " . $e->getMessage());
-            // Opcional: podrías mostrar una notificación de error al usuario aquí.
+            // Opcional: mostrar una notificación de error al usuario aquí.
         }
 
         return $data;
