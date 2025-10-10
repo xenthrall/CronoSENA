@@ -16,6 +16,8 @@ class CreateInstructor extends CreateRecord
      */
     protected function mutateFormDataBeforeCreate(array $data): array
     {
+        $data['password'] = $data['document_number'];
+
         if (empty($data['photo_url'])) {
             return $data;
         }
