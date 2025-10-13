@@ -38,9 +38,11 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            filter: blur(80px) saturate(120%);
+            filter: blur(40px) saturate(120%);
             object-fit: cover;
             opacity: 1;
+            animation: gradientMove 15s ease infinite;
+
 
         }
 
@@ -88,6 +90,22 @@
             filter: var(--logo-filter);
             transition: filter 0.3s ease;
             z-index: 1;
+        }
+
+        .header-crono {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            filter: var(--logo-filter);
+            transition: filter 0.3s ease;
+            z-index: 1;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+        }
+
+        .header-crono:hover {
+            filter:
+                drop-shadow(0 0 6px rgba(188, 82, 238, 0.6)) 
+                drop-shadow(0 0 12px rgba(50, 69, 255, 0.4));
         }
 
         #back-button {
@@ -170,6 +188,20 @@
             color: rgba(0, 0, 0, 0.5);
         }
 
+        @keyframes gradientMove {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.1) translate(-10px, -10px);
+            }
+
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -213,7 +245,8 @@
             <img src="/images/logo-cata-removebg.png" alt="CronoSENA Logo" class="header-logo">
         </div>
 
-        <h1>CATA</h1>
+        <!--<h1>CATA</h1> -->
+        <img src="/images/crono.svg" alt="crono" class="header-crono" />
         <p>CronoSENA v{{ config('app.version', '1.0.0') }}</p>
 
         <div class="buttons">
