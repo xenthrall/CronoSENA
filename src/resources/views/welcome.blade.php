@@ -92,21 +92,49 @@
             z-index: 1;
         }
 
+        .header-container {
+            position: relative;
+            display: inline-block;
+        }
+
         .header-crono {
             height: 80px;
             width: auto;
             object-fit: contain;
-            filter: var(--logo-filter);
-            transition: filter 0.3s ease;
-            z-index: 1;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+            transition: filter 0.3s ease;
+            cursor: pointer;
         }
 
         .header-crono:hover {
             filter:
-                drop-shadow(0 0 6px rgba(188, 82, 238, 0.6)) 
-                drop-shadow(0 0 12px rgba(50, 69, 255, 0.4));
+                drop-shadow(0 0 6px rgba(188, 82, 238, 0.6)) drop-shadow(0 0 12px rgba(50, 69, 255, 0.4));
         }
+
+        /* Mensaje de saludo */
+        .crono-message {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Estado visible */
+        .crono-message.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
 
         #back-button {
             position: absolute;
@@ -246,7 +274,11 @@
         </div>
 
         <!--<h1>CATA</h1> -->
-        <img src="/images/crono.svg" alt="crono" class="header-crono" />
+        <div class="header-container">
+            <img src="/images/crono.svg" alt="crono Mascota" class="header-crono" id="crono-logo">
+            <div id="crono-message" class="crono-message">👋 ¡Hola! Soy Crono 🦉</div>
+        </div>
+
         <p>CronoSENA v{{ config('app.version', '1.0.0') }}</p>
 
         <div class="buttons">
@@ -257,6 +289,23 @@
     </main>
 
     <footer>© {{ date('Y') }} CronoSENA — xenthrall</footer>
+
+    <script>
+        const cronoLogo = document.getElementById('crono-logo');
+        const cronoMessage = document.getElementById('crono-message');
+        let timeoutId;
+
+        cronoLogo.addEventListener('click', () => {
+            // Si ya está visible, reinicia el temporizador
+            clearTimeout(timeoutId);
+            cronoMessage.classList.add('show');
+
+            timeoutId = setTimeout(() => {
+                cronoMessage.classList.remove('show');
+            }, 2000);
+        });
+    </script>
+
 </body>
 
 </html>
