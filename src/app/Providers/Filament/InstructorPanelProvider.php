@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Instructor\Pages\Auth\EditProfile;
+use App\Filament\Instructor\Pages\Auth\InstructorLogin;
 use Filament\Support\Assets\Css;
 
 class InstructorPanelProvider extends PanelProvider
@@ -27,14 +28,20 @@ class InstructorPanelProvider extends PanelProvider
         return $panel
             ->id('instructor')
             ->path('instructor')
-            ->login()
+            ->login(InstructorLogin::class)
             ->profile(EditProfile::class, isSimple: false)
             ->passwordReset()
             ->authGuard('instructor')
-            ->registration()
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors([
-                'primary' => Color::Green,
+                'primary' => Color::Indigo,
             ])
+            ->brandName('instructor')
+            ->brandLogo(asset('images/logo-cata.png'))
+            ->darkModeBrandLogo(asset('images/logo-cata-dark.png'))
+            //->brandLogo(fn () => view('filament.admin.logo'))
+            //->darkModeBrandLogo(fn () => view('filament.admin.logo-dark'))
+            ->brandLogoHeight('2.5rem')
             ->discoverResources(in: app_path('Filament/Instructor/Resources'), for: 'App\Filament\Instructor\Resources')
             ->discoverPages(in: app_path('Filament/Instructor/Pages'), for: 'App\Filament\Instructor\Pages')
             ->pages([
@@ -62,11 +69,12 @@ class InstructorPanelProvider extends PanelProvider
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
-            
+            /*
             ->assets([
                 Css::make('custom-stylesheet', resource_path('css/custom.css')),
                 //Js::make('custom-script', resource_path('js/custom.js')),
-            ]);
+            ])
+                ;*/;
             
             
     }
