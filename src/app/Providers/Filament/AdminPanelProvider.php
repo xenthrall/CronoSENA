@@ -21,7 +21,6 @@ use Filament\Navigation\NavigationGroup;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 
-
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -35,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Indigo,
             ])
-            ->brandName('CronoSENA')
+            ->brandName('admin')
             ->brandLogo(asset('images/logo-cata.png'))
             ->darkModeBrandLogo(asset('images/logo-cata-dark.png'))
             //->brandLogo(fn () => view('filament.admin.logo'))
