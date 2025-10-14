@@ -8,9 +8,20 @@ use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
+use App\Services\ImageOptimizer;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class EditProfile extends BaseEditProfile
 {
+
+    public ?string $originalPhotoPath = null;
+
+    protected function getRedirectUrl(): string
+    {
+        return static::getUrl();
+    }
+
     public function form(Schema $schema): Schema
     {
         return $schema->components([
@@ -81,5 +92,45 @@ class EditProfile extends BaseEditProfile
                 ])
                 ->columns(2),
         ]);
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $this->originalPhotoPath = $this->getUser()->photo_url;
+        $newPath = $data['photo_url'];
+
+        if ($this->originalPhotoPath === $newPath || !$newPath) {
+            return $data;
+        }
+
+        try {
+            $optimizer = app(ImageOptimizer::class);
+            $optimizedPath = $optimizer->optimize($newPath, [
+                'max_width' => 200,
+                'quality' => 70,
+                'delete_original' => true,
+            ]);
+
+            if ($optimizedPath) {
+                $data['photo_url'] = $optimizedPath;
+            }
+        } catch (\Exception $e) {
+            Log::error("Fallo al optimizar la nueva imagen para el instructor ID {$this->getRecord()->id}: " . $e->getMessage());
+        }
+
+        return $data;
+    }
+
+    /**
+     * 6. El hook `afterSave` funciona exactamente igual.
+     */
+
+    protected function afterSave(): void
+    {
+        $currentPhotoPath = $this->getUser()->photo_url;
+
+        if ($this->originalPhotoPath && $this->originalPhotoPath !== $currentPhotoPath) {
+            Storage::disk('public')->delete($this->originalPhotoPath);
+        }
     }
 }

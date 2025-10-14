@@ -18,9 +18,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationGroup;
+use App\Filament\Pages\Auth\AdminLogin;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
-
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,10 +30,21 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(AdminLogin::class)
+            ->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Indigo,
             ])
+            ->brandName('admin')
+            ->brandLogo(asset('images/logo-cata.png'))
+            ->darkModeBrandLogo(asset('images/logo-cata-dark.png'))
+            //->brandLogo(fn () => view('filament.admin.logo'))
+            //->darkModeBrandLogo(fn () => view('filament.admin.logo-dark'))
+
+            ->brandLogoHeight('2.5rem')
+
+
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -73,11 +84,12 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
-
+            /*
             ->assets([
                 Css::make('custom-stylesheet', resource_path('css/custom.css')),
                 //Js::make('custom-script', resource_path('js/custom.js')),
             ])
+            */
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()

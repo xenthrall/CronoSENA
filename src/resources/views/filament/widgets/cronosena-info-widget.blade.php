@@ -9,7 +9,7 @@
                 
                 <!-- Logo / Enlace a GitHub (SVG más pequeño) -->
                 <a
-                    href="https://github.com/xenthrall/CronoSENA"
+                    href="https://jhontequia.github.io/CronoSENA-docs/"
                     rel="noopener noreferrer"
                     target="_blank"
                     class="flex-shrink-0"
@@ -65,7 +65,7 @@
                 <div class="flex items-center gap-3 flex-shrink-0">
                     <!-- Enlace a Documentación -->
                     <a
-                        href="https://cronosena.site"
+                        href="https://jhontequia.github.io/CronoSENA-docs/"
                         rel="noopener noreferrer"
                         target="_blank"
                         class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-600 dark:text-gray-400 dark:hover:text-primary-500 transition-colors duration-300 whitespace-nowrap"
