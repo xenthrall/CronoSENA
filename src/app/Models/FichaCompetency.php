@@ -32,4 +32,9 @@ class FichaCompetency extends Model
     {
         return $this->belongsTo(Competency::class);
     }
+
+    public function executions()
+    {
+        return $this->hasMany(FichaCompetencyExecution::class);
+    }
 }
