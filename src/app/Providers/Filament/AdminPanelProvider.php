@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Navigation\NavigationGroup;
+use App\Filament\Pages\Auth\AdminLogin;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 
@@ -29,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(AdminLogin::class)
             ->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Indigo,
