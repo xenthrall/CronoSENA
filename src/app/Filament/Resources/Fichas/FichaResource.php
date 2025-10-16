@@ -16,13 +16,17 @@ class FichaResource extends Resource
 {
     protected static ?string $model = Ficha::class;
 
-    protected static ?string $navigationLabel = 'Fichas';
+    protected static ?string $recordTitleAttribute = 'code';
 
     protected static string|\UnitEnum|null $navigationGroup = 'fichas';
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $recordTitleAttribute = 'codigo';
+    protected static ?string $navigationLabel = 'Fichas';
+
+    protected static ?string $modelLabel = 'Ficha';
+
+    protected static ?string $pluralModelLabel = 'Fichas';
 
     public static function form(Schema $schema): Schema
     {
@@ -47,6 +51,7 @@ class FichaResource extends Resource
             'index' => ListFichas::route('/'),
             'create' => CreateFicha::route('/create'),
             'edit' => EditFicha::route('/{record}/edit'),
+            'manage' => EditFicha::route('/{record}/manage'),
         ];
     }
 }
