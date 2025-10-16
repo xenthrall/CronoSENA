@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('2.5rem')
 
 
-            ->viteTheme('resources/css/filament/admin/theme.css')
+           // ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -84,12 +84,12 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
-            /*
+        
             ->assets([
                 Css::make('custom-stylesheet', resource_path('css/custom.css')),
                 //Js::make('custom-script', resource_path('js/custom.js')),
             ])
-            */
+            
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
