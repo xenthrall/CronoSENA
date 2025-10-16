@@ -10,6 +10,9 @@ use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
+use Filament\Actions\Action;
+use App\Filament\Resources\Fichas\FichaResource;
+
 
 class FichasTable
 {
@@ -100,6 +103,12 @@ class FichasTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('manage')
+                    ->label('Gestionar')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->color('info')
+                    //->button() // opcional: fuerza renderizado como botón
+                    ->url(fn($record) => FichaResource::getUrl('manage', ['record' => $record])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

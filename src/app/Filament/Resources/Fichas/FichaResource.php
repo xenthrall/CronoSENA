@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Fichas;
 use App\Filament\Resources\Fichas\Pages\CreateFicha;
 use App\Filament\Resources\Fichas\Pages\EditFicha;
 use App\Filament\Resources\Fichas\Pages\ListFichas;
+use App\Filament\Resources\Fichas\Pages\ManageFicha;
 use App\Filament\Resources\Fichas\Schemas\FichaForm;
 use App\Filament\Resources\Fichas\Tables\FichasTable;
 use App\Models\Ficha;
@@ -51,7 +52,7 @@ class FichaResource extends Resource
             'index' => ListFichas::route('/'),
             'create' => CreateFicha::route('/create'),
             'edit' => EditFicha::route('/{record}/edit'),
-            'manage' => EditFicha::route('/{record}/manage'),
+            'manage' => ManageFicha::route('/{record}/manage'),
         ];
     }
 }
