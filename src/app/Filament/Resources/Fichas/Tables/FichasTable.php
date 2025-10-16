@@ -12,6 +12,8 @@ use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
 use Filament\Actions\Action;
 use App\Filament\Resources\Fichas\FichaResource;
+use Illuminate\Database\Eloquent\Model;
+
 
 
 class FichasTable
@@ -19,6 +21,10 @@ class FichasTable
     public static function configure(Table $table): Table
     {
         return $table
+        ->recordUrl(function (Model $record): string {
+                // Redirige a la página "manage" en lugar de "edit"
+                return route('filament.admin.resources.fichas.manage', ['record' => $record]);
+            })
             //->defaultSort('fecha_inicio', 'desc')
             ->columns([
                 TextColumn::make('code')
