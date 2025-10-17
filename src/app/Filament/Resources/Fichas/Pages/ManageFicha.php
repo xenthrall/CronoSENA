@@ -14,6 +14,10 @@ class ManageFicha extends Page
 
     protected string $view = 'filament.resources.fichas.pages.manage-ficha';
 
+    protected static ?string $title = 'Gestionar ficha';
+
+    //protected static ?string $breadcrumb = 'Gestionar ficha';
+
     public function mount(int|string $record): void
     {
         $this->record = $this->resolveRecord($record);

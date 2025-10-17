@@ -4,7 +4,7 @@
         <div class="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                    Gestionar Ficha: <span class="text-primary-600 dark:text-primary-400">{{ $record->code }}</span>
+                    Ficha: <span class="text-primary-600 dark:text-primary-400">{{ $record->code }}</span>
                 </h1>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
                     Programa: {{ $record->program->name ?? 'Sin programa' }} · Inicio {{ $record->start_date}}
@@ -25,7 +25,7 @@
 
             @if ($competencias->isEmpty())
                 <div class="text-center py-12 border border-dashed rounded-xl dark:border-gray-700">
-                    <p class="text-gray-500 dark:text-gray-400">Esta ficha aún no tiene competencias asignadas.</p>
+                    <p class="text-gray-500 dark:text-gray-400">Esta ficha aún no tiene competencias vinculadas.</p>
                 </div>
             @else
                 <div class="divide-y divide-gray-200 dark:divide-gray-700 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">

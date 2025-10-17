@@ -59,14 +59,17 @@ class FichasTable
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('status.name')
+                    ->label('Estado')
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable(),
 
                 TextColumn::make('municipality.name')
+                    ->label('Municipio')
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable(),
 
                 TextColumn::make('shift.name')
+                    ->label('Jornada')
                     ->toggleable(isToggledHiddenByDefault: false),
 
                 TextColumn::make('created_at')
