@@ -17,7 +17,11 @@ return new class extends Migration
             $table->foreignId('ficha_competency_id')->constrained('ficha_competencies')->onDelete('cascade');
             $table->foreignId('instructor_id')->constrained('instructors')->onDelete('cascade');
 
-            $table->integer('scheduled_hours')->default(0);
+            $table->date('execution_date')->nullable();
+            $table->date('completion_date')->nullable();
+            $table->integer('executed_hours')->default(0);
+            
+            $table->text('notes')->nullable();
 
             $table->timestamps();
         });

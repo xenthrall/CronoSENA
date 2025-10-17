@@ -11,7 +11,10 @@ class FichaCompetencyExecution extends Model
     protected $fillable = [
         'ficha_competency_id',
         'instructor_id',
-        'scheduled_hours',
+        'execution_date',
+        'completion_date',
+        'executed_hours',
+        'notes',
     ];
 
     public function fichaCompetency()
