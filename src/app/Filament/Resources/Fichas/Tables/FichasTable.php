@@ -10,12 +10,21 @@ use Filament\Tables\Table;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\Filter;
 use Filament\Forms\Components\DatePicker;
+use Filament\Actions\Action;
+use App\Filament\Resources\Fichas\FichaResource;
+use Illuminate\Database\Eloquent\Model;
+
+
 
 class FichasTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+        ->recordUrl(function (Model $record): string {
+                // Redirige a la página "manage" en lugar de "edit"
+                return route('filament.admin.resources.fichas.manage', ['record' => $record]);
+            })
             //->defaultSort('fecha_inicio', 'desc')
             ->columns([
                 TextColumn::make('code')
@@ -50,14 +59,17 @@ class FichasTable
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('status.name')
+                    ->label('Estado')
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable(),
 
                 TextColumn::make('municipality.name')
+                    ->label('Municipio')
                     ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable(),
 
                 TextColumn::make('shift.name')
+                    ->label('Jornada')
                     ->toggleable(isToggledHiddenByDefault: false),
 
                 TextColumn::make('created_at')
@@ -100,6 +112,12 @@ class FichasTable
             ])
             ->recordActions([
                 EditAction::make(),
+                Action::make('manage')
+                    ->label('Gestionar')
+                    ->icon('heroicon-o-cog-6-tooth')
+                    ->color('info')
+                    //->button() // opcional: fuerza renderizado como botón
+                    ->url(fn($record) => FichaResource::getUrl('manage', ['record' => $record])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

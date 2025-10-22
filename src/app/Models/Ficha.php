@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ficha extends Model
 {
+    protected $table = 'fichas';
+    
     protected $fillable = [
         'code',
         'start_date',

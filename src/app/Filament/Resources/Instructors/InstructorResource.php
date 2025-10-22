@@ -25,7 +25,7 @@ class InstructorResource extends Resource
     protected static ?string $recordTitleAttribute = 'nombre';
 
     protected static ?string $modelLabel = 'Instructor';
-    
+
     protected static ?string $pluralModelLabel = 'Instructores';
 
     public static function form(Schema $schema): Schema
@@ -41,7 +41,8 @@ class InstructorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ];
+            RelationManagers\CompetenciesRelationManager::class
+        ];
     }
 
     public static function getPages(): array
@@ -52,5 +53,4 @@ class InstructorResource extends Resource
             'edit' => EditInstructor::route('/{record}/edit'),
         ];
     }
-
 }

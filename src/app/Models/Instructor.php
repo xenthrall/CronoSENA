@@ -55,7 +55,6 @@ class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, Ha
 
         if ($this->name && $this->last_name) {
             return "{$this->name} {$this->last_name}";
-            
         }
         if ($this->name) {
             return $this->name;
@@ -94,9 +93,14 @@ class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, Ha
         return $this->belongsTo(Profesion::class, 'profesion_id');
     }
     */
-    //Un instructor tiene muchas competencias
-    public function competencies(): BelongsToMany
+    public function competencies()
     {
-        return $this->belongsToMany(Competency::class, 'instructor_competencia', 'instructor_id', 'competencia_id');
+        return $this->belongsToMany(Competency::class, 'instructor_competency')
+            ->withPivot([]);
+    }
+
+    public function fichaCompetencyExecutions()
+    {
+        return $this->hasMany(FichaCompetencyExecution::class);
     }
 }

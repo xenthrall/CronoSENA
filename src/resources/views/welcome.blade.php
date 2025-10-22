@@ -284,7 +284,7 @@
 
         <div class="buttons">
 
-            <a class="button" href="">Planificación Académica</a>
+            <a class="button" href="{{ url('/planificacion') }}">Planificación Académica</a>
             <a class="button" href="{{ url('/instructor') }}">Espacio del Instructor</a>
         </div>
     </main>

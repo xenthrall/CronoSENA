@@ -28,6 +28,12 @@ class Competency extends Model
             ->withPivot([]);
     }
 
+    public function instructors()
+    {
+        return $this->belongsToMany(Instructor::class, 'instructor_competency')
+            ->withPivot([]);
+    }
+
     public function fichas()
     {
         return $this->belongsToMany(Ficha::class, 'ficha_competencies')
