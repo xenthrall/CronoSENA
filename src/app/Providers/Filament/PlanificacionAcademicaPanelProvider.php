@@ -18,6 +18,8 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Support\Assets\Css;
+use Filament\Support\Assets\Js;
 
 class PlanificacionAcademicaPanelProvider extends PanelProvider
 {
@@ -56,6 +58,19 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+
+            ->assets([
+                Css::make('custom-stylesheet', resource_path('css/custom.css')),
+                //Js::make('custom-script', resource_path('js/custom.js')),
+            ])
+            
+            //->topNavigation() //Habilitar la barra de navegación superior
+
+            ->sidebarCollapsibleOnDesktop()
+            //->spa() //Habilitar la aplicación de una sola página (SPA)
+            ->unsavedChangesAlerts()
+            //->sidebarFullyCollapsibleOnDesktop() //Contraer la barra lateral completamente
+        ;
     }
 }
