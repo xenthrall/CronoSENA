@@ -81,6 +81,10 @@ class AdminPanelProvider extends PanelProvider
                     ->label('instructores')
                     ->icon('heroicon-o-user-group')
                     ->collapsed(),
+                NavigationGroup::make()
+                    ->label('sistema')
+                    ->icon('heroicon-o-cog')
+                    ->collapsed(),
 
 
             ])
