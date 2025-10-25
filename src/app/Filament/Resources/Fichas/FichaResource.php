@@ -12,6 +12,7 @@ use App\Models\Ficha;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class FichaResource extends Resource
 {
@@ -54,5 +55,20 @@ class FichaResource extends Resource
             'edit' => EditFicha::route('/{record}/edit'),
             'manage' => ManageFicha::route('/{record}/manage'),
         ];
+    }
+
+     public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('ficha.view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->can('ficha.create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->can('ficha.edit');
     }
 }

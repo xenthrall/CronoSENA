@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Fichas\Pages;
 use App\Filament\Resources\Fichas\FichaResource;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\Page;
+use Illuminate\Support\Facades\Auth;
 
 class ManageFicha extends Page
 {
@@ -21,5 +22,15 @@ class ManageFicha extends Page
     public function mount(int|string $record): void
     {
         $this->record = $this->resolveRecord($record);
+        $this->authorizeAccess();
+    }
+
+    protected function authorizeAccess(): void
+    {
+        abort_unless(
+            Auth::user()?->can('ficha.manage'),
+            403,
+            'No tienes permiso para gestionar esta ficha.'
+        );
     }
 }
