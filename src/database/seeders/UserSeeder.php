@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         // 🔹 Aseguramos que existan los roles base antes de asignarlos
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $planificadorRole = Role::firstOrCreate(['name' => 'planificador']);
+        $planificadorRole = Role::firstOrCreate(['name' => 'viewer']);
 
         // 🔹 Usuario administrador
         $admin = User::firstOrCreate(
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             ]
         );
 
-        if (! $planificador->hasRole('planificador')) {
+        if (! $planificador->hasRole('viewer')) {
             $planificador->assignRole($planificadorRole);
         }
 

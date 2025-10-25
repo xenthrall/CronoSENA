@@ -25,7 +25,7 @@ class UsersTable
                     ->badge()
                     ->colors([
                         'primary' => 'admin',
-                        'success' => 'planificador',
+                        'success' => 'viewer',
                     ])
                     ->sortable(),
 
@@ -35,11 +35,13 @@ class UsersTable
                     ->boolean(),
 
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Creado en')
+                    ->dateTime('d M, Y h:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->dateTime()
+                    ->label('Actualizado en')
+                    ->dateTime('d M, Y h:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
