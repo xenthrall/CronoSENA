@@ -6,7 +6,6 @@ use App\Filament\Resources\Shifts\Pages\ManageShifts;
 use App\Models\Shift;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -156,7 +155,8 @@ class ShiftResource extends Resource
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+
+
                 ]),
             ]);
     }
