@@ -12,8 +12,13 @@ class ListRoles extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            CreateAction::make(),
-        ];
+        $actions = [];
+
+        if(auth()->user()?->can('role.create')){
+            $actions[] = CreateAction::make();
+
+        }
+
+        return $actions;
     }
 }
