@@ -18,6 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\CheckboxList;
+use Illuminate\Support\Facades\Auth;
 
 class ShiftResource extends Resource
 {
@@ -117,7 +118,7 @@ class ShiftResource extends Resource
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                 TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('start_time')
                     ->label('Hora Inicio')
@@ -154,10 +155,7 @@ class ShiftResource extends Resource
                 DeleteAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-
-
-                ]),
+                BulkActionGroup::make([]),
             ]);
     }
 
@@ -166,5 +164,10 @@ class ShiftResource extends Resource
         return [
             'index' => ManageShifts::route('/'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('ficha.shifts');
     }
 }
