@@ -28,7 +28,7 @@ class UserForm
                     ->required(),
                 Select::make('roles')
                     ->label('Rol')
-                    ->multiple()
+                    ->visible(fn() => auth()->user()?->can('user.manageRoles'))
                     ->relationship('roles', 'name')
                     ->preload()
                     ->required(),

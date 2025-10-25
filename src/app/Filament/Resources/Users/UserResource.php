@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
@@ -57,4 +58,26 @@ class UserResource extends Resource
             'edit' => EditUser::route('/{record}/edit'),
         ];
     }
+
+    
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('user.view');
+    }
+
+    public static function canView($record): bool
+    {
+        return Auth::user()?->can('user.view');
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->can('user.create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->can('user.edit');
+    }
+
 }
