@@ -33,8 +33,19 @@ class SyncPermissions extends Command
         $permissions = [
             'Usuarios' => [
                 ['name' => 'user.view', 'action' => 'Ver Usuarios', 'description' => 'Permite ver la lista de usuarios.'],
-                ['name' => 'user.edit', 'action' => 'Editar Usuario', 'description' => 'Permite modificar información de usuarios.'],
+                ['name' => 'user.create', 'action' => 'Crear Usuario', 'description' => 'Permite registrar nuevos usuarios en el sistema.'],
+                ['name' => 'user.edit', 'action' => 'Editar Usuario', 'description' => 'Permite modificar la información de los usuarios existentes.'],
+                ['name' => 'user.delete', 'action' => 'Eliminar Usuario', 'description' => 'Permite eliminar usuarios del sistema.'],
+                ['name' => 'user.manageRoles', 'action' => 'Asignar Roles', 'description' => 'Permite asignar o modificar roles y permisos de los usuarios.'],
             ],
+            
+            'Roles y Permisos' => [
+                ['name' => 'role.view', 'action' => 'Ver Roles', 'description' => 'Permite ver la lista de roles.'],
+                ['name' => 'role.edit', 'action' => 'Editar Rol', 'description' => 'Permite modificar permisos de roles.'],
+                ['name' => 'role.create', 'action' => 'Crear Rol', 'description' => 'Permite crear nuevos roles.'],
+                ['name' => 'role.delete', 'action' => 'Eliminar Rol', 'description' => 'Permite eliminar roles existentes.'],
+            ],
+
             'Panel Principal' => [
                 ['name' => 'admin.access', 'action' => 'Acceso al Panel', 'description' => 'Permite acceder al panel administrativo.'],
             ],
