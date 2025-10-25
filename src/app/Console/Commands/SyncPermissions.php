@@ -46,9 +46,11 @@ class SyncPermissions extends Command
                 ['name' => 'role.delete', 'action' => 'Eliminar Rol', 'description' => 'Permite eliminar roles existentes.'],
             ],
 
-            'Panel Principal' => [
-                ['name' => 'admin.access', 'action' => 'Acceso al Panel', 'description' => 'Permite acceder al panel administrativo.'],
+            'Paneles' => [
+                ['name' => 'panel.admin.access', 'action' => 'Acceso al Panel Administrativo', 'description' => 'Permite acceder y visualizar el panel administrativo del sistema.'],
+                ['name' => 'panel.planificacion.access', 'action' => 'Acceso al Panel de Planificación', 'description' => 'Permite acceder y visualizar el panel de planificación del sistema.'],
             ],
+            
             'Reportes' => [
                 ['name' => 'reportes.export', 'action' => 'Exportar Reportes', 'description' => 'Permite descargar reportes en PDF o Excel.'],
             ],
