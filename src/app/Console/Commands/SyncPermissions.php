@@ -14,8 +14,7 @@ class SyncPermissions extends Command
      *
      * @var string
      */
-    protected $signature = 'cronosena:sync-permissions';
-
+    protected $signature = 'cronosena:sync-permissions {--refresh : Limpia los permisos existentes antes de sincronizar}';
     /**
      * The console command description.
      *
@@ -29,6 +28,12 @@ class SyncPermissions extends Command
     public function handle()
     {
         $this->info('🚀 Iniciando sincronización de permisos...');
+
+        if ($this->option('refresh')) {
+            $this->info('🧹 Limpiando permisos existentes...');
+            Permission::truncate();
+            $this->info('🗑️ Permisos existentes eliminados.');
+        }
 
         $permissions = [
             'Usuarios' => [
