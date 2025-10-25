@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->string('model')->nullable()->after('name');
+            $table->string('group')->nullable()->after('name');
+            $table->string('action')->nullable()->after('group');
+            $table->string('description')->nullable()->after('action');
         });
     }
 
@@ -22,7 +24,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('permissions', function (Blueprint $table) {
-            $table->dropColumn('model');
+            $table->dropColumn('group');
+            $table->dropColumn('action');
+            $table->dropColumn('description');
         });
     }
 };
