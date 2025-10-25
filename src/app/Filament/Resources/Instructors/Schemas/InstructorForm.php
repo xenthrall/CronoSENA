@@ -8,8 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Grid;
-
+use Illuminate\Support\Facades\Auth;
 
 class InstructorForm
 {
@@ -79,6 +78,7 @@ class InstructorForm
                             //->required()
                             ->searchable()
                             ->preload()
+                            ->disabled(Auth::user()?->cannot('instructor.manageEquipoEjecutor'))
                             ->placeholder('Seleccione un equipo'),
                         TextInput::make('specialty')
                             ->label('Especialidad')

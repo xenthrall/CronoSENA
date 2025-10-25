@@ -7,6 +7,7 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\IconColumn;
+use Illuminate\Support\Facades\Auth;
 
 class UsersTable
 {
@@ -50,7 +51,7 @@ class UsersTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->visible(fn() => auth()->user()?->can('user.edit')),
+                    ->visible(fn() => Auth::user()?->can('user.edit')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

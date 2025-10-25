@@ -6,6 +6,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class RolesTable
 {
@@ -35,7 +36,7 @@ class RolesTable
             ])
             ->recordActions([
                 EditAction::make()
-                    ->visible(fn() => auth()->user()?->can('role.edit')),
+                    ->visible(fn() => Auth::user()?->can('role.edit')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

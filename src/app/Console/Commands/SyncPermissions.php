@@ -38,7 +38,7 @@ class SyncPermissions extends Command
                 ['name' => 'user.delete', 'action' => 'Eliminar Usuario', 'description' => 'Permite eliminar usuarios del sistema.'],
                 ['name' => 'user.manageRoles', 'action' => 'Asignar Roles', 'description' => 'Permite asignar o modificar roles y permisos de los usuarios.'],
             ],
-            
+
             'Roles y Permisos' => [
                 ['name' => 'role.view', 'action' => 'Ver Roles', 'description' => 'Permite ver la lista de roles.'],
                 ['name' => 'role.edit', 'action' => 'Editar Rol', 'description' => 'Permite modificar permisos de roles.'],
@@ -46,11 +46,24 @@ class SyncPermissions extends Command
                 ['name' => 'role.delete', 'action' => 'Eliminar Rol', 'description' => 'Permite eliminar roles existentes.'],
             ],
 
+            'Instructores' => [
+                // Permisos básicos
+                ['name' => 'instructor.view', 'action' => 'Ver Instructores', 'description' => 'Permite visualizar la lista de instructores y sus detalles básicos.'],
+                ['name' => 'instructor.create', 'action' => 'Crear Instructor', 'description' => 'Permite registrar nuevos instructores en el sistema.'],
+                ['name' => 'instructor.edit', 'action' => 'Editar Instructor', 'description' => 'Permite modificar la información de un instructor existente.'],
+                ['name' => 'instructor.delete', 'action' => 'Eliminar Instructor', 'description' => 'Permite eliminar un instructor del sistema.'],
+
+                // Permisos funcionales
+                ['name' => 'instructor.manageEquipoEjecutor', 'action' => 'Gestionar Equipo Ejecutor', 'description' => 'Permite asignar, modificar o eliminar la información del equipo ejecutor.'],
+                ['name' => 'instructor.manageCompetencias', 'action' => 'Gestionar Competencias Vinculadas', 'description' => 'Permite vincular y administrar las competencias asociadas al instructor.'],
+                ['name' => 'instructor.export', 'action' => 'Exportar Información de Instructores', 'description' => 'Permite exportar listados o fichas de instructores en formatos PDF o Excel.'],
+            ],
+
             'Paneles' => [
                 ['name' => 'panel.admin.access', 'action' => 'Acceso al Panel Administrativo', 'description' => 'Permite acceder y visualizar el panel administrativo del sistema.'],
                 ['name' => 'panel.planificacion.access', 'action' => 'Acceso al Panel de Planificación', 'description' => 'Permite acceder y visualizar el panel de planificación del sistema.'],
             ],
-            
+
             'Reportes' => [
                 ['name' => 'reportes.export', 'action' => 'Exportar Reportes', 'description' => 'Permite descargar reportes en PDF o Excel.'],
             ],

@@ -12,6 +12,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DetachAction;
 use Filament\Actions\DetachBulkAction;
 use Filament\Actions\ViewAction;
+use Illuminate\Support\Facades\Auth;
 
 
 class CompetenciesRelationManager extends RelationManager
@@ -19,7 +20,7 @@ class CompetenciesRelationManager extends RelationManager
     protected static string $relationship = 'competencies';
 
     protected static ?string $relatedResource = CompetencyResource::class;
-    
+
     public function table(Table $table): Table
     {
         return $table
@@ -78,11 +79,15 @@ class CompetenciesRelationManager extends RelationManager
                     ->preloadRecordSelect()
                     ->recordTitle(fn($record) => "{$record->code} - {$record->name}")
                     ->recordSelectSearchColumns(['code', 'name'])
-                    ->label('Vincular Competencia'),
+                    ->label('Vincular Competencia')
+                    ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
             ])
             ->recordActions([
-                ViewAction::make(),
-                DetachAction::make(),
+                ViewAction::make()
+                    ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
+                DetachAction::make()
+                    ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -91,7 +96,8 @@ class CompetenciesRelationManager extends RelationManager
                             $relationship = $table->getRelationship();
                             // Aseguramos que sean IDs y no objetos
                             $relationship->detach($records->pluck('id'));
-                        }),
+                        })
+                        ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
                 ]),
             ]);
     }

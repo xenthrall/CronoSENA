@@ -11,6 +11,7 @@ use App\Models\Instructor;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class InstructorResource extends Resource
 {
@@ -52,5 +53,20 @@ class InstructorResource extends Resource
             'create' => CreateInstructor::route('/create'),
             'edit' => EditInstructor::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('instructor.view');
+    }
+
+     public static function canCreate(): bool
+    {
+        return Auth::user()?->can('instructor.create');
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->can('instructor.edit');
     }
 }
