@@ -83,7 +83,6 @@ class AdminPanelProvider extends PanelProvider
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('sistema')
-                    ->icon('heroicon-o-cog')
                     ->collapsed(),
 
 
