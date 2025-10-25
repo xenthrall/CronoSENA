@@ -22,7 +22,7 @@ class InstructorResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $recordTitleAttribute = 'nombre';
+    protected static ?string $recordTitleAttribute = 'full_name';
 
     protected static ?string $modelLabel = 'Instructor';
 
