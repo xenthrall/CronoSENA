@@ -64,6 +64,17 @@ class SyncPermissions extends Command
                 ['name' => 'instructor.export', 'action' => 'Exportar Información de Instructores', 'description' => 'Permite exportar listados o fichas de instructores en formatos PDF o Excel.'],
             ],
 
+            'Fichas' => [
+                ['name' => 'ficha.view', 'action' => 'Ver Fichas', 'description' => 'Permite ver la lista de fichas.'],
+                ['name' => 'ficha.create', 'action' => 'Crear Ficha', 'description' => 'Permite crear nuevas fichas.'],
+                ['name' => 'ficha.edit', 'action' => 'Editar Ficha', 'description' => 'Permite modificar fichas existentes.'],
+                ['name' => 'ficha.delete', 'action' => 'Eliminar Ficha', 'description' => 'Permite eliminar fichas del sistema.'],
+
+                ['name' => 'ficha.manage', 'action' => 'Gestionar Ficha', 'description' => 'Permite gestionar detalles especificos de la ficha, como asignar instructores o competencias.'],
+                ['name' => 'ficha.municipalities', 'action' => 'Gestionar Municipios', 'description' => 'Permite gestionar los municipios'],
+                ['name' => 'ficha.shifts', 'action' => 'Gestionar Jornadas', 'description' => 'Permite gestionar las jornadas'],
+            ],
+
             'Paneles' => [
                 ['name' => 'panel.admin.access', 'action' => 'Acceso al Panel Administrativo', 'description' => 'Permite acceder y visualizar el panel administrativo del sistema.'],
                 ['name' => 'panel.planificacion.access', 'action' => 'Acceso al Panel de Planificación', 'description' => 'Permite acceder y visualizar el panel de planificación del sistema.'],
