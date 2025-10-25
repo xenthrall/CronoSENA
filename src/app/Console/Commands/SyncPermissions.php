@@ -28,63 +28,59 @@ class SyncPermissions extends Command
      */
     public function handle()
     {
+        $this->info('🚀 Iniciando sincronización de permisos...');
 
-        $this->info('Iniciando sincronización de permisos...');
-
-         $permissionsByModel = [
-            'User' => [
-                'user.view',
-                'user.create',
-                'user.edit',
-                'user.delete',
+        $permissions = [
+            'Usuarios' => [
+                ['name' => 'user.view', 'action' => 'Ver Usuarios', 'description' => 'Permite ver la lista de usuarios.'],
+                ['name' => 'user.edit', 'action' => 'Editar Usuario', 'description' => 'Permite modificar información de usuarios.'],
             ],
-            'Role' => [
-                'role.view',
-                'role.create',
-                'role.edit',
-                'role.delete',
+            'Panel Principal' => [
+                ['name' => 'admin.access', 'action' => 'Acceso al Panel', 'description' => 'Permite acceder al panel administrativo.'],
             ],
-
+            'Reportes' => [
+                ['name' => 'reportes.export', 'action' => 'Exportar Reportes', 'description' => 'Permite descargar reportes en PDF o Excel.'],
+            ],
         ];
 
-        // Recorremos y creamos cada permiso si no existe
-        foreach ($permissionsByModel as $model => $permissions) {
-            foreach ($permissions as $permissionName) {
-                Permission::firstOrCreate([
-                    'name' => $permissionName,
-                    'guard_name' => 'web',
-                    'model' => $model,
-                ]);
+        foreach ($permissions as $group => $perms) {
+            foreach ($perms as $perm) {
+                Permission::firstOrCreate(
+                    ['name' => $perm['name'], 'guard_name' => 'web'],
+                    [
+                        'group' => $group,
+                        'action' => $perm['action'],
+                        'description' => $perm['description'],
+                    ]
+                );
             }
         }
 
         $this->info('✅ Permisos sincronizados correctamente.');
 
-        // (Opcional) Crear roles base y asignar permisos
         if ($this->confirm('¿Deseas crear roles base y asignar permisos?')) {
-            $this->createBaseRoles($permissionsByModel);
+            $this->createBaseRoles($permissions);
         }
 
         return self::SUCCESS;
-
     }
 
-    protected function createBaseRoles(array $permissionsByModel)
+    protected function createBaseRoles(array $permissions)
     {
         $roles = [
-            'admin' => array_merge(...array_values($permissionsByModel)), // todos los permisos
-            'viewer' => collect($permissionsByModel)
-                ->flatten()
-                ->filter(fn($perm) => str_contains($perm, 'view'))
+            'admin' => array_merge(...array_values($permissions)), // todos los permisos
+            'viewer' => collect($permissions)
+                ->flatten(1)
+                ->filter(fn($perm) => str_contains($perm['name'], 'view'))
                 ->values()
                 ->toArray(),
         ];
 
         foreach ($roles as $roleName => $perms) {
             $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
-            $role->syncPermissions($perms);
+            $role->syncPermissions(collect($perms)->pluck('name')->toArray());
         }
 
-        $this->info('🎯 Roles base creados: admin, viewer');
+        $this->info('🎯 Roles base creados y sincronizados: admin, viewer');
     }
 }

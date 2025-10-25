@@ -17,19 +17,20 @@ class RoleForm
         // Agrupamos permisos por el campo 'model'
         $permissions = Permission::query()
             ->get()
-            ->groupBy('model');
+            ->groupBy('group');
 
         $sections = [];
 
-        foreach ($permissions as $model => $perms) {
-            $sections[] = Section::make($model)
+        foreach ($permissions as $group => $perms) {
+            $sections[] = Section::make($group)
                 ->collapsed(false)
                 ->schema([
-                    CheckboxList::make("permissions.{$model}")
-                        ->options($perms->pluck('name', 'id'))
+                    CheckboxList::make("permissions.{$group}")
+                        ->options($perms->pluck('action', 'id'))
                         ->columns(2)
                         ->searchable()
                         ->bulkToggleable()
+                        ->descriptions($perms->pluck('description', 'id'))
                         ->label(false),
                 ]);
         }

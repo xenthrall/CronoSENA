@@ -54,7 +54,7 @@ class EditRole extends EditRecord
 
         $grouped = Permission::whereIn('id', $ids)
             ->get()
-            ->groupBy('model')
+            ->groupBy('group')
             ->map(fn ($items) => $items->pluck('id')->toArray())
             ->toArray();
 
