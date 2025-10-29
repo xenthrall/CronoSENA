@@ -3,12 +3,12 @@
 namespace App\Filament\Resources\Instructors\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\ImageColumn;
+use Illuminate\Support\Facades\Auth;
 
 class InstructorsTable
 {
@@ -61,11 +61,12 @@ class InstructorsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->visible(fn() => Auth::user()?->can('instructor.edit')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+
                 ]),
             ]);
     }

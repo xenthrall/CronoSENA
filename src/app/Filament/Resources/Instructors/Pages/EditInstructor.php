@@ -6,6 +6,7 @@ use App\Filament\Resources\Instructors\InstructorResource;
 use App\Services\ImageOptimizer;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +22,8 @@ class EditInstructor extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->visible(fn () => Auth::user()?->can('instructor.delete')),
         ];
     }
     protected function getRedirectUrl(): string

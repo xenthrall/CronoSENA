@@ -7,7 +7,6 @@ use App\Models\Municipality;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
@@ -15,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class MunicipalityResource extends Resource
 {
@@ -66,7 +66,7 @@ class MunicipalityResource extends Resource
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+
                 ]),
             ]);
     }
@@ -76,5 +76,10 @@ class MunicipalityResource extends Resource
         return [
             'index' => ManageMunicipalities::route('/'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()->can('ficha.municipalities');
     }
 }

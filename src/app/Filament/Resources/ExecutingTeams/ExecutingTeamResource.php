@@ -6,13 +6,13 @@ use App\Filament\Resources\ExecutingTeams\Pages\ManageExecutingTeams;
 use App\Models\ExecutingTeam;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 
 class ExecutingTeamResource extends Resource
 {
@@ -63,7 +63,7 @@ class ExecutingTeamResource extends Resource
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+
                 ]),
             ]);
     }
@@ -74,4 +74,10 @@ class ExecutingTeamResource extends Resource
             'index' => ManageExecutingTeams::route('/'),
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('instructor.manageEquipoEjecutor');
+    }
+  
 }

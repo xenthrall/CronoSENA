@@ -13,6 +13,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Actions\Action;
 use App\Filament\Resources\Fichas\FichaResource;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+
 
 
 
@@ -111,17 +113,19 @@ class FichasTable
                     ->label('Rango fecha inicio'), */
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->visible(fn () => Auth::user()?->can('ficha.edit')),
                 Action::make('manage')
                     ->label('Gestionar')
                     ->icon('heroicon-o-cog-6-tooth')
                     ->color('info')
                     //->button() // opcional: fuerza renderizado como botón
-                    ->url(fn($record) => FichaResource::getUrl('manage', ['record' => $record])),
+                    ->url(fn($record) => FichaResource::getUrl('manage', ['record' => $record]))
+                    ->visible(fn () => Auth::user()?->can('ficha.manage')),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    //DeleteBulkAction::make(),
                 ]),
             ]);
     }

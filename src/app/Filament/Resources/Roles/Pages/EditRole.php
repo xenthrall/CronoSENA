@@ -6,6 +6,7 @@ use App\Filament\Resources\Roles\RoleResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Auth;
 
 class EditRole extends EditRecord
 {
@@ -18,7 +19,7 @@ class EditRole extends EditRecord
          $actions = [];
 
         // Solo mostrar el botón "Eliminar" si el usuario tiene permiso
-        if (auth()->user()?->can('role.delete')) {
+        if (Auth::user()?->can('role.delete')) {
             $actions[] = DeleteAction::make()
                 ->label('Eliminar Rol');
         }

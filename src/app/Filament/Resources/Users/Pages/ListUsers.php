@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Users\Pages;
 use App\Filament\Resources\Users\UserResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\Auth;
 
 class ListUsers extends ListRecords
 {
@@ -14,7 +15,7 @@ class ListUsers extends ListRecords
     {
         $actions = [];
 
-        if(auth()->user()?->can('user.create')){
+        if(Auth::user()?->can('user.create')){
             $actions[] = CreateAction::make();
 
         }

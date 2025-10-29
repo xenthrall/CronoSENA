@@ -43,7 +43,7 @@ class RoleForm
 
                 ViewField::make('checkall')
                     ->label('Seleccionar / Deseleccionar todos')
-                    ->view('components.toggle-all'),
+                    ->view('filament.components.toggle-all'),
 
                 ...$sections, // ← Aquí renderizamos todas las secciones dinámicas
             ]);
