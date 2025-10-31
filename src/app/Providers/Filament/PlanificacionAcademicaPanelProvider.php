@@ -83,11 +83,15 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
                     ->collapsed(),
             ])
 
+            ->viteTheme('resources/css/filament/admin/theme.css')
+
+            /*
             ->assets([
                 Css::make('custom-stylesheet', resource_path('css/custom.css')),
                 //Js::make('custom-script', resource_path('js/custom.js')),
             ])
-            
+                ;*/
+
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
