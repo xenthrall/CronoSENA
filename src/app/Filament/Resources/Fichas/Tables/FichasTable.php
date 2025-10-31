@@ -25,7 +25,7 @@ class FichasTable
         return $table
         ->recordUrl(function (Model $record): string {
                 // Redirige a la página "manage" en lugar de "edit"
-                return route('filament.admin.resources.fichas.manage', ['record' => $record]);
+                return FichaResource::getUrl('manage', ['record' => $record]);
             })
             //->defaultSort('fecha_inicio', 'desc')
             ->columns([
