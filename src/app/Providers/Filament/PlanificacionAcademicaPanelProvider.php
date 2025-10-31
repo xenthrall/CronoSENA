@@ -22,6 +22,7 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use App\Filament\Resources\Fichas\FichaResource;
 use Filament\Navigation\NavigationGroup;
+use App\Filament\PlanificacionAcademica\Pages\Auth\PlanificacionLogin;
 
 class PlanificacionAcademicaPanelProvider extends PanelProvider
 {
@@ -30,7 +31,7 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
         return $panel
             ->id('planificacion')
             ->path('planificacion')
-            ->login()
+            ->login(PlanificacionLogin::class)
             ->colors([
                 'primary' => Color::Indigo,
             ])
