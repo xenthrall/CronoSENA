@@ -1,0 +1,10 @@
+# configuracion inicial para que el servidor 80 responda
+server {
+    listen 80;
+    server_name cata.cronosena.site;
+
+    # Ruta para la validación de Let's Encrypt
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+}
