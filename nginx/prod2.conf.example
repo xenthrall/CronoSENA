@@ -1,7 +1,7 @@
 # Redirige todo el tráfico HTTP (puerto 80) a HTTPS
 server {
     listen 80;
-    server_name cronosena.site www.cronosena.site;
+    server_name demo.cronosena.site;
 
     # Ruta para la validación de Let's Encrypt
     location /.well-known/acme-challenge/ {
@@ -16,14 +16,14 @@ server {
 # Configuración principal para HTTPS (puerto 443)
 server {
     listen 443 ssl;
-    server_name cronosena.site www.cronosena.site;
+    server_name demo.cronosena.site;
 
     # Rutas a los certificados (serán creados por Certbot)
-    ssl_certificate /etc/letsencrypt/live/cronosena.site/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/cronosena.site/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/demo.cronosena.site/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/demo.cronosena.site/privkey.pem;
 
     # Configuraciones de seguridad SSL recomendadas
-    include /etc/letsencrypt/options-ssl-nginx.conf;
+    #include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     root /var/www/html/public;

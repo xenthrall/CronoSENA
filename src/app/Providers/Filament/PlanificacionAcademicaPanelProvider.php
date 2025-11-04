@@ -20,6 +20,9 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
+use App\Filament\Resources\Fichas\FichaResource;
+use Filament\Navigation\NavigationGroup;
+use App\Filament\PlanificacionAcademica\Pages\Auth\PlanificacionLogin;
 
 class PlanificacionAcademicaPanelProvider extends PanelProvider
 {
@@ -28,7 +31,7 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
         return $panel
             ->id('planificacion')
             ->path('planificacion')
-            ->login()
+            ->login(PlanificacionLogin::class)
             ->colors([
                 'primary' => Color::Indigo,
             ])
@@ -37,6 +40,9 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
             ->darkModeBrandLogo(asset('images/logo-cata-dark.png'))
             ->brandLogoHeight('2.5rem')
             ->discoverResources(in: app_path('Filament/PlanificacionAcademica/Resources'), for: 'App\Filament\PlanificacionAcademica\Resources')
+            ->resources([
+                FichaResource::class,
+            ])
             ->discoverPages(in: app_path('Filament/PlanificacionAcademica/Pages'), for: 'App\Filament\PlanificacionAcademica\Pages')
             ->pages([
                 Dashboard::class,
@@ -60,11 +66,32 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
 
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('programas')
+                    ->icon('heroicon-o-book-open')
+                    ->collapsed(), //contraible deshabilitado -> false
+                NavigationGroup::make()
+                    ->label('fichas')
+                    ->icon('heroicon-o-pencil'),
+                NavigationGroup::make()
+                    ->label('instructores')
+                    ->icon('heroicon-o-user-group')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('sistema')
+                    ->collapsed(),
+            ])
+
+            ->viteTheme('resources/css/filament/admin/theme.css')
+
+            /*
             ->assets([
                 Css::make('custom-stylesheet', resource_path('css/custom.css')),
                 //Js::make('custom-script', resource_path('js/custom.js')),
             ])
-            
+                ;*/
+
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
