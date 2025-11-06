@@ -32,7 +32,8 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
             ->query(FichaCompetency::query()->where('ficha_id', $this->ficha->id))
             ->columns([
                 TextColumn::make('order')
-                    ->label('Orden de ejecución'),
+                    ->label('Orden de ejecución')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('competency.code')
                     ->label('Código')
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -45,6 +46,8 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                     ->label('Horas totales'),
                 TextColumn::make('executed_hours')
                     ->label('Horas ejecutadas'),
+                TextColumn::make('remaining_hours')
+                    ->label('Horas restantes'),
                 TextColumn::make('status')
                     ->label('Estado'),
                 TextColumn::make('competency.competencyType.name')
@@ -53,7 +56,8 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                     ->badge()
                     ->colors([
                         'gray'    => fn($state): bool => $state === 'Sin asignar', // si no tiene tipo asignado
-                    ]),
+                    ])
+                    ->toggleable(isToggledHiddenByDefault: false),
             ])
             ->filters([
                 //Filtrar por tipo de competencia

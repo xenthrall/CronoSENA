@@ -23,6 +23,17 @@ class FichaCompetency extends Model
         'total_hours_competency' => 'integer',
     ];
 
+    protected $appends = ['remaining_hours'];
+
+    public function getRemainingHoursAttribute()
+    {
+        $total = $this->total_hours_competency ?? 0;
+        $executed = $this->executed_hours ?? 0;
+
+        return max($total - $executed, 0);
+    }
+
+
     public function ficha()
     {
         return $this->belongsTo(Ficha::class);
