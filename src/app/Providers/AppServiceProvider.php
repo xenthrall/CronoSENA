@@ -1,11 +1,16 @@
 <?php
 
 namespace App\Providers;
-use App\Observers\FichaObserver;
-use App\Models\Ficha;
-use App\Models\Instructor;
 use Illuminate\Support\ServiceProvider;
+
+use App\Models\Ficha;
+use App\Models\FichaCompetencyExecution;
+use App\Models\Instructor;
+
 use App\Observers\InstructorObserver;
+use App\Observers\FichaCompetencyExecutionObserver;
+use App\Observers\FichaObserver;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Ficha::observe(FichaObserver::class);
         Instructor::observe(InstructorObserver::class);
+        FichaCompetencyExecution::observe(FichaCompetencyExecutionObserver::class);
     }
 }
