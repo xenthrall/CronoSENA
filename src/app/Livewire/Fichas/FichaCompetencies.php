@@ -15,6 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Filament\Tables\Filters\SelectFilter;
+use App\Filament\Actions\RegisterExecutionAction;
 
 
 class FichaCompetencies extends Component implements HasActions, HasSchemas, HasTable
@@ -58,6 +59,11 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                         'gray'    => fn($state): bool => $state === 'Sin asignar', // si no tiene tipo asignado
                     ])
                     ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('notes')
+                    ->label('Observaciones')
+                    ->limit(25)
+                    ->tooltip(fn($record) => $record->notes)
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //Filtrar por tipo de competencia
@@ -68,7 +74,9 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
 
             ])
 
-            ->recordAction(null);
+            ->recordActions([
+                RegisterExecutionAction::make(),
+            ]);
     }
 
     public function render(): View
