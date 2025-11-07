@@ -23,6 +23,40 @@ class FichaCompetency extends Model
         'total_hours_competency' => 'integer',
     ];
 
+    protected $appends = ['remaining_hours', 'progress_percentage'];
+
+    public function getRemainingHoursAttribute()
+    {
+        $total = $this->total_hours_competency ?? 0;
+        $executed = $this->executed_hours ?? 0;
+
+        return max($total - $executed, 0);
+    }
+
+    public function getProgressPercentageAttribute()
+    {
+        $total = $this->total_hours_competency ?? 0;
+        $executed = $this->executed_hours ?? 0;
+
+        if ($total === 0) {
+            return 0;
+        }
+
+        $percentage = round(($executed / $total) * 100, 0);
+        return $this->status . ' (' . $percentage . '%)';
+    }
+
+    public function getStatusAttribute($value)
+    {
+        return match ($value) {
+            'pendiente' => 'Programado',
+            'en_progreso' => 'En Progreso',
+            'completado' => 'Completado',
+            default => ucfirst($value),
+        };
+    }
+
+
     public function ficha()
     {
         return $this->belongsTo(Ficha::class);

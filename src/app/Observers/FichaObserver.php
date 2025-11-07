@@ -28,7 +28,7 @@ class FichaObserver
                 'competency_id' => $competency->id,
                 'total_hours_competency' => $competency->duration_hours,
                 'executed_hours' => 0,
-                'status' => 'pending', //estado por defecto
+                'status' => 'pendiente', //estado por defecto
                 'order' => 0, // Más adelante puede definir una lógica para el orden si es necesario
                 'created_at' => now(),
                 'updated_at' => now(),

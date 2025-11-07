@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('total_hours_competency')->default(0);
             $table->integer('executed_hours')->default(0);
 
-            $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
+            $table->string('status')->default('pendiente'); // pendiente, en_progreso, completado
 
             $table->text('notes')->nullable();
 

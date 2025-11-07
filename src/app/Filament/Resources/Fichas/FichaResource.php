@@ -6,6 +6,8 @@ use App\Filament\Resources\Fichas\Pages\CreateFicha;
 use App\Filament\Resources\Fichas\Pages\EditFicha;
 use App\Filament\Resources\Fichas\Pages\ListFichas;
 use App\Filament\Resources\Fichas\Pages\ManageFicha;
+use App\Filament\Resources\Fichas\Pages\CompetencyExecutions;
+
 use App\Filament\Resources\Fichas\Schemas\FichaForm;
 use App\Filament\Resources\Fichas\Tables\FichasTable;
 use App\Models\Ficha;
@@ -54,10 +56,11 @@ class FichaResource extends Resource
             'create' => CreateFicha::route('/create'),
             'edit' => EditFicha::route('/{record}/edit'),
             'manage' => ManageFicha::route('/{record}/manage'),
+            'competency-executions' => CompetencyExecutions::route('/{ficha}/competency-executions/{ficha_competency}'),
         ];
     }
 
-     public static function canViewAny(): bool
+    public static function canViewAny(): bool
     {
         return Auth::user()?->can('ficha.view');
     }
