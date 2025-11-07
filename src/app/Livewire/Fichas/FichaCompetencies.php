@@ -15,7 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Actions\RegisterExecutionAction;
+use App\Filament\Actions\Fichas\RegisterExecutionAction;
 
 use Filament\Actions\ActionGroup;
 

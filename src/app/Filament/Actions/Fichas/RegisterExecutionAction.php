@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Actions;
+namespace App\Filament\Actions\Fichas;
 
 use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
