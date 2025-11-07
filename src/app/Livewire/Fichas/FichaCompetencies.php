@@ -16,7 +16,7 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Actions\RegisterExecutionAction;
-
+use Filament\Actions\ActionGroup;
 
 class FichaCompetencies extends Component implements HasActions, HasSchemas, HasTable
 {
@@ -75,7 +75,9 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
             ])
 
             ->recordActions([
-                RegisterExecutionAction::make(),
+                ActionGroup::make([
+                    RegisterExecutionAction::make(),
+                ]),
             ]);
     }
 

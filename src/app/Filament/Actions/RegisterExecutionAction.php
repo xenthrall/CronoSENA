@@ -24,6 +24,7 @@ class RegisterExecutionAction extends Action
             ->color('primary')
             ->modalHeading(fn($record) => "Registrar Ejecución para: " . $record->competency->name)
             ->modalIcon('heroicon-o-clock')
+            ->modalSubmitActionLabel('Guardar ejecución')
             ->schema([
                 Grid::make(2)
                     ->schema([
@@ -65,6 +66,8 @@ class RegisterExecutionAction extends Action
                     'executed_hours'      => $data['executed_hours'],
                     'notes'               => $data['notes'] ?? null,
                 ]);
-            });
+                    
+            })
+            ->successNotificationTitle('Ejecución registrada correctamente');
     }
 }
