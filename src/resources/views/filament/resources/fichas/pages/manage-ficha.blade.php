@@ -16,6 +16,4 @@
         </div>
 
         @livewire('fichas.ficha-competencies', ['ficha' => $this->record])
-        @livewire('fichas.competency-executions')
-
 </x-filament-panels::page>

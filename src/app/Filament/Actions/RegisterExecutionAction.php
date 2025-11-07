@@ -30,7 +30,7 @@ class RegisterExecutionAction extends Action
                     ->schema([
                         Select::make('instructor_id')
                             ->label('Instructor')
-                            ->options(fn() => Instructor::query()->orderBy('name')->pluck('name', 'id')->toArray())
+                            ->options(fn() => Instructor::query()->orderBy('full_name')->pluck('full_name', 'id')->toArray())
                             ->searchable()
                             ->required(),
                         TextInput::make('executed_hours')

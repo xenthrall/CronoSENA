@@ -33,7 +33,7 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
     public function table(Table $table): Table
     {
         return $table
-            ->query(FichaCompetencyExecution::query()->where('ficha_competency_id', $this->fichaCompetency->id ?? 1))
+            ->query(FichaCompetencyExecution::query()->where('ficha_competency_id', $this->fichaCompetency->id))
 
             ->columns([
                 ImageColumn::make('instructor.photo_url')
@@ -45,7 +45,7 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
                     ->label('Instructor'),
                 TextColumn::make('executed_hours')
                     ->label('Horas Ejecutadas'),
-                TextColumn::make('date_execution')
+                TextColumn::make('execution_date')
                     ->label('Fecha de Ejecución'),
                 TextColumn::make('completion_date')
                     ->label('Fecha de Finalización'),

@@ -16,7 +16,11 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Actions\RegisterExecutionAction;
+
 use Filament\Actions\ActionGroup;
+
+use App\Filament\Resources\Fichas\FichaResource;
+use Illuminate\Database\Eloquent\Model;
 
 class FichaCompetencies extends Component implements HasActions, HasSchemas, HasTable
 {
@@ -31,6 +35,12 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
     {
         return $table
             ->query(FichaCompetency::query()->where('ficha_id', $this->ficha->id))
+            ->recordUrl(function (Model $record): string {
+                return FichaResource::getUrl('competency-executions', [
+                    'ficha' => $this->ficha->id,              
+                    'ficha_competency' => $record,           // el registro actual de la tabla
+                ]);
+            })
             ->columns([
                 TextColumn::make('order')
                     ->label('Orden de ejecución')
