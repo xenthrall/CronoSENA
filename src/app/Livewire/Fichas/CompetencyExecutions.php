@@ -12,6 +12,7 @@ use Filament\Schemas\Contracts\HasSchemas;
 use Filament\Tables\Contracts\HasTable;
 
 use Filament\Actions\DeleteAction;
+use App\Filament\Actions\Fichas\EditExecutionAction;
 
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
@@ -53,6 +54,7 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
 
             ->recordActions([
                 DeleteAction::make(),
+                EditExecutionAction::make(),
             ]);
     }
 
