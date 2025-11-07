@@ -59,8 +59,8 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                     ->label('Horas ejecutadas'),
                 TextColumn::make('remaining_hours')
                     ->label('Horas restantes'),
-                TextColumn::make('status')
-                    ->label('Estado'),
+                TextColumn::make('progress_percentage')
+                    ->label('Estado (%)'),
                 TextColumn::make('competency.competencyType.name')
                     ->label('Tipo de Competencia')
                     ->default('Sin asignar')
