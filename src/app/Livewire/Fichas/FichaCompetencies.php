@@ -60,7 +60,7 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                     ])
                     ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('notes')
-                    ->label('Observaciones')
+                    ->label('Notas')
                     ->limit(25)
                     ->tooltip(fn($record) => $record->notes)
                     ->toggleable(isToggledHiddenByDefault: true),
