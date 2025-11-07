@@ -11,7 +11,7 @@ class CompetencyExecutions extends Page
 {
     protected static string $resource = FichaResource::class;
 
-    protected static ?string $title = 'Ejecuciones';
+    protected static ?string $title = 'Desarrollo de la Competencia';
 
     protected string $view = 'filament.resources.fichas.pages.competency-executions';
 

@@ -13,8 +13,10 @@ use Filament\Tables\Contracts\HasTable;
 
 use Filament\Actions\DeleteAction;
 use App\Filament\Actions\Fichas\EditExecutionAction;
+use App\Filament\Actions\Fichas\RegisterExecutionHeaderAction;
 
 use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Auth\Pages\Register;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Table;
@@ -50,6 +52,12 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
                     ->label('Fecha de Ejecución'),
                 TextColumn::make('completion_date')
                     ->label('Fecha de Finalización'),
+            ])
+
+            ->headerActions([
+                RegisterExecutionHeaderAction::make()
+                    ->fichaCompetency($this->fichaCompetency->id),
+
             ])
 
             ->recordActions([
