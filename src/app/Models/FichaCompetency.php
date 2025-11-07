@@ -46,6 +46,16 @@ class FichaCompetency extends Model
         return $this->status . ' (' . $percentage . '%)';
     }
 
+    public function getStatusAttribute($value)
+    {
+        return match ($value) {
+            'pendiente' => 'Programado',
+            'en_progreso' => 'En Progreso',
+            'completado' => 'Completado',
+            default => ucfirst($value),
+        };
+    }
+
 
     public function ficha()
     {
