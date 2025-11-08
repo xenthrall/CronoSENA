@@ -60,4 +60,9 @@ class Ficha extends Model
     {
         return $this->hasMany(FichaCompetency::class);
     }
+
+    public function instructorLeaderships()
+    {
+        return $this->hasMany(FichaInstructorLeadership::class);
+    }
 }
