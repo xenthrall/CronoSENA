@@ -6,6 +6,7 @@ use App\Filament\Resources\Fichas\FichaResource;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\Page;
 use Illuminate\Support\Facades\Auth;
+use Filament\Actions\Action;
 
 class ManageFicha extends Page
 {
@@ -23,6 +24,14 @@ class ManageFicha extends Page
     {
         $this->record = $this->resolveRecord($record);
         $this->authorizeAccess();
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('Gestionar Instructor Lider')
+                ->label('Gestionar Instructor Lider'),
+        ];
     }
 
     protected function authorizeAccess(): void
