@@ -1,18 +1,23 @@
-# ⏱️ CronoSENA
+# ⏱️ CronoSENA – Iniciación Rápida
 
-#Iniciación Rápida
+## Configuración del Proyecto
 
-#Poblar la Base de Datos
+Utiliza el siguiente comando para realizar la configuración inicial del proyecto:
 
-php artisan migrate
+> **Nota:** CronoSENA detecta automáticamente si se está ejecutando en un entorno de producción o desarrollo, ajustando las opciones disponibles en consecuencia.:
 
-php artisan cronosena:sync-permissions
+## Opciones Disponibles entorno Desarrollo
+>
+> **Opción 1:** Configuración inicial del proyecto.  
+> Se ejecuta una sola vez cuando el proyecto se instala por primera vez.
+>
+> **Opción 2:** Refrescar base de datos y poblarla.  
+> Elimina todas las tablas, las vuelve a crear y las llena con datos de seeders.
 
-php artisan db:seed
+```bash
+php artisan cronosena:setup
+```
 
+## Opciones Disponibles entorno Producción
 
-php artisan storage:link
-
-
-
-php artisan db:seed --class=InstructorSeeder
+> Opciones disponibles para la configuración en producción.
