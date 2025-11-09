@@ -1,0 +1,23 @@
+[
+    {
+        "document_number": "20242025",
+        "full_name": "Carlos Andrés Pérez",
+        "name": "Carlos",
+        "last_name": "Andrés Pérez",
+        "profile_default": "men-1.webp"
+    },
+    {
+        "document_number": "20242025",
+        "full_name": "María Fernanda Gómez",
+        "name": "María",
+        "last_name": "Fernanda Gómez",
+        "profile_default": "women-1.webp"
+    },
+    {
+        "document_number": "20242025",
+        "full_name": "Luis Alberto Ríos",
+        "name": "Luis",
+        "last_name": "Alberto Ríos",
+        "profile_default": "men-2.webp"
+    }
+]
