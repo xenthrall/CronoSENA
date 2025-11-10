@@ -1,5 +1,6 @@
 <?php
 //Competencias ADSO
+
 return [
     [
         'competency_type_id' => 2,
