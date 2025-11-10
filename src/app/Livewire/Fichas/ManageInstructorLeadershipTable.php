@@ -3,6 +3,7 @@
 namespace App\Livewire\Fichas;
 
 use App\Models\FichaInstructorLeadership;
+use App\Models\Ficha;
 
 use Livewire\Component;
 use Filament\Actions\Contracts\HasActions;
@@ -27,10 +28,13 @@ class ManageInstructorLeadershipTable extends Component implements HasActions, H
     use InteractsWithSchemas;
     use InteractsWithTable;
 
+    public Ficha $ficha;
+
     public function table(Table $table): Table
     {
         return $table
-            ->query(FichaInstructorLeadership::query())
+            
+            ->query(FichaInstructorLeadership::query()->where('ficha_id', $this->ficha->id)->orderByDesc('start_date'))
             ->columns([
                 ImageColumn::make('instructor.photo_url')
                     ->label('')
@@ -40,7 +44,7 @@ class ManageInstructorLeadershipTable extends Component implements HasActions, H
 
                 TextColumn::make('instructor.full_name')
                     ->label('Instructor'),
-                
+
                 TextColumn::make('start_date')
                     ->label('Fecha de Inicio')
                     ->date('d/F/Y'),
@@ -49,9 +53,9 @@ class ManageInstructorLeadershipTable extends Component implements HasActions, H
                     ->date('d/F/Y'),
                 TextColumn::make('is_active')
                     ->label('estado')
-                    ->formatStateUsing(fn ($state) => $state ? 'Gestor Actual' : 'Gestor Anterior'),
+                    ->formatStateUsing(fn($state) => $state ? 'Gestor Actual' : 'Gestor Anterior'),
             ])
-            
+
             ->recordActions([
                 ActionGroup::make([
                     EditEndDate::make(),
