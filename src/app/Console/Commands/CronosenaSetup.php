@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Support\StorageHelper;
 
 class CronosenaSetup extends Command
 {
@@ -33,6 +34,7 @@ class CronosenaSetup extends Command
         $this->info("Seleccione una opción:");
         $this->info("  [1] Configuración inicial del proyecto");
         $this->info("  [2] Refrescar base de datos y poblarla");
+        $this->info("  [3] Limpiar imágenes de perfil de instructores");
         $this->info("  [0] Salir\n");
 
         $option = $this->ask("Ingrese el número de la opción");
@@ -45,6 +47,10 @@ class CronosenaSetup extends Command
             case '2':
                 $this->refreshDatabase();
                 break;
+            case '3':
+                StorageHelper::cleanInstructorsProfiles();
+                $this->info("✅ Imágenes de perfil de instructores eliminadas.");
+                break;    
 
             case '0':
                 $this->info("Saliendo...");
@@ -117,6 +123,8 @@ class CronosenaSetup extends Command
         $this->call('db:seed', [
             '--class' => 'InstructorSeeder',
         ]);
+        StorageHelper::cleanInstructorsProfiles();
+        $this->info("✅ Imágenes de perfil de instructores eliminadas.");
 
         $this->info("✅ Base de datos refrescada y poblada.");
     }

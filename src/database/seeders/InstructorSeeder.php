@@ -10,17 +10,6 @@ class InstructorSeeder extends Seeder
 {
     public function run(): void
     {
-
-        // Copiar perfiles antes de ejecutar seeders
-        $from = public_path('images/profiles');
-        $to = storage_path('app/public/profiles');
-
-        if (File::exists($from)) {
-            File::ensureDirectoryExists($to);
-            File::copyDirectory($from, $to);
-            $this->command->info("✅ Copiado profiles → storage.");
-        }
-
         $path = database_path('data/instructors.json');
 
         if (!File::exists($path)) {
@@ -41,7 +30,6 @@ class InstructorSeeder extends Seeder
                 'last_name' => $item['last_name'] ?? null,
                 'email' => strtolower(str_replace(' ', '', $item['name'])) . $count . '@cronosena.com',
                 'phone' => null,
-                'photo_url' => 'profiles/' . ($item['profile_default'] ?? 'default.png'),
                 'password' => 'password2025',
                 'is_active' => true,
             ]);
