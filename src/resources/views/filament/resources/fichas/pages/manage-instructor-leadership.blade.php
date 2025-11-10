@@ -23,7 +23,7 @@
 
                 {{-- Columna derecha: botón Volver (alineado verticalmente con el header en md) --}}
             <div class="mt-4 md:mt-0 md:ml-6 flex items-start md:items-center">
-                <x-filament::button color="gray" tag="a" href="{{ url()->previous() }}" class="whitespace-nowrap">
+                <x-filament::button color="gray" tag="a" href="{{ static::getResource()::getUrl('manage', ['record' => $record->id]) }}" class="whitespace-nowrap">
                     ← Volver
                 </x-filament::button>
             </div>
