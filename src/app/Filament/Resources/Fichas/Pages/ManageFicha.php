@@ -29,8 +29,12 @@ class ManageFicha extends Page
     protected function getHeaderActions(): array
     {
         return [
-            Action::make('Gestionar Instructor Lider')
-                ->label('Gestionar Instructor Lider'),
+            Action::make('Instructor Líder de la Ficha')
+                ->label('Instructor Líder de la Ficha')
+                ->icon('heroicon-o-user')
+                ->badge()
+                ->color('info')
+                ->url($this->getResource()::getUrl('manage-instructor-leadership', ['record' => $this->record]))
         ];
     }
 
