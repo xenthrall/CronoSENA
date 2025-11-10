@@ -1,3 +1,5 @@
 <x-filament-panels::page>
-    {{-- Page content --}}
+    Lista de Ejecuciones
+
+    @livewire('schedules.list-executions')
 </x-filament-panels::page>
