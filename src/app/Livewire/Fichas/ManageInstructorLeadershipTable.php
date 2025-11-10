@@ -2,9 +2,8 @@
 
 namespace App\Livewire\Fichas;
 
-use App\Models\Ficha;
 use App\Models\FichaInstructorLeadership;
-use Dom\Text;
+
 use Livewire\Component;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Schemas\Contracts\HasSchemas;
@@ -17,6 +16,10 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
+
+use Filament\Actions\ActionGroup;
+use App\Filament\Actions\InstructorLeader\EditEndDate;
+use Filament\Actions\DeleteAction;
 
 class ManageInstructorLeadershipTable extends Component implements HasActions, HasSchemas, HasTable
 {
@@ -47,6 +50,13 @@ class ManageInstructorLeadershipTable extends Component implements HasActions, H
                 TextColumn::make('is_active')
                     ->label('estado')
                     ->formatStateUsing(fn ($state) => $state ? 'Gestor Actual' : 'Gestor Anterior'),
+            ])
+            
+            ->recordActions([
+                ActionGroup::make([
+                    EditEndDate::make(),
+                    DeleteAction::make(),
+                ]),
             ]);
     }
     public function render()
