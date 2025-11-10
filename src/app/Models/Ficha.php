@@ -22,7 +22,7 @@ class Ficha extends Model
     public function currentLeader()
     {
         return $this->instructorLeaderships()
-            ->where('is_active', true)
+            ->whereNull('end_date')
             ->with('instructor')
             ->first()
             ?->instructor;

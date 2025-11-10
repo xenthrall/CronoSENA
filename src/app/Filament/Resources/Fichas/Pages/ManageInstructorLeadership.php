@@ -8,6 +8,7 @@ use Filament\Resources\Pages\Page;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Filament\Actions\InstructorLeader\CreateInstructorLeadership;
 
 class ManageInstructorLeadership extends Page
 {
@@ -23,6 +24,14 @@ class ManageInstructorLeadership extends Page
     {
         $this->record = $this->resolveRecord($record);
         $this->authorizeAccess();
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            CreateInstructorLeadership::make()
+                ->visible(fn () => $this->record->currentLeader() === null),
+        ];
     }
 
     protected function authorizeAccess(): void

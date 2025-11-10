@@ -55,7 +55,12 @@ class ManageInstructorLeadershipTable extends Component implements HasActions, H
             ->recordActions([
                 ActionGroup::make([
                     EditEndDate::make(),
-                    DeleteAction::make(),
+                    DeleteAction::make()
+                        ->label('Eliminar asignación')
+                        ->requiresConfirmation()
+                        ->modalHeading('Eliminar asignación de instructor líder')
+                        ->modalDescription('¿Estás seguro de que deseas eliminar esta asignación? Esta acción no se puede deshacer.')
+                        ->successNotificationTitle('Asignación eliminada con éxito.'),
                 ]),
             ]);
     }
