@@ -7,7 +7,8 @@
             $photoUrl = $leader?->photo_url ? Storage::url($leader->photo_url) : asset('images/crono.svg');
         @endphp
 
-        <header class="flex flex-col md:flex-row md:items-center md:justify-between border-b border-gray-200 dark:border-gray-700 pb-4">
+        <header
+            class="flex flex-col md:flex-row md:items-center md:justify-between border-b border-gray-200 dark:border-gray-700 pb-4">
 
             {{-- Columna izquierda: información principal (ocupa todo el ancho en sm, crece en md) --}}
             <div class="md:flex-1 space-y-3">
@@ -41,7 +42,7 @@
                 {{-- Instructor y foto --}}
                 <div class="flex items-center gap-3 mt-2">
                     <img src="{{ $photoUrl }}" alt="Foto del instructor"
-                         class="w-12 h-12 rounded-full object-cover shadow-sm" />
+                        class="w-12 h-12 rounded-full object-cover shadow-sm" />
 
                     <div class="flex flex-col">
                         <span class="text-sm font-medium text-gray-800 dark:text-gray-200">
@@ -56,7 +57,9 @@
 
             {{-- Columna derecha: botón Volver (alineado verticalmente con el header en md) --}}
             <div class="mt-4 md:mt-0 md:ml-6 flex items-start md:items-center">
-                <x-filament::button color="gray" tag="a" href="{{ url()->previous() }}" class="whitespace-nowrap">
+                <x-filament::button color="gray" tag="a"
+                    href="{{ static::getResource()::getUrl('index') }}"
+                    class="whitespace-nowrap">
                     ← Volver
                 </x-filament::button>
             </div>

@@ -71,6 +71,10 @@ class AdminPanelProvider extends PanelProvider
 
             ->navigationGroups([
                 NavigationGroup::make()
+                    ->label('gestion academica')
+                    ->icon('heroicon-o-calendar')
+                    ->collapsed(),
+                NavigationGroup::make()
                     ->label('programas')
                     ->icon('heroicon-o-book-open')
                     ->collapsed(), //contraible deshabilitado -> false

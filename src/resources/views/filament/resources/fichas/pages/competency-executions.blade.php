@@ -38,7 +38,7 @@
 
             {{-- Botón volver --}}
             <div class="mt-4 md:mt-0">
-                <x-filament::button color="gray" tag="a" href="{{ url()->previous() }}">
+                <x-filament::button color="gray" tag="a" href="{{ static::getResource()::getUrl('manage', ['record' => $ficha->id]) }}">
                     ← Volver
                 </x-filament::button>
             </div>
