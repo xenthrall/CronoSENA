@@ -12,12 +12,17 @@ use App\Models\FichaCompetencyExecution;
 use Filament\Support\Enums\Alignment;
 use Filament\Schemas\Components\Grid;
 
+use Carbon\Carbon;
+use Illuminate\Validation\ValidationException;
+use Filament\Notifications\Notification;
+
 
 
 class RegisterExecutionAction extends Action
 {
     public static function make(?string $name = null): static
     {
+
         return parent::make($name ?? 'registerExecution')
             ->label('Registrar Ejecución')
             ->icon('heroicon-o-clock')
@@ -31,6 +36,7 @@ class RegisterExecutionAction extends Action
                         Select::make('instructor_id')
                             ->label('Instructor')
                             ->options(fn() => Instructor::query()->orderBy('full_name')->pluck('full_name', 'id')->toArray())
+                            ->disabled(fn(callable $get) => $get('execution_date') === null)
                             ->searchable()
                             ->required(),
                         TextInput::make('executed_hours')
@@ -49,6 +55,8 @@ class RegisterExecutionAction extends Action
                             ->required(),
 
                         DatePicker::make('completion_date')
+                            ->required()
+                            ->minDate(fn(callable $get) => $get('execution_date'))
                             ->label('Fecha de finalización'),
                     ]),
 
@@ -66,8 +74,50 @@ class RegisterExecutionAction extends Action
                     'executed_hours'      => $data['executed_hours'],
                     'notes'               => $data['notes'] ?? null,
                 ]);
-                    
             })
+            ->before(function (array $data, $record) {
+                $newStart = $data['execution_date'];
+                $newEnd   = $data['completion_date'];
+
+                $fichaId = $record->ficha_id;
+                $conflict = FichaCompetencyExecution::query()
+                    ->whereHas('fichaCompetency', function ($query) use ($fichaId) {
+                        $query->where('ficha_id', $fichaId);
+                    })
+                    ->whereRaw(
+                        'DATE(execution_date) <= ? AND DATE(completion_date) >= ?',
+                        [$newEnd, $newStart]
+                    )
+                    ->with('fichaCompetency.competency', 'instructor')
+                    ->first();
+
+                if ($conflict) {
+
+                    // Datos del conflicto
+                    $competencia = $conflict->fichaCompetency->competency->name ?? 'Competencia desconocida';
+                    $instructor  = $conflict->instructor->full_name ?? 'Instructor no asignado';
+                    $conflictStart = Carbon::parse($conflict->execution_date)->format('d/F/Y');
+                    $conflictEnd   = Carbon::parse($conflict->completion_date)->format('d/F/Y');
+
+                    $body = "
+                        <strong>Conflicto de ejecución detectado</strong><br>
+                        Esta ejecución se cruza con otra existente:<br><br>
+                        • <strong>Competencia:</strong> {$competencia}<br>
+                        • <strong>Instructor:</strong> {$instructor}<br>
+                        • <strong>Fecha:</strong> {$conflictStart} → {$conflictEnd}
+                    ";
+
+                    throw ValidationException::withMessages([
+                        Notification::make()
+                            ->danger()
+                            ->title("Cruce de fechas")
+                            ->body($body)
+                            ->persistent()
+                            ->send()
+                    ]);
+                }
+            })
+           
             ->successNotificationTitle('Ejecución registrada correctamente');
     }
 }
