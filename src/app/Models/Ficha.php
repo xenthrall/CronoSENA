@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ficha extends Model
 {
     protected $table = 'fichas';
-    
+
     protected $fillable = [
         'code',
         'start_date',
@@ -19,8 +19,17 @@ class Ficha extends Model
         'shift_id',
     ];
 
+    public function currentLeader()
+    {
+        return $this->instructorLeaderships()
+            ->whereNull('end_date')
+            ->with('instructor')
+            ->first()
+            ?->instructor;
+    }
+
     /**
-     * Una ficha pertenece a un programa
+     * relaciones
      */
     public function program()
     {
@@ -59,5 +68,10 @@ class Ficha extends Model
     public function fichaCompetencies()
     {
         return $this->hasMany(FichaCompetency::class);
+    }
+
+    public function instructorLeaderships()
+    {
+        return $this->hasMany(FichaInstructorLeadership::class);
     }
 }

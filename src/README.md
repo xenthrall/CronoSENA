@@ -1,20 +1,23 @@
-# ⏱️ CronoSENA
+# ⏱️ CronoSENA – Iniciación Rápida
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/xenthrall/CronoSENA/main/src/public/images/crono.svg" alt="Crono" width="120">
-</p>
+## Configuración del Proyecto
 
-**CronoSENA** es una plataforma moderna para la planificación académica y gestión de recursos en los centros de formación del SENA.  
-Diseñada con un enfoque en **automatización, rendimiento y simplicidad**.
+Utiliza el siguiente comando para realizar la configuración inicial del proyecto:
 
----
+> **Nota:** CronoSENA detecta automáticamente si se está ejecutando en un entorno de producción o desarrollo, ajustando las opciones disponibles en consecuencia.:
 
-### 🌐 Recursos Oficiales
+## Opciones Disponibles entorno Desarrollo
+>
+> **Opción 1:** Configuración inicial del proyecto.  
+> Se ejecuta una sola vez cuando el proyecto se instala por primera vez.
+>
+> **Opción 2:** Refrescar base de datos y poblarla.  
+> Elimina todas las tablas, las vuelve a crear y las llena con datos de seeders.
 
-- **Portal:** [cronosena.site](https://cronosena.site)
-- **Documentación:** [docs.cronosena.site](https://docs.cronosena.site)
-- **Repositorio:** [github.com/xenthrall/CronoSENA](https://github.com/xenthrall/CronoSENA)
+```bash
+php artisan cronosena:setup
+```
 
----
+## Opciones Disponibles entorno Producción
 
-> “Organiza el tiempo, impulsa la formación.” – *CronoSENA*
+> Opciones disponibles para la configuración en producción.

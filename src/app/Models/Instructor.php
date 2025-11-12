@@ -103,4 +103,9 @@ class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, Ha
     {
         return $this->hasMany(FichaCompetencyExecution::class);
     }
+
+    public function fichaInstructorLeaderships()
+    {
+        return $this->hasMany(FichaInstructorLeadership::class);
+    }
 }

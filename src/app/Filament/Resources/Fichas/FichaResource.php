@@ -6,6 +6,7 @@ use App\Filament\Resources\Fichas\Pages\CreateFicha;
 use App\Filament\Resources\Fichas\Pages\EditFicha;
 use App\Filament\Resources\Fichas\Pages\ListFichas;
 use App\Filament\Resources\Fichas\Pages\ManageFicha;
+use App\Filament\Resources\Fichas\Pages\ManageInstructorLeadership;
 use App\Filament\Resources\Fichas\Pages\CompetencyExecutions;
 
 use App\Filament\Resources\Fichas\Schemas\FichaForm;
@@ -56,6 +57,7 @@ class FichaResource extends Resource
             'create' => CreateFicha::route('/create'),
             'edit' => EditFicha::route('/{record}/edit'),
             'manage' => ManageFicha::route('/{record}/manage'),
+            'manage-instructor-leadership' => ManageInstructorLeadership::route('/{record}/manage/instructor-leadership'),
             'competency-executions' => CompetencyExecutions::route('/{ficha}/competency-executions/{ficha_competency}'),
         ];
     }

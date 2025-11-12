@@ -2,7 +2,7 @@
 //Competencias ADSO
 return [
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '220201501',
         'name' => 'FISICA',
         'description' => 'APLICACIÓN DE CONOCIMIENTOS DE LAS CIENCIAS NATURALES DE ACUERDO CON SITUACIONES DEL CONTEXTO PRODUCTIVO Y SOCIAL.',
@@ -10,7 +10,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '220601501',
         'name' => 'PROTECCIÓN PARA LA SALUD Y EL MEDIO AMBIENTE.',
         'description' => 'APLICAR PRÁCTICAS DE PROTECCIÓN AMBIENTAL, SEGURIDAD Y SALUD EN EL TRABAJO DE ACUERDO CON LAS POLÍTICAS ORGANIZACIONALES Y LA NORMATIVIDAD VIGENTE.',
@@ -34,7 +34,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '240201524',
         'name' => 'COMUNICACIÓN',
         'description' => 'DESARROLLAR PROCESOS DE COMUNICACIÓN EFICACES Y EFECTIVOS, TENIENDO EN CUENTA SITUACIONES DE ORDEN SOCIAL, PERSONAL Y PRODUCTIVO.',
@@ -50,7 +50,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '210201501',
         'name' => 'Ejercer derechos fundamentales del trabajo',
         'description' => 'Ejercer derechos fundamentales del trabajo en el marco de la constitución política y los convenios internacionales.',
@@ -58,7 +58,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '240201526',
         'name' => 'ETICA PARA LA CONSTRUCCIÓN DE UNA CULTURA DE PAZ.',
         'description' => 'Enrique Low Murtra-Interactuar en el contexto productivo y social de acuerdo con principios éticos para la construcción de una cultura de paz.',
@@ -90,7 +90,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '230101507',
         'name' => 'ACTIVIDAD FÍSICA Y HÁBITOS DE VIDA SALUDABLE',
         'description' => 'GENERAR HÁBITOS SALUDABLES DE VIDA MEDIANTE LA APLICACIÓN DE PROGRAMAS DE ACTIVIDAD FÍSICA EN LOS CONTEXTOS PRODUCTIVOS Y SOCIALES.',
@@ -98,7 +98,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '240201529',
         'name' => 'CULTURA EMPRENDEDORA Y EMPRESARIAL.',
         'description' => 'Gestionar procesos propios de la cultura emprendedora y empresarial de acuerdo con el perfil personal y los requerimientos de los contextos productivo y social.',
@@ -122,7 +122,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '240201064',
         'name' => 'INVESTIGACIÓN',
         'description' => 'Orientar investigación formativa según referentes técnicos',
@@ -130,7 +130,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '240201528',
         'name' => 'MATEMÁTICAS',
         'description' => 'Razonar cuantitativamente frente a situaciones susceptibles de ser abordadas de manera matemática en contextos laborales, sociales y personales.',
@@ -138,7 +138,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '240201530',
         'name' => 'INDUCCIÓN',
         'description' => 'Resultado de Aprendizaje de la Inducción.',
@@ -154,7 +154,7 @@ return [
         'version' => '1',
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '220501046',
         'name' => 'TIC',
         'description' => 'Utilizar herramientas informáticas de acuerdo con las necesidades de manejo de información',

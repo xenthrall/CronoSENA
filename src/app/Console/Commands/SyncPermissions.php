@@ -27,12 +27,12 @@ class SyncPermissions extends Command
      */
     public function handle()
     {
-        $this->info('🚀 Iniciando sincronización de permisos...');
+        $this->info('Iniciando sincronización de permisos...');
 
         if ($this->option('refresh')) {
-            $this->info('🧹 Limpiando permisos existentes...');
+            $this->info('Limpiando permisos existentes...');
             Permission::truncate();
-            $this->info('🗑️ Permisos existentes eliminados.');
+            $this->info('Permisos existentes eliminados.');
         }
 
         $permissions = [

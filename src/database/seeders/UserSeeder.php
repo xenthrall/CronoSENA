@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use App\Models\Instructor;
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
@@ -46,19 +45,5 @@ class UserSeeder extends Seeder
             $planificador->assignRole($planificadorRole);
         }
 
-        // 🔹 Usuario instructor (usa su propio modelo)
-        Instructor::firstOrCreate(
-            ['email' => 'instructor@cronosena.com'],
-            [
-                'document_number' => '000000001',
-                'document_type' => 'CC',
-                'full_name' => 'Instructor Cronosena',
-                'name' => 'Instructor',
-                'last_name' => 'Cronosena',
-                'phone' => '3000000001',
-                'password' => Hash::make('password'),
-                'is_active' => true,
-            ]
-        );
     }
 }
