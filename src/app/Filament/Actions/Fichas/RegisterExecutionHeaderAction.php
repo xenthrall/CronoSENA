@@ -83,9 +83,6 @@ class RegisterExecutionHeaderAction extends Action
                             ->label('Fecha de finalización'),
                     ]),
 
-                    Textarea::make('notes')
-                        ->label('Notas')
-                        ->rows(4),
                 ];
             })
             ->modalAlignment(Alignment::Center)
