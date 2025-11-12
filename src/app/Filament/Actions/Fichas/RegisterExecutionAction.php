@@ -110,7 +110,8 @@ class RegisterExecutionAction extends Action
                         Esta ejecución se cruza con otra existente:<br><br>
                         • <strong>Competencia:</strong> {$competencia}<br>
                         • <strong>Instructor:</strong> {$instructor}<br>
-                        • <strong>Fecha:</strong> {$conflictStart} → {$conflictEnd}
+                        • <strong>Desde:</strong> {$conflictStart} <br>
+                        • <strong>Hasta:</strong> {$conflictEnd} <br>
                     ";
 
                     throw ValidationException::withMessages([
