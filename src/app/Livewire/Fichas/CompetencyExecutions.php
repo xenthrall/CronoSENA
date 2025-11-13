@@ -49,8 +49,10 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
                 TextColumn::make('executed_hours')
                     ->label('Horas Ejecutadas'),
                 TextColumn::make('execution_date')
+                    ->date('d/F/Y')
                     ->label('Fecha de Ejecución'),
                 TextColumn::make('completion_date')
+                    ->date('d/F/Y')
                     ->label('Fecha de Finalización'),
             ])
 
@@ -62,7 +64,8 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
 
             ->recordActions([
                 DeleteAction::make(),
-                EditExecutionAction::make(),
+                EditExecutionAction::make()
+                    ->disabled(),
             ]);
     }
 

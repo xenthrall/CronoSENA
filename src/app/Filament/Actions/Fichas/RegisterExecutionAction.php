@@ -22,7 +22,7 @@ use App\Traits\PreventsDateOverlap;
 class RegisterExecutionAction extends Action
 {
     use PreventsDateOverlap;
-    
+
     public static function make(?string $name = null): static
     {
 
@@ -70,9 +70,6 @@ class RegisterExecutionAction extends Action
                             ->minDate(fn(callable $get) => $get('execution_date'))
                             ->label('Fecha de finalización'),
                     ]),
-                Textarea::make('notes')
-                    ->label('Notas')
-                    ->rows(4),
             ])
             ->modalAlignment(Alignment::Center)
             ->action(function (array $data, $record) {
@@ -110,7 +107,8 @@ class RegisterExecutionAction extends Action
                         Esta ejecución se cruza con otra existente:<br><br>
                         • <strong>Competencia:</strong> {$competencia}<br>
                         • <strong>Instructor:</strong> {$instructor}<br>
-                        • <strong>Fecha:</strong> {$conflictStart} → {$conflictEnd}
+                        • <strong>Desde:</strong> {$conflictStart} <br>
+                        • <strong>Hasta:</strong> {$conflictEnd} <br>
                     ";
 
                     throw ValidationException::withMessages([
