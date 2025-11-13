@@ -14,6 +14,9 @@ class GanttInstructorsCompetencies extends Component
     public int $year;
     public ?int $fichaId = null;
 
+    public int $dayWidthPx = 40;   // Ancho de cada día en píxeles
+    public int $rowHeightPx = 54;  // Alto de cada fila/barras
+
     /** @var Collection<Instructor> */
     public Collection $instructors;
 
@@ -133,7 +136,7 @@ class GanttInstructorsCompetencies extends Component
                 }
 
                 $offset = $monthStart->diffInDays($start);
-                $duration = $start->diffInDays($end) + 1;
+                $duration = $start->diffInDays($end) + 0;
 
                 $bars[$instructor->id][] = [
                     'left' => ($offset / $this->totalDays) * 100,
@@ -141,6 +144,8 @@ class GanttInstructorsCompetencies extends Component
                     'title' => ($exec->fichaCompetency->competency->name ?? 'Competencia')
                         . ' — Ficha '
                         . ($exec->fichaCompetency->ficha->code ?? 'N/A'),
+                    'competency' => $exec->fichaCompetency->competency->name ?? 'Competencia',
+                    'ficha_code' => $exec->fichaCompetency->ficha->code ?? 'N/A',
                     'notes' => $exec->notes,
                     'hours' => $exec->executed_hours ?? 0,
                     'color' => $exec->completion_date ? '#16a34a' : '#f59e0b',
