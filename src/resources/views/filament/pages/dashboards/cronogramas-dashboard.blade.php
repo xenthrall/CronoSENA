@@ -1,5 +1,4 @@
 <x-filament-panels::page>
-    Lista de Ejecuciones
+    <livewire:fichas.gantt-instructors-competencies  />
 
-    @livewire('schedules.list-executions')
 </x-filament-panels::page>
