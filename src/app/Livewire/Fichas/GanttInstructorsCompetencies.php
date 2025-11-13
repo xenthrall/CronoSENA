@@ -10,14 +10,15 @@ use Illuminate\Support\Collection;
 
 class GanttInstructorsCompetencies extends GanttBaseComponent
 {
-    public ?int $fichaId = null;
+    public ?string $fichaId = null;
 
-     public function configure(): static
+    public function configure(): static
     {
         return $this
             ->entityName('Instructor')
-            ->dayWidth(40)
-            ->rowHeight(52);
+            ->dayWidth(50)
+            ->rowHeight(70)
+            ->barColor('#10b981');
     }
 
     /**
@@ -27,7 +28,9 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
     {
         return FichaCompetencyExecution::query()
             ->with(['fichaCompetency.ficha', 'fichaCompetency.competency', 'instructor'])
-            ->when($this->fichaId, fn($q) =>
+            ->when(
+                $this->fichaId,
+                fn($q) =>
                 $q->whereHas('fichaCompetency', fn($sq) => $sq->where('ficha_id', $this->fichaId))
             )
             ->where(function ($q) use ($periodStart, $periodEnd) {
@@ -50,7 +53,6 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
      */
     protected function buildBars(Collection|array $records, Carbon $periodStart, Carbon $periodEnd): void
     {
-        // Entidades: instructores con ejecuciones
         $this->entities = Instructor::query()
             ->whereIn('id', $records->pluck('instructor_id')->unique())
             ->orderBy('full_name')
@@ -75,13 +77,19 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
                 if ($visibleEnd->lt($visibleStart)) continue;
 
                 $offset = $periodStart->diffInDays($visibleStart);
-                $duration = $visibleStart->diffInDays($visibleEnd) + 1;
+                $duration = $visibleStart->diffInDays($visibleEnd) + 0;
 
                 $this->barsByEntity[$instructor->id][] = [
                     'left' => ($offset / $this->totalDays) * 100,
                     'width' => ($duration / $this->totalDays) * 100,
+
+                    // Texto / etiquetas
                     'label' => $exec->fichaCompetency->competency->name ?? 'Competencia',
-                    'ficha_code' => $exec->fichaCompetency->ficha->code ?? 'N/A',
+                    'sub_label' => $exec->fichaCompetency->ficha->code ?? 'N/A',
+                    'tag' => "{$execStart->format('d/m')} - {$execEnd->format('d/m')}",
+                    'tooltip' => "{$execStart->format('d/m')} - {$execEnd->format('d/m')}",
+                    'side_label' => $instructor->name ?? '', 
+
                     //'color' => '#208a0bff',
                     'started_at' => $execStart->toDateString(),
                     'ended_at' => $execEnd->toDateString(),
@@ -89,7 +97,4 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
             }
         }
     }
-
-    
-
 }

@@ -11,7 +11,7 @@
             {{-- Zoom horizontal --}}
             <div class="flex items-center gap-2">
                 <label class="text-sm text-gray-600 dark:text-gray-400">Zoom horizontal:</label>
-                <input type="range" min="30" max="100" step="2" wire:model.live="dayWidthPx"
+                <input type="range" min="40" max="100" step="2" wire:model.live="dayWidthPx"
                     class="w-40 accent-blue-500 dark:accent-blue-400" />
             </div>
 
@@ -87,7 +87,7 @@
                             <div>
                                 <div
                                     class="font-medium text-sm text-gray-900 dark:text-gray-100 truncate max-w-[180px]">
-                                    {{ $entity->name ?? 'Entidad' }}
+                                    {{ $entity->full_name ?? 'Entidad' }}
                                 </div>
                             </div>
                         </div>
@@ -107,21 +107,29 @@
                                 {{-- Barras de ejecución --}}
                                 @php $bars = $barsByEntity[$entity->id] ?? []; @endphp
                                 @foreach ($bars as $bar)
-                                    <div class="absolute top-0 rounded-md overflow-hidden shadow-md transition-all duration-200 hover:z-20 hover:scale-[1.03] hover:shadow-lg"
+                                    <div class="absolute top-0 rounded-md overflow-hidden shadow-md transition-all duration-200 hover:z-20 hover:scale-[1.03] hover:shadow-lg dark:bg-gray-700 bg-primary-600/80"
                                         style="
                                             left: {{ $bar['left'] }}%;
                                             width: {{ $bar['width'] }}%;
                                             height: {{ $rowHeightPx }}px;
-                                            background: {{ $bar['color'] ?? $barColor }};
                                             border: 1px solid rgba(255,255,255,0.2);
-                                        "
-                                        title="{{ $bar['label'] ?? 'Actividad' }}">
+                                        ">
                                         <div
-                                            class="relative h-full w-full flex justify-center items-center px-2 text-center">
-                                            <span
-                                                class="text-xs font-semibold text-white break-words whitespace-normal max-w-full">
+                                            class="relative h-full w-full flex flex-col items-start justify-center px-2 leading-tight">
+                                            {{-- SUB-LABEL --}}
+                                            @if (!empty($bar['sub_label']))
+                                                <span
+                                                    class="text-[10px] text-gray-300 whitespace-normal break-words leading-tight">
+                                                    {{ $bar['sub_label'] }}
+                                                </span>
+                                            @endif
+
+                                            {{-- LABEL PRINCIPAL --}}
+                                            <span class="text-[11px] font-semibold text-white w-full">
                                                 {{ $bar['label'] ?? 'Sin título' }}
                                             </span>
+
+                                            
                                         </div>
                                     </div>
                                 @endforeach
@@ -143,7 +151,9 @@
         <div class="flex gap-5 items-center">
             <div class="flex items-center gap-2">
                 <div class="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-600"></div>
-                <span class="text-gray-400 dark:text-gray-500">GanttBaseComponent</span>
+                <span class="text-gray-400 dark:text-gray-500">
+                    Developed by xenthrall
+                </span>
             </div>
         </div>
         <div class="text-xs text-gray-500 dark:text-gray-400">

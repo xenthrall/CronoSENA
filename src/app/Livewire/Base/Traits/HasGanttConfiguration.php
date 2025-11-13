@@ -42,6 +42,12 @@ trait HasGanttConfiguration
         return $this;
     }
 
+    public function barColor(string $color): static
+    {
+        $this->barColor = $color;
+        return $this;
+    }
+    
     public function period(int $month, int $year): static
     {
         $this->month = $month;
