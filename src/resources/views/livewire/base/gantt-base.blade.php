@@ -116,32 +116,59 @@
                                 {{-- Barras de ejecución --}}
                                 @php $bars = $barsByEntity[$entity->id] ?? []; @endphp
                                 @foreach ($bars as $bar)
-                                    <div class="absolute top-0 rounded-md overflow-hidden shadow-md transition-all duration-200 hover:z-20 hover:scale-[1.03] hover:shadow-lg dark:bg-gray-700 bg-primary-600/80"
+                                    <div class="absolute top-0 left-0 transition-all duration-200 hover:z-20 hover:scale-[1.03] hover:shadow-lg"
                                         style="
                                             left: {{ $bar['left'] }}%;
                                             width: {{ $bar['width'] }}%;
                                             height: {{ $rowHeightPx }}px;
-                                            border: 1px solid rgba(255,255,255,0.2);
                                         ">
-                                        <div
-                                            class="relative h-full w-full flex flex-col items-start justify-center px-2 leading-tight">
-                                            {{-- SUB-LABEL --}}
-                                            @if (!empty($bar['sub_label']))
-                                                <span
-                                                    class="text-[10px] text-gray-300 whitespace-normal break-words leading-tight">
-                                                    {{ $bar['sub_label'] }}
-                                                </span>
-                                            @endif
+                                        {{-- Wrapper para permitir overflow-visible --}}
+                                        <div class="relative w-full h-full overflow-visible">
 
-                                            {{-- LABEL PRINCIPAL --}}
-                                            <span class="text-[11px] font-semibold text-white w-full">
-                                                {{ $bar['label'] ?? 'Sin título' }}
+                                            {{-- Badge solapada en la esquina superior izquierda --}}
+                                            <span
+                                                class="absolute -top-2 -left-4 w-7 h-6 rounded-full flex items-center justify-center 
+                                                text-[10px] font-semibold
+                                                border border-white shadow-sm
+                                                bg-white text-primary-600
+                                                dark:bg-gray-800 dark:text-white dark:border-gray-700"
+                                                aria-hidden="true">
+                                                {{ $bar['badge'] }}
                                             </span>
 
+                                            {{-- Contenido real de la barra --}}
+                                            <div class="h-full w-full rounded-md overflow-hidden shadow-md dark:bg-gray-700 bg-primary-600/80"
+                                                style="border: 1px solid rgba(255,255,255,0.2);">
+                                                <div
+                                                    class="relative h-full w-full flex flex-col items-start justify-start px-2 leading-tight pt-2">
+
+                                                    <div class="flex items-center gap-2">
+                                                        {{-- SUB-LABEL --}}
+                                                        @if (!empty($bar['sub_label']))
+                                                            <span class="text-[10px] text-gray-300 leading-tight">
+                                                                {{ $bar['sub_label'] }}
+                                                            </span>
+                                                        @endif
+
+                                                        {{-- Rango de fechas --}}
+                                                        <span class="text-[10px] text-gray-200/90 leading-tight">
+                                                            {{ $bar['started_at'] . ' - ' . $bar['ended_at'] }}
+                                                        </span>
+                                                    </div>
+
+
+                                                    {{-- LABEL PRINCIPAL --}}
+                                                    <span class="text-[11px] font-semibold text-white w-full">
+                                                        {{ $bar['label'] ?? 'Sin título' }}
+                                                    </span>
+
+                                                </div>
+                                            </div>
 
                                         </div>
                                     </div>
                                 @endforeach
+
                             </div>
                         </div>
                     </div>

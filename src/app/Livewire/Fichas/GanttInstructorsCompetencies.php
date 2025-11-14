@@ -78,6 +78,7 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
                 $offset = $periodStart->diffInDays($visibleStart);
                 $duration = $visibleStart->diffInDays($visibleEnd) + 0;
 
+
                 $this->barsByEntity[$instructor->id][] = [
                     'left' => ($offset / $this->totalDays) * 100,
                     'width' => ($duration / $this->totalDays) * 100,
@@ -85,13 +86,12 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
                     // Texto / etiquetas
                     'label' => $exec->fichaCompetency->competency->name ?? 'Competencia',
                     'sub_label' => $exec->fichaCompetency->ficha->code ?? 'N/A',
-                    'tag' => "{$execStart->format('d/m')} - {$execEnd->format('d/m')}",
+                    'badge' => $exec->executed_hours.'h',
                     'tooltip' => "{$execStart->format('d/m')} - {$execEnd->format('d/m')}",
-                    'side_label' => $instructor->name ?? '', 
 
-                    //'color' => '#208a0bff',
-                    'started_at' => $execStart->toDateString(),
-                    'ended_at' => $execEnd->toDateString(),
+                    // Fechas reales
+                    'started_at' => $execStart->translatedFormat('j M'),
+                    'ended_at' => $execEnd->translatedFormat('j M'),
                 ];
             }
         }
