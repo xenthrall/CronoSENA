@@ -17,8 +17,7 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
         return $this
             ->entityName('Instructor')
             ->dayWidth(50)
-            ->rowHeight(70)
-            ->barColor('#10b981');
+            ->rowHeight(70);
     }
 
     /**

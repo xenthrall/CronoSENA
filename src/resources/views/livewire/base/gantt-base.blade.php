@@ -80,14 +80,23 @@
                         {{-- Información de la entidad --}}
                         <div
                             class="p-3 flex items-center gap-3 sticky left-0 z-10 bg-inherit border-r border-gray-200 dark:border-gray-700">
-                            <div
-                                class="w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-semibold text-gray-700 dark:text-gray-100 shadow-sm">
-                                {{ strtoupper(Str::substr($entity->name ?? 'E', 0, 1)) }}
-                            </div>
+
+                            @if (method_exists($entity, 'getFilamentAvatarUrl') && $entity->getFilamentAvatarUrl())
+                                <img src="{{ $entity->getFilamentAvatarUrl() }}"
+                                    class="w-9 h-9 rounded-full object-cover shadow-sm" alt="{{ $entity->full_name }}">
+                            @else
+                                <div
+                                    class="w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-semibold text-gray-700 dark:text-gray-100 shadow-sm">
+                                    {{ Str::upper(Str::substr($entity->full_name, 0, 1)) }}
+                                </div>
+                            @endif
                             <div>
                                 <div
                                     class="font-medium text-sm text-gray-900 dark:text-gray-100 truncate max-w-[180px]">
-                                    {{ $entity->full_name ?? 'Entidad' }}
+                                    {{ $entity->full_name }}
+                                </div>
+                                <div class="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[180px]">
+                                    {{ $entity->email ?? '' }}
                                 </div>
                             </div>
                         </div>
@@ -129,7 +138,7 @@
                                                 {{ $bar['label'] ?? 'Sin título' }}
                                             </span>
 
-                                            
+
                                         </div>
                                     </div>
                                 @endforeach
@@ -157,7 +166,7 @@
             </div>
         </div>
         <div class="text-xs text-gray-500 dark:text-gray-400">
-            Días: {{ $totalDays }} — Entidades: {{ $entities->count() }}
+            Días: {{ $totalDays }}
         </div>
     </div>
 </div>

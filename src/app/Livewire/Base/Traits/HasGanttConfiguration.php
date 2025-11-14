@@ -15,8 +15,6 @@ trait HasGanttConfiguration
     public int $dayWidthPx = 40;
     public int $rowHeightPx = 54;
 
-    public string $barColor = '#3b82f6';
-
     public function configure(): static
     {
         return $this;
@@ -39,12 +37,6 @@ trait HasGanttConfiguration
     public function rowHeight(int $height): static
     {
         $this->rowHeightPx = $height;
-        return $this;
-    }
-
-    public function barColor(string $color): static
-    {
-        $this->barColor = $color;
         return $this;
     }
     
