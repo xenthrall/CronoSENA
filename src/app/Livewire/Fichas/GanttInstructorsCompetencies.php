@@ -7,7 +7,6 @@ use App\Models\Instructor;
 use App\Models\FichaCompetencyExecution;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use League\Csv\Query\Row;
 
 class GanttInstructorsCompetencies extends GanttBaseComponent
 {

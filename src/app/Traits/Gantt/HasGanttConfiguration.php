@@ -12,7 +12,7 @@ trait HasGanttConfiguration
 {
     public string $entityName = 'Entidad';
 
-    public int $dayWidthPx = 40;
+    public int $columnsWidthPx = 40;
     public int $rowHeightPx = 54;
 
     public function configure(): static
@@ -30,7 +30,7 @@ trait HasGanttConfiguration
 
     public function columnsWidth(int $width): static
     {
-        $this->columnWidthPx = $width;
+        $this->columnsWidthPx = $width;
         return $this;
     }
 

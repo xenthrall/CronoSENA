@@ -2,7 +2,7 @@
 
     {{-- Button exportar --}}
     <div class="flex justify-end">
-        <a class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('export.monthly_executions', ['month' => $month, 'year' => $year]) }}" target='_blank'>Exportar PDF</a>
+        <a class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('export.monthly_executions', ['month' => $month, 'year' => $year]) }}" target='_blank'>Previsualizar PDF</a>
     </div>
     {{-- Header --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -192,7 +192,7 @@
             <div class="flex items-center gap-2">
                 <div class="w-4 h-4 rounded-full border border-gray-300 dark:border-gray-600"></div>
                 <span class="text-gray-400 dark:text-gray-500">
-                    Developed by xenthrall
+                    Generado con <a href="https://cronosena.site/" target="_blank" class="underline">CronoSENA</a>
                 </span>
             </div>
         </div>
