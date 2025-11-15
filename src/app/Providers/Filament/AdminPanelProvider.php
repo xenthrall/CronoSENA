@@ -91,7 +91,7 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->viteTheme('resources/css/filament/theme.css')
 
             /*
             ->assets([

@@ -83,7 +83,7 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
                     ->collapsed(),
             ])
 
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->viteTheme('resources/css/filament/theme.css')
 
             /*
             ->assets([

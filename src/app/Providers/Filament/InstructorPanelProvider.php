@@ -32,7 +32,7 @@ class InstructorPanelProvider extends PanelProvider
             ->profile(EditProfile::class, isSimple: false)
             ->passwordReset()
             ->authGuard('instructor')
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->viteTheme('resources/css/filament/theme.css')
             ->colors([
                 'primary' => Color::Indigo,
             ])
