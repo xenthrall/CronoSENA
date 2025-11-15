@@ -1,5 +1,9 @@
 <div class="bg-white dark:bg-gray-900 shadow-xl rounded-xl p-6 space-y-6 transition-colors duration-300">
 
+    {{-- Button exportar --}}
+    <div class="flex justify-end">
+        <a class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('export.monthly_executions', ['month' => $month, 'year' => $year]) }}" target='_blank'>Exportar PDF</a>
+    </div>
     {{-- Header --}}
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
@@ -11,7 +15,7 @@
             {{-- Zoom horizontal --}}
             <div class="flex items-center gap-2">
                 <label class="text-sm text-gray-600 dark:text-gray-400">Zoom horizontal:</label>
-                <input type="range" min="40" max="100" step="2" wire:model.live="dayWidthPx"
+                <input type="range" min="30" max="100" step="2" wire:model.live="columnWidthPx"
                     class="w-40 accent-blue-500 dark:accent-blue-400" />
             </div>
 
@@ -45,7 +49,7 @@
 
     {{-- Contenedor con scroll --}}
     <div class="overflow-auto border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 transition-colors duration-300"
-        style="max-height: 70vh;">
+        style="max-height: 60vh;">
         <div class="min-w-full">
 
             {{-- Encabezado --}}
@@ -56,15 +60,15 @@
                     {{ $entityName }}
                 </div>
 
-                <div class="relative flex" style="min-width: {{ $totalDays * $dayWidthPx }}px;">
-                    @foreach ($days as $day)
+                <div class="relative flex" style="min-width: {{ $totalColumns * $columnWidthPx }}px;">
+                    @foreach ($columns as $column)
                         <div class="flex-shrink-0 text-center border-r border-gray-200 dark:border-gray-700 py-2"
-                            style="width: {{ $dayWidthPx }}px;">
+                            style="width: {{ $columnWidthPx }}px;">
                             <div class="text-xs text-gray-500 dark:text-gray-400">
-                                {{ $day->translatedFormat('D') }}
+                                {{ $column->translatedFormat('D') }}
                             </div>
                             <div class="text-sm font-medium text-gray-800 dark:text-gray-100">
-                                {{ $day->format('d') }}
+                                {{ $column->format('d') }}
                             </div>
                         </div>
                     @endforeach
@@ -73,7 +77,7 @@
 
             {{-- Filas por entidad --}}
             <div class="divide-y divide-gray-200 dark:divide-gray-700">
-                @forelse($entities as $entity)
+                @forelse($rows as $row)
                     <div
                         class="grid grid-cols-[240px_1fr] items-stretch odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900 dark:even:bg-gray-800 transition-colors">
 
@@ -81,22 +85,22 @@
                         <div
                             class="p-3 flex items-center gap-3 sticky left-0 z-10 bg-inherit border-r border-gray-200 dark:border-gray-700">
 
-                            @if (method_exists($entity, 'getFilamentAvatarUrl') && $entity->getFilamentAvatarUrl())
-                                <img src="{{ $entity->getFilamentAvatarUrl() }}"
-                                    class="w-9 h-9 rounded-full object-cover shadow-sm" alt="{{ $entity->full_name }}">
+                            @if ($row['avatarUrl'] ?? '')
+                                <img src="{{ $row['avatarUrl'] }}"
+                                    class="w-9 h-9 rounded-full object-cover shadow-sm" alt="{{ $row['label'] }}">
                             @else
                                 <div
                                     class="w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-semibold text-gray-700 dark:text-gray-100 shadow-sm">
-                                    {{ Str::upper(Str::substr($entity->full_name, 0, 1)) }}
+                                    {{ Str::upper(Str::substr($row['label'], 0, 1)) }}
                                 </div>
                             @endif
                             <div>
                                 <div
                                     class="font-medium text-sm text-gray-900 dark:text-gray-100 truncate max-w-[180px]">
-                                    {{ $entity->full_name }}
+                                    {{ $row['label'] }}
                                 </div>
                                 <div class="text-xs text-gray-500 dark:text-gray-400 truncate max-w-[180px]">
-                                    {{ $entity->email ?? '' }}
+                                    {{ $row['sub_label'] ?? '' }}
                                 </div>
                             </div>
                         </div>
@@ -104,17 +108,17 @@
                         {{-- Timeline --}}
                         <div class="py-3 px-1 relative">
                             <div class="relative"
-                                style="min-width: {{ $totalDays * $dayWidthPx }}px; height: {{ $rowHeightPx }}px;">
+                                style="width: {{ $totalColumns * $columnWidthPx }}px; height: {{ $rowHeightPx }}px;">
                                 {{-- Cuadrícula --}}
                                 <div class="absolute inset-0 flex">
-                                    @foreach ($days as $_)
+                                    @foreach ($columns as $_)
                                         <div class="flex-shrink-0 border-r border-gray-200 dark:border-gray-700"
-                                            style="width: {{ $dayWidthPx }}px;"></div>
+                                            style="width: {{ $columnWidthPx }}px;"></div>
                                     @endforeach
                                 </div>
 
                                 {{-- Barras de ejecución --}}
-                                @php $bars = $barsByEntity[$entity->id] ?? []; @endphp
+                                @php $bars = $barsByRow[$row['id']] ?? []; @endphp
                                 @foreach ($bars as $bar)
                                     <div class="absolute top-0 left-0 transition-all duration-200 hover:z-20 hover:scale-[1.03] hover:shadow-lg"
                                         style="
@@ -193,7 +197,7 @@
             </div>
         </div>
         <div class="text-xs text-gray-500 dark:text-gray-400">
-            Días: {{ $totalDays }}
+            Columnas: {{ $totalColumns }}
         </div>
     </div>
 </div>

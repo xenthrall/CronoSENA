@@ -5,39 +5,30 @@ namespace App\Livewire\Base;
 use Livewire\Component;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use App\Livewire\Base\Traits\HasGanttConfiguration;
+
+use App\Traits\Gantt\HasGanttConfiguration;
+use App\Traits\Gantt\GanttBarsTrait;
 
 abstract class GanttBaseComponent extends Component
 {
+    use GanttBarsTrait;
     use HasGanttConfiguration;
     
     public int $month;
     public int $year;
 
-    public int $dayWidthPx = 40;
+    public string $monthLabel;
+
+    public int $columnWidthPx = 40;
     public int $rowHeightPx = 54;
 
-    /** @var array<int, Carbon> */
-    public array $days = [];
+    public int $totalColumns = 0;
 
-    public int $totalDays = 0;
+    public array $columns = [];
 
-    /** 
-     * Colección de entidades (por ejemplo: instructores, fichas, proyectos, etc.)
-     * @var Collection
-     */
-    public Collection $entities;
-
-    /**
-     * Barras asociadas a cada entidad.
-     * Ejemplo: [entity_id => [bar1, bar2, ...]]
-     */
-    public array $barsByEntity = [];
-
-    public function boot(): void
-    {
-        Carbon::setLocale(config('app.locale'));
-    }
+    public array $rows = [];
+    public array $barsByRow = [];
+    
 
     public function mount(?int $month = null, ?int $year = null): void
     {
@@ -68,11 +59,11 @@ abstract class GanttBaseComponent extends Component
         $periodStart = Carbon::create($this->year, $this->month, 1)->startOfDay();
         $periodEnd = $periodStart->clone()->endOfMonth()->endOfDay();
 
-        $this->days = collect(range(0, $periodStart->diffInDays($periodEnd)))
+        $this->columns = collect(range(0, $periodStart->diffInDays($periodEnd)))
             ->map(fn ($d) => $periodStart->clone()->addDays($d))
             ->toArray();
 
-        $this->totalDays = count($this->days);
+        $this->totalColumns = count($this->columns);
 
         // Llamadas abstractas implementadas en subclases
         $records = $this->fetchRecords($periodStart, $periodEnd);
@@ -89,25 +80,10 @@ abstract class GanttBaseComponent extends Component
      */
     abstract protected function buildBars(Collection|array $records, Carbon $periodStart, Carbon $periodEnd): void;
 
-    /**
-     * Devuelve una etiqueta del mes actual (e.g. “Noviembre 2025”)
-     */
-    public function getMonthLabelProperty(): string
-    {
-        return Carbon::create($this->year, $this->month, 1)->translatedFormat('F Y');
-    }
 
-    /**
-     * Render por defecto: sobrescribible por las subclases.
-     */
+
     public function render()
     {
-        return view('livewire.base.gantt-base', [
-            'days' => $this->days,
-            'entities' => $this->entities ?? collect(),
-            'barsByEntity' => $this->barsByEntity ?? [],
-            'monthLabel' => $this->monthLabel,
-            'totalDays' => $this->totalDays,
-        ]);
+        return view('livewire.base.gantt-base');
     }
 }

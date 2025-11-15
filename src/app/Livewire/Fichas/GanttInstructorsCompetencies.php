@@ -7,6 +7,7 @@ use App\Models\Instructor;
 use App\Models\FichaCompetencyExecution;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use League\Csv\Query\Row;
 
 class GanttInstructorsCompetencies extends GanttBaseComponent
 {
@@ -16,7 +17,7 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
     {
         return $this
             ->entityName('Instructor')
-            ->dayWidth(50)
+            ->columnsWidth(50)
             ->rowHeight(70);
     }
 
@@ -52,47 +53,53 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
      */
     protected function buildBars(Collection|array $records, Carbon $periodStart, Carbon $periodEnd): void
     {
-        $this->entities = Instructor::query()
+        $instructores = Instructor::query()
             ->whereIn('id', $records->pluck('instructor_id')->unique())
             ->orderBy('full_name')
             ->get();
 
-        // Barras asociadas a cada entidad (instructor)
-        $this->barsByEntity = [];
+        // Filas
+        foreach ($instructores as $instructor) {
+            $this->rows[$instructor->id] = [
+                'id'        => $instructor->id,
+                'label'     => $instructor->full_name,
+                'sub_label' => $instructor->email,
+                'avatarUrl' => $instructor->getFilamentAvatarUrl(),
+            ];
+        }
 
-        foreach ($this->entities as $instructor) {
-            $this->barsByEntity[$instructor->id] = [];
+        // Barras agrupadas por fila
+        $this->barsByRow = [];
 
-            foreach ($records->where('instructor_id', $instructor->id) as $exec) {
+        foreach ($this->rows as $row) {
+
+            $this->barsByRow[$row['id']] = [];
+
+            $executions = $records->where('instructor_id', $row['id']);
+
+            foreach ($executions as $exec) {
+
                 $execStart = Carbon::parse($exec->execution_date)->startOfDay();
                 $execEnd = $exec->completion_date
                     ? Carbon::parse($exec->completion_date)->endOfDay()
                     : $execStart;
 
-                // Limitar rango al periodo visible
-                $visibleStart = $execStart->max($periodStart);
-                $visibleEnd = $execEnd->min($periodEnd);
+                $bar = $this->makeGanttBar(
+                    meta: [
+                        'label'     => $exec->fichaCompetency->competency->name ?? 'Competencia',
+                        'sub_label' => $exec->fichaCompetency->ficha->code ?? 'N/A',
+                        'badge'     => $exec->executed_hours . 'h',
+                    ],
+                    execStart: $execStart,
+                    execEnd: $execEnd,
+                    periodStart: $periodStart,
+                    periodEnd: $periodEnd,
+                    totalColumns: $this->totalColumns
+                );
 
-                if ($visibleEnd->lt($visibleStart)) continue;
-
-                $offset = $periodStart->diffInDays($visibleStart);
-                $duration = $visibleStart->diffInDays($visibleEnd) + 0;
-
-
-                $this->barsByEntity[$instructor->id][] = [
-                    'left' => ($offset / $this->totalDays) * 100,
-                    'width' => ($duration / $this->totalDays) * 100,
-
-                    // Texto / etiquetas
-                    'label' => $exec->fichaCompetency->competency->name ?? 'Competencia',
-                    'sub_label' => $exec->fichaCompetency->ficha->code ?? 'N/A',
-                    'badge' => $exec->executed_hours.'h',
-                    'tooltip' => "{$execStart->format('d/m')} - {$execEnd->format('d/m')}",
-
-                    // Fechas reales
-                    'started_at' => $execStart->translatedFormat('j M'),
-                    'ended_at' => $execEnd->translatedFormat('j M'),
-                ];
+                if ($bar) {
+                    $this->barsByRow[$row['id']][] = $bar;
+                }
             }
         }
     }

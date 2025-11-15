@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Base\Traits;
+namespace App\Traits\Gantt;
 
 /**
  * Trait que agrega configuración fluida para los componentes Gantt.
@@ -28,9 +28,9 @@ trait HasGanttConfiguration
         return $this;
     }
 
-    public function dayWidth(int $width): static
+    public function columnsWidth(int $width): static
     {
-        $this->dayWidthPx = $width;
+        $this->columnWidthPx = $width;
         return $this;
     }
 
