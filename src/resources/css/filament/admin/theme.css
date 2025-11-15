@@ -1,4 +1,5 @@
 @import '../../../../vendor/filament/filament/resources/css/theme.css';
+@import '../../../../vendor/filament/filament/resources/css/index.css';
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
@@ -6,3 +7,8 @@
 @source '../../../../app/Livewire/**/*';
 @source '../../../../resources/views/livewire/**/*';
 
+
+@source '../../../../resources/views/layouts/*';
+
+
+@source '../../../../resources/views/exports/**/*';
