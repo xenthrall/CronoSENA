@@ -201,7 +201,7 @@
                     </div>
                 @empty
                     <div class="p-6 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-900">
-                        No hay entidades para mostrar en este período.
+                        No hay Instructores para mostrar en este período.
                     </div>
                 @endforelse
             </div>
@@ -220,7 +220,7 @@
             </div>
         </div>
         <div class="text-xs text-gray-500 dark:text-gray-400">
-            Columnas: {{ $totalColumns }}
+            Días: {{ $totalColumns }}
         </div>
     </div>
 </div>

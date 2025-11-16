@@ -29,16 +29,24 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
             ->with(['fichaCompetency.ficha', 'fichaCompetency.competency', 'instructor'])
             ->when(
                 $this->fichaId,
-                fn($q) =>
-                $q->whereHas('fichaCompetency', fn($sq) => $sq->where('ficha_id', $this->fichaId))
+                fn ($q) => $q->whereHas(
+                    'fichaCompetency',
+                    fn ($sq) => $sq->where('ficha_id', $this->fichaId)
+                )
             )
             ->where(function ($q) use ($periodStart, $periodEnd) {
+
+                // ejecución dentro del mes
                 $q->whereBetween('execution_date', [$periodStart, $periodEnd])
+
+                    // ejecución que comenzó antes y terminó dentro o después
                     ->orWhere(function ($q2) use ($periodStart, $periodEnd) {
                         $q2->whereNotNull('completion_date')
                             ->where('execution_date', '<=', $periodEnd)
                             ->where('completion_date', '>=', $periodStart);
                     })
+
+                    // ejecución sin fecha fin pero activa antes de periodEnd
                     ->orWhere(function ($q3) use ($periodEnd) {
                         $q3->whereNull('completion_date')
                             ->where('execution_date', '<=', $periodEnd);
@@ -52,32 +60,38 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
      */
     protected function buildBars(Collection|array $records, Carbon $periodStart, Carbon $periodEnd): void
     {
-        $instructores = Instructor::query()
-            ->whereIn('id', $records->pluck('instructor_id')->unique())
+        // Solo usar instructores presentes en los records
+        $instructorIds = $records->pluck('instructor_id')->unique();
+
+        $instructors = Instructor::whereIn('id', $instructorIds)
             ->orderBy('full_name')
             ->get();
 
-        // Filas
-        foreach ($instructores as $instructor) {
-            $this->rows[$instructor->id] = [
+        $this->rows = [];
+        $this->barsByRow = [];
+
+        foreach ($instructors as $instructor) {
+
+            // Filtrar ejecuciones únicamente del instructor actual
+            $executions = $records->where('instructor_id', $instructor->id);
+
+            // Si no tiene ejecuciones válidas → no se incluye
+            if ($executions->isEmpty()) {
+                continue;
+            }
+
+            // Crear fila
+            $this->rows[] = [
                 'id'        => $instructor->id,
                 'label'     => $instructor->full_name,
                 'sub_label' => $instructor->email,
                 'avatarUrl' => $instructor->getFilamentAvatarUrl(),
             ];
-        }
 
-        // Barras agrupadas por fila
-        $this->barsByRow = [];
-
-        foreach ($this->rows as $row) {
-
-            $this->barsByRow[$row['id']] = [];
-
-            $executions = $records->where('instructor_id', $row['id']);
+            // Inicializar contenedor de barras
+            $this->barsByRow[$instructor->id] = [];
 
             foreach ($executions as $exec) {
-
                 $execStart = Carbon::parse($exec->execution_date)->startOfDay();
                 $execEnd = $exec->completion_date
                     ? Carbon::parse($exec->completion_date)->endOfDay()
@@ -97,8 +111,14 @@ class GanttInstructorsCompetencies extends GanttBaseComponent
                 );
 
                 if ($bar) {
-                    $this->barsByRow[$row['id']][] = $bar;
+                    $this->barsByRow[$instructor->id][] = $bar;
                 }
+            }
+
+            // Si no se generó ninguna barra final → eliminar instructor
+            if (empty($this->barsByRow[$instructor->id])) {
+                unset($this->barsByRow[$instructor->id]);
+                array_pop($this->rows); // remover última fila agregada
             }
         }
     }
