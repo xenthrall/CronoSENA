@@ -143,7 +143,7 @@
                                 {{-- Barras de ejecución --}}
                                 @php $bars = $barsByRow[$row['id']] ?? []; @endphp
                                 @foreach ($bars as $bar)
-                                    <div class="absolute top-0 left-0 transition-all duration-200 hover:z-20 hover:scale-[1.03] hover:shadow-lg"
+                                    <div class="absolute top-0 left-0 transition-all duration-200 hover:scale-[1.03] hover:shadow-lg"
                                         style="
                                             left: {{ $bar['left'] }}%;
                                             width: {{ $bar['width'] }}%;
