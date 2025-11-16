@@ -61,9 +61,12 @@ trait GanttBarsTrait
 
         // 3. Offset y duración
         [$offset, $duration] = $this->calculateOffsetAndDuration($visibleStart, $visibleEnd, $periodStart);
+        
+        
 
         // 4. Conversión a porcentaje
-        $leftPct = $this->toPercentage($offset, $totalColumns);
+        //suma 1 al offset para que la barra inicie en el día correcto con respecto a la columna vacia
+        $leftPct = $this->toPercentage($offset+1, $totalColumns);
         $widthPct = $this->toPercentage($duration, $totalColumns);
 
         // 5. Armar barra final

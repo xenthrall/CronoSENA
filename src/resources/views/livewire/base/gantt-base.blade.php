@@ -2,33 +2,52 @@
 
     {{-- Button exportar --}}
     <div class="flex justify-end">
-        <a class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600" href="{{ route('export.monthly_executions', ['month' => $month, 'year' => $year]) }}" target='_blank'>Previsualizar PDF</a>
+        <a class="text-sm font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600"
+            href="{{ route('export.monthly_executions', ['month' => $month, 'year' => $year]) }}"
+            target='_blank'>Previsualizar PDF</a>
     </div>
+    
     {{-- Header --}}
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
-            {{ $monthLabel }}
-        </h3>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
+        {{ $monthLabel }}
+    </h3>
 
-        <div class="flex flex-wrap items-center gap-3">
+    <div class="flex flex-wrap items-start gap-6">
 
-            {{-- Zoom horizontal --}}
+        {{-- Contenedor vertical de los zooms --}}
+        <div class="flex flex-col gap-3">
             <div class="flex items-center gap-2">
-                <label class="text-sm text-gray-600 dark:text-gray-400">Zoom horizontal:</label>
-                <input type="range" min="30" max="100" step="2" wire:model.live="columnWidthPx"
-                    class="w-40 accent-blue-500 dark:accent-blue-400" />
+                <label class="text-sm text-gray-600 dark:text-gray-400">X:</label>
+                <input
+                    type="range"
+                    min="30"
+                    max="100"
+                    step="2"
+                    wire:model.live="columnWidthPx"
+                    class="w-40 accent-blue-500 dark:accent-blue-400"
+                />
             </div>
 
-            {{-- Zoom vertical --}}
             <div class="flex items-center gap-2">
-                <label class="text-sm text-gray-600 dark:text-gray-400">Zoom vertical:</label>
-                <input type="range" min="40" max="100" step="2" wire:model.live="rowHeightPx"
-                    class="w-40 accent-blue-500 dark:accent-blue-400" />
+                <label class="text-sm text-gray-600 dark:text-gray-400">Y:</label>
+                <input
+                    type="range"
+                    min="40"
+                    max="100"
+                    step="2"
+                    wire:model.live="rowHeightPx"
+                    class="w-40 accent-blue-500 dark:accent-blue-400"
+                />
             </div>
+        </div>
 
-            {{-- Select mes --}}
+        {{-- Selects --}}
+        <div class="flex items-center gap-3">
             <select wire:model.live="month"
-                class="form-select w-36 p-2 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
+                class="form-select w-36 p-2 rounded-lg border-gray-300 dark:border-gray-600 
+                bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm 
+                focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
                 @foreach (range(1, 12) as $m)
                     <option value="{{ $m }}">
                         {{ ucfirst(\Carbon\Carbon::create(0, $m, 1)->translatedFormat('F')) }}
@@ -36,16 +55,19 @@
                 @endforeach
             </select>
 
-            {{-- Select año --}}
             <select wire:model.live="year"
-                class="form-select w-28 p-2 rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
+                class="form-select w-28 p-2 rounded-lg border-gray-300 dark:border-gray-600 
+                bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm 
+                focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
                 @php $current = now()->year; @endphp
                 @for ($y = $current - 3; $y <= $current + 2; $y++)
                     <option value="{{ $y }}">{{ $y }}</option>
                 @endfor
             </select>
         </div>
+
     </div>
+</div>
 
     {{-- Contenedor con scroll --}}
     <div class="overflow-auto border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 transition-colors duration-300"
@@ -61,6 +83,12 @@
                 </div>
 
                 <div class="relative flex" style="min-width: {{ $totalColumns * $columnWidthPx }}px;">
+
+                    <div class="flex-shrink-0 text-center border-r border-gray-200 dark:border-gray-700 py-2"
+                        style="width: {{ $columnWidthPx }}px;">
+                        {{-- Columna vacia --}}
+                    </div>
+
                     @foreach ($columns as $column)
                         <div class="flex-shrink-0 text-center border-r border-gray-200 dark:border-gray-700 py-2"
                             style="width: {{ $columnWidthPx }}px;">
@@ -86,8 +114,8 @@
                             class="p-3 flex items-center gap-3 sticky left-0 z-10 bg-inherit border-r border-gray-200 dark:border-gray-700">
 
                             @if ($row['avatarUrl'] ?? '')
-                                <img src="{{ $row['avatarUrl'] }}"
-                                    class="w-9 h-9 rounded-full object-cover shadow-sm" alt="{{ $row['label'] }}">
+                                <img src="{{ $row['avatarUrl'] }}" class="w-9 h-9 rounded-full object-cover shadow-sm"
+                                    alt="{{ $row['label'] }}">
                             @else
                                 <div
                                     class="w-9 h-9 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center text-sm font-semibold text-gray-700 dark:text-gray-100 shadow-sm">
