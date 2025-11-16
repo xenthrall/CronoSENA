@@ -6,68 +6,63 @@
             href="{{ route('export.monthly_executions', ['month' => $month, 'year' => $year]) }}"
             target='_blank'>Previsualizar PDF</a>
     </div>
-    
+
     {{-- Header --}}
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
-        {{ $monthLabel }}
-    </h3>
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
+            {{ $monthLabel }}
+        </h3>
 
-    <div class="flex flex-wrap items-start gap-6">
+        <div class="flex flex-wrap items-start gap-6">
 
-        {{-- Contenedor vertical de los zooms --}}
-        <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-2">
-                <label class="text-sm text-gray-600 dark:text-gray-400">X:</label>
-                <input
-                    type="range"
-                    min="30"
-                    max="100"
-                    step="2"
-                    wire:model.live="columnWidthPx"
-                    class="w-40 accent-blue-500 dark:accent-blue-400"
-                />
+            <input type="text" wire:model.live="filterByInstructor" placeholder="Filtrar por instructor..."
+                class="w-64 px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
+           bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100
+           shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 
+           focus:border-blue-500 transition-colors text-sm" />
+
+
+            {{-- Contenedor vertical de los zooms --}}
+            <div class="flex flex-col gap-3">
+                <div class="flex items-center gap-2">
+                    <label class="text-sm text-gray-600 dark:text-gray-400">X:</label>
+                    <input type="range" min="30" max="100" step="2" wire:model.live="columnWidthPx"
+                        class="w-40 accent-blue-500 dark:accent-blue-400" />
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <label class="text-sm text-gray-600 dark:text-gray-400">Y:</label>
+                    <input type="range" min="40" max="100" step="2" wire:model.live="rowHeightPx"
+                        class="w-40 accent-blue-500 dark:accent-blue-400" />
+                </div>
             </div>
 
-            <div class="flex items-center gap-2">
-                <label class="text-sm text-gray-600 dark:text-gray-400">Y:</label>
-                <input
-                    type="range"
-                    min="40"
-                    max="100"
-                    step="2"
-                    wire:model.live="rowHeightPx"
-                    class="w-40 accent-blue-500 dark:accent-blue-400"
-                />
+            {{-- Selects --}}
+            <div class="flex items-center gap-3">
+                <select wire:model.live="month"
+                    class="form-select w-36 p-2 rounded-lg border-gray-300 dark:border-gray-600 
+                bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm 
+                focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
+                    @foreach (range(1, 12) as $m)
+                        <option value="{{ $m }}">
+                            {{ ucfirst(\Carbon\Carbon::create(0, $m, 1)->translatedFormat('F')) }}
+                        </option>
+                    @endforeach
+                </select>
+
+                <select wire:model.live="year"
+                    class="form-select w-28 p-2 rounded-lg border-gray-300 dark:border-gray-600 
+                bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm 
+                focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
+                    @php $current = now()->year; @endphp
+                    @for ($y = $current - 3; $y <= $current + 2; $y++)
+                        <option value="{{ $y }}">{{ $y }}</option>
+                    @endfor
+                </select>
             </div>
+
         </div>
-
-        {{-- Selects --}}
-        <div class="flex items-center gap-3">
-            <select wire:model.live="month"
-                class="form-select w-36 p-2 rounded-lg border-gray-300 dark:border-gray-600 
-                bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm 
-                focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
-                @foreach (range(1, 12) as $m)
-                    <option value="{{ $m }}">
-                        {{ ucfirst(\Carbon\Carbon::create(0, $m, 1)->translatedFormat('F')) }}
-                    </option>
-                @endforeach
-            </select>
-
-            <select wire:model.live="year"
-                class="form-select w-28 p-2 rounded-lg border-gray-300 dark:border-gray-600 
-                bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 shadow-sm 
-                focus:border-blue-500 focus:ring-blue-500 text-sm transition-colors">
-                @php $current = now()->year; @endphp
-                @for ($y = $current - 3; $y <= $current + 2; $y++)
-                    <option value="{{ $y }}">{{ $y }}</option>
-                @endfor
-            </select>
-        </div>
-
     </div>
-</div>
 
     {{-- Contenedor con scroll --}}
     <div class="overflow-auto border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800 transition-colors duration-300"

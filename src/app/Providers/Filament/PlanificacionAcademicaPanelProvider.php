@@ -20,9 +20,12 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
-use App\Filament\Resources\Fichas\FichaResource;
+
 use Filament\Navigation\NavigationGroup;
 use App\Filament\PlanificacionAcademica\Pages\Auth\PlanificacionLogin;
+
+use App\Filament\Resources\Fichas\FichaResource;
+use App\Filament\Pages\Dashboards\CronogramasDashboard;
 
 class PlanificacionAcademicaPanelProvider extends PanelProvider
 {
@@ -46,6 +49,7 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/PlanificacionAcademica/Pages'), for: 'App\Filament\PlanificacionAcademica\Pages')
             ->pages([
                 Dashboard::class,
+                CronogramasDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/PlanificacionAcademica/Widgets'), for: 'App\Filament\PlanificacionAcademica\Widgets')
             ->widgets([
@@ -67,6 +71,10 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
             ])
 
             ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('gestion academica')
+                    ->icon('heroicon-o-calendar')
+                    ->collapsed(),
                 NavigationGroup::make()
                     ->label('programas')
                     ->icon('heroicon-o-book-open')
