@@ -52,7 +52,7 @@ return [
     [
         'competency_type_id' => 2,
         'code' => '210201501',
-        'name' => 'Ejercer derechos fundamentales del trabajo',
+        'name' => 'EJERCER DERECHOS FUNDAMENTALES DEL TRABAJO',
         'description' => 'Ejercer derechos fundamentales del trabajo en el marco de la constitución política y los convenios internacionales.',
         'duration_hours' => 48,
         'version' => '1',

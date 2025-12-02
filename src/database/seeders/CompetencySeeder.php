@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Competency;
+use Illuminate\Support\Facades\File;
 
 class CompetencySeeder extends Seeder
 {
@@ -12,14 +13,35 @@ class CompetencySeeder extends Seeder
      */
     public function run(): void
     {
-        //Buscar todos los archivos PHP en el directorio database/data/competencias
-        $files = glob(database_path('data/competencias/*.php'));
-        foreach ($files as $file) {
-            $competencias = require $file;
+        // Directorio donde están los JSON generados
+        $path = database_path('data/generated/competencies');
 
-            foreach ($competencias as $data){
-                Competency::create($data);
+        // Buscar todos los archivos JSON en la carpeta
+        $files = File::glob($path . '/*.json');
+
+        $contadorCompetencias = 0;
+
+        foreach ($files as $file) {
+            // Decodificar JSON
+            $data = json_decode(File::get($file), true);
+
+            if (!$data || !isset($data['code'])) {
+                $this->command->error("Archivo inválido o incompleto: {$file}");
+                continue;
             }
+
+            // Crear o actualizar si existe el mismo code + version
+            Competency::updateOrCreate(
+                [
+                    'code' => $data['code'],
+                    'version' => $data['version'] ?? '1',
+                ],
+                $data
+            );
+
+            $contadorCompetencias++;
         }
+
+        $this->command->info('Competencias procesadas: ' . $contadorCompetencias);
     }
 }
