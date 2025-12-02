@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             TrainingLevelSeeder::class,
             SpecialProgramNameSeeder::class,
             ProgramSeeder::class,
-            ProgramCompetencySeeder::class,
             MunicipalitySeeder::class,
             ShiftSeeder::class,
             FichaStatusSeeder::class,
