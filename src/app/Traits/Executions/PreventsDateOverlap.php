@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Traits;
+namespace App\Traits\Executions;
+
 use App\Models\Instructor;
 use App\Models\FichaCompetencyExecution;
 
@@ -39,7 +40,7 @@ trait PreventsDateOverlap
                 [$end, $start]
             )
             ->pluck('instructor_id')
-            ->toArray(); 
+            ->toArray();
 
         return Instructor::whereNotIn('id', $conflictedInstructorIds)
             ->orderBy('full_name')
