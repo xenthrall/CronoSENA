@@ -1,0 +1,29 @@
+{
+  "program_code": "621201",
+  "version": "102",
+  "name": "GESTION EMPRESARIAL",
+  "total_duration_hours": 3984,
+  "training_level_id": 4,
+  "special_program_name_id": 3,
+  "competency_codes": [
+    "210101005",
+    "210101023",
+    "210201033",
+    "210601002",
+    "210601003",
+    "210601009",
+    "210601010",
+    "210601011",
+    "210601013",
+    "210601014",
+    "260101001",
+    "260101016",
+    "240201500",
+    "240201501"
+],
+  "metadata": {
+    "source": "sofía-plus",
+    "processed_by": "JhonTequia(xenthrall)",
+    "competency_count": null
+  }
+}
