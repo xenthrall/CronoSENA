@@ -1,0 +1,31 @@
+{
+  "program_code": "123101",
+  "version": "1",
+  "name": "GESTION CONTABLE Y DE INFORMACION FINANCIERA",
+  "total_duration_hours": 3984,
+  "training_level_id": 4,
+  "special_program_name_id": 3,
+  "competency_codes": [
+    "220601501",
+    "210601020",
+    "240201524",
+    "210201501",
+    "210303024",
+    "210303023",
+    "240201526",
+    "210303027",
+    "230101507",
+    "240201529",
+    "240202501",
+    "240201064",
+    "240201528",
+    "210303022",
+    "240201530",
+    "999999999"
+],
+  "metadata": {
+    "source": "sofía-plus",
+    "processed_by": "JhonTequia(xenthrall)",
+    "competency_count": 16
+  }
+}

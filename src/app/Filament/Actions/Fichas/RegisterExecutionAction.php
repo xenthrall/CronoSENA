@@ -16,13 +16,15 @@ use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 use Filament\Notifications\Notification;
 
-use App\Traits\PreventsDateOverlap;
+use App\Traits\Executions\PreventsDateOverlap;
+use App\Traits\Executions\CalculatesExecutionHours;
 
 
 class RegisterExecutionAction extends Action
 {
     use PreventsDateOverlap;
-    
+    use CalculatesExecutionHours;
+
     public static function make(?string $name = null): static
     {
 
@@ -35,6 +37,37 @@ class RegisterExecutionAction extends Action
             ->modalSubmitActionLabel('Guardar ejecución')
             ->extraModalWindowAttributes([])
             ->schema([
+                Grid::make(2)
+                    ->schema([
+                        DatePicker::make('execution_date')
+                            ->label('Fecha de ejecución')
+                            ->reactive()
+                            ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                $hours = RegisterExecutionAction::calculateWorkHoursBetweenDates(
+                                    $state,
+                                    $get('completion_date')
+                                );
+
+                                $set('executed_hours', $hours);
+                            })
+                            ->required(),
+
+                        DatePicker::make('completion_date')
+                            ->label('Fecha de finalización')
+                            ->reactive()
+                            ->minDate(fn(callable $get) => $get('execution_date'))
+                            ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                $hours = RegisterExecutionAction::calculateWorkHoursBetweenDates(
+                                    $get('execution_date'),
+                                    $state
+                                );
+
+                                $set('executed_hours', $hours);
+                            })
+                            ->required(),
+
+                    ]),
+
                 Grid::make(2)
                     ->schema([
                         Select::make('instructor_id')
@@ -51,28 +84,20 @@ class RegisterExecutionAction extends Action
                         TextInput::make('executed_hours')
                             ->label('Horas ejecutadas')
                             ->integer()
+                            //->readOnly()
                             ->minValue(1)
-                            ->maxValue(fn($record) => $record->remaining_hours)
+                            //->maxValue(fn($record) => $record->remaining_hours)
+                            ->maxValue(fn(callable $get, $record) => self::calculateMaxExecutableHours(
+                                $get('execution_date'),
+                                $get('completion_date'),
+                                $record->remaining_hours
+                            ))
                             ->placeholder(fn($record) => "Máximo: " . $record->remaining_hours . " horas")
-                            ->required(),
-
-                    ]),
-                Grid::make(2)
-                    ->schema([
-                        DatePicker::make('execution_date')
-                            ->label('Fecha de ejecución')
                             ->reactive()
                             ->required(),
 
-                        DatePicker::make('completion_date')
-                            ->required()
-                            ->reactive()
-                            ->minDate(fn(callable $get) => $get('execution_date'))
-                            ->label('Fecha de finalización'),
                     ]),
-                Textarea::make('notes')
-                    ->label('Notas')
-                    ->rows(4),
+
             ])
             ->modalAlignment(Alignment::Center)
             ->action(function (array $data, $record) {

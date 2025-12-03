@@ -16,8 +16,11 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Actions\Fichas\RegisterExecutionAction;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Support\Icons\Heroicon;
 
 use Filament\Actions\ActionGroup;
+use App\Filament\Actions\Fichas\ManageNotesAction;
 
 use App\Filament\Resources\Fichas\FichaResource;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +40,7 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
             ->query(FichaCompetency::query()->where('ficha_id', $this->ficha->id))
             ->recordUrl(function (Model $record): string {
                 return FichaResource::getUrl('competency-executions', [
-                    'ficha' => $this->ficha->id,              
+                    'ficha' => $this->ficha->id,
                     'ficha_competency' => $record,           // el registro actual de la tabla
                 ]);
             })
@@ -60,7 +63,8 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                 TextColumn::make('remaining_hours')
                     ->label('Horas restantes'),
                 TextColumn::make('progress_percentage')
-                    ->label('Estado (%)'),
+                    ->label('Estado (%)')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('competency.competencyType.name')
                     ->label('Tipo de Competencia')
                     ->default('Sin asignar')
@@ -69,11 +73,17 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                         'gray'    => fn($state): bool => $state === 'Sin asignar', // si no tiene tipo asignado
                     ])
                     ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('notes')
-                    ->label('Notas')
-                    ->limit(25)
-                    ->tooltip(fn($record) => $record->notes)
-                    ->toggleable(isToggledHiddenByDefault: true),
+                IconColumn::make('notes')
+                    ->label('Observaciones')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->boolean()
+                    ->state(fn($record) => !empty($record->notes))
+                    ->trueIcon(Heroicon::ExclamationCircle)
+                    ->falseIcon(Heroicon::CheckCircle)
+                    ->trueColor('warning')
+                    ->falseColor('gray')
+                    ->tooltip(fn($record) => $record->notes ? 'Tiene observaciones' : 'Sin Observaciones')
+                    ->action(ManageNotesAction::make()),
             ])
             ->filters([
                 //Filtrar por tipo de competencia
@@ -87,6 +97,7 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
             ->recordActions([
                 ActionGroup::make([
                     RegisterExecutionAction::make(),
+                        //->visible(fn (Model $record): bool => $record->notes? true : false),
                 ]),
             ]);
     }

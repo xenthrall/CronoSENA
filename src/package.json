@@ -16,5 +16,8 @@
         "postcss": "^8.5.6",
         "tailwindcss": "^4.1.14",
         "vite": "^7.0.4"
+    },
+    "dependencies": {
+        "puppeteer": "^24.30.0"
     }
 }

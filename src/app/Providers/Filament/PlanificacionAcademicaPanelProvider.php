@@ -11,7 +11,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
+use App\Filament\Widgets\CronosenaInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -20,9 +20,12 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
-use App\Filament\Resources\Fichas\FichaResource;
+
 use Filament\Navigation\NavigationGroup;
 use App\Filament\PlanificacionAcademica\Pages\Auth\PlanificacionLogin;
+
+use App\Filament\Resources\Fichas\FichaResource;
+use App\Filament\Pages\Dashboards\CronogramasDashboard;
 
 class PlanificacionAcademicaPanelProvider extends PanelProvider
 {
@@ -46,10 +49,12 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/PlanificacionAcademica/Pages'), for: 'App\Filament\PlanificacionAcademica\Pages')
             ->pages([
                 Dashboard::class,
+                CronogramasDashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/PlanificacionAcademica/Widgets'), for: 'App\Filament\PlanificacionAcademica\Widgets')
             ->widgets([
                 AccountWidget::class,
+                CronosenaInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -68,6 +73,10 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
 
             ->navigationGroups([
                 NavigationGroup::make()
+                    ->label('gestion academica')
+                    ->icon('heroicon-o-calendar')
+                    ->collapsed(),
+                NavigationGroup::make()
                     ->label('programas')
                     ->icon('heroicon-o-book-open')
                     ->collapsed(), //contraible deshabilitado -> false
@@ -83,7 +92,7 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
                     ->collapsed(),
             ])
 
-            ->viteTheme('resources/css/filament/admin/theme.css')
+            ->viteTheme('resources/css/filament/theme.css')
 
             /*
             ->assets([

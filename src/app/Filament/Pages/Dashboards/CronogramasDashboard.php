@@ -8,7 +8,7 @@ class CronogramasDashboard extends Page
 {
     protected string $view = 'filament.pages.dashboards.cronogramas-dashboard';
 
-    protected static ?string $title = 'Cronogramas';
+    protected static ?string $title = '';
 
     protected static string|\UnitEnum|null $navigationGroup = 'gestion academica';
 

@@ -1,0 +1,34 @@
+{
+  "program_code": "223104",
+  "version": "1",
+  "name": "CONSTRUCCION EN EDIFICACIONES",
+  "total_duration_hours": 3984,
+  "training_level_id": 4,
+  "special_program_name_id": 3,
+  "competency_codes": [
+    "220201501",
+    "220601501",
+    "280301204",
+    "240201524",
+    "210201501",
+    "240201526",
+    "230101507",
+    "280301205",
+    "280301203",
+    "280301198",
+    "280301171",
+    "280301200",
+    "240201064",
+    "240201528",
+    "240201529",
+    "240201530",
+    "220501046",
+    "999999999",
+    "240202501"
+  ],
+  "metadata": {
+    "source": "sofía-plus",
+    "processed_by": "JhonTequia(xenthrall)",
+    "competency_count": 19
+  }
+}
