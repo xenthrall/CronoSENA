@@ -4,7 +4,7 @@ return [
     [
         'competency_type_id' => 2,
         'code' => '220201501',
-        'name' => 'FISICA',
+        'name' => 'APLICACIÓN DE CONOCIMIENTOS DE LAS CIENCIAS NATURALES',
         'description' => 'APLICACIÓN DE CONOCIMIENTOS DE LAS CIENCIAS NATURALES DE ACUERDO CON SITUACIONES DEL CONTEXTO PRODUCTIVO Y SOCIAL.',
         'duration_hours' => 48,
         'version' => '1',
