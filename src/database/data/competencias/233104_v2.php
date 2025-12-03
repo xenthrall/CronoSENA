@@ -5,27 +5,23 @@ return[
         'competency_type_id' => 1,
         'code' => '220501113',
         'name' => 'ADMINISTRACIÓN DE BASE DE DATOS',
-	    'description'=>'PROGRAMAR SENTENCIAS SQL EN UN SISTEMA MANEJADOR DE BASES DE DATOS SEGÚN
-REQUERIMIENTOS DEL CLIENTE',
+	    'description'=>'ADMINISTRAR BASE DE DATOS DE ACUERDO CON LOS ESTÁNDARES Y REQUISITOS TÉCNICOS',
         'duration_hours' => 144,
         'version' => '1'
     ],
     [
-        'competency_type_id' => 1,
+        'competency_type_id' => 2,
         'code' => '220601501',
-        'name' => 'APLICAR PRÁCTICAS DE PROTECCIÓN AMBIENTAL, SEGURIDAD Y SALUD EN EL TRABAJO
-DE ACUERDO CON LAS POLÍTICAS ORGANIZACIONALES Y LA NORMATIVIDAD VIGENTE.',
-	    'description'=>'VERIFICAR LAS CONDICIONES AMBIENTALES Y DE SST ACORDE CON LOS LINEAMIENTOS ESTABLECIDOS
-PARA EL ÁREA DE DESEMPEÑO LABORAL.',
+        'name' => 'PROTECCIÓN PARA LA SALUD Y EL MEDIO AMBIENTE.',
+        'description' => 'APLICAR PRÁCTICAS DE PROTECCIÓN AMBIENTAL, SEGURIDAD Y SALUD EN EL TRABAJO DE ACUERDO CON LAS POLÍTICAS ORGANIZACIONALES Y LA NORMATIVIDAD VIGENTE.',
         'duration_hours' => 48,
-        'version' => '1'
+        'version' => '1',
     ],
     [
         'competency_type_id' => 1,
         'code' => '220501096',
         'name' => 'DESARROLLO DE LA SOLUCIÓN DE SOFTWARE',
-	    'description'=>'RESOLVER PROCESOS LÓGICOS A TRAVÉS DE LA IMPLEMENTACIÓN DE ALGORITMOS Y EL LENGUAJE
-DE PROGRAMACIÓN SELECCIONADO',
+	    'description'=>'DESARROLLAR LA SOLUCIÓN DE SOFTWARE DE ACUERDO CON EL DISEÑO Y METODOLOGÍAS DE DESARROLLO',
         'duration_hours' =>528,
         'version' => '1'
     ],
