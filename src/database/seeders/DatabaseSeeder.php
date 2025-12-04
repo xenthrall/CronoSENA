@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             ProgramSeeder::class,
 
             CompetencyTypeSeeder::class,
-            //CompetencySeeder::class,
+            CompetencySeeder::class,
+            
             MunicipalitySeeder::class,
             ShiftSeeder::class,
             FichaStatusSeeder::class,
