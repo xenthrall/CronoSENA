@@ -2,11 +2,9 @@
 
 namespace App\Filament\Resources\Programs\RelationManagers;
 
-use Filament\Actions\AttachAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
-use Filament\Actions\DetachAction;
-use Filament\Actions\DetachBulkAction;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Forms\Components\TextInput;
@@ -35,36 +33,44 @@ class CompetenciesRelationManager extends RelationManager
         return $schema
             ->components([
                 Grid::make()->schema([
+                    Select::make('norm_id')
+                        ->label('Código Norma')
+                        ->relationship('norm', 'code')
+                        ->getOptionLabelFromRecordUsing(fn ($record) => $record->code . ' - ' . $record->name)
+                        ->searchable()
+                        ->preload()
+                        ->placeholder('Seleccione una norma...')
+                        ->required()
+                        ->columnSpanFull()
+                        ->reactive()
+                        ->afterStateUpdated(function (callable $set, $state) {
+                            $norm = \App\Models\Norm::find($state);
+                            if ($norm) {
+                                $set('name', $norm->name);
+                                $set('description', $norm->description);
+                            }
+                        }),
+
+                    TextInput::make('name')
+                        ->label('Nombre')
+                        ->required()
+                        ->maxLength(255)
+                        ->columnSpanFull()
+                        ->placeholder('Ejemplo: Desarrollo de Aplicaciones Web'),
+
+                ])->columns(3)->columnSpanFull(),
+                Grid::make()->schema([
                     Select::make('competency_type_id')
                         ->label('Tipo de Competencia')
                         ->relationship('competencyType', 'name')
                         ->nullable()
                         ->preload(),
 
-                    TextInput::make('name')
-                        ->label('Nombre')
-                        ->required()
-                        ->maxLength(255)
-                        ->columnSpan(2)
-                        ->placeholder('Ejemplo: Desarrollo de Aplicaciones Web'),
-                ])->columns(3)->columnSpanFull(),
-                Grid::make()->schema([
-                    TextInput::make('code')
-                        ->label('Código Norma')
-                        ->required()
-                        ->unique(ignoreRecord: true)
-                        ->maxLength(10),
-
                     TextInput::make('duration_hours')
                         ->label('Duración (Horas)')
                         ->minValue(0)
                         ->numeric()
                         ->required(),
-
-                    TextInput::make('version')
-                        ->label('Versión')
-                        ->maxLength(20)
-                        ->default('1'),
                 ])->columns(3)->columnSpanFull(),
 
                 Textarea::make('description')
@@ -84,16 +90,15 @@ class CompetenciesRelationManager extends RelationManager
                 InfoSection::make('Detalles de la Competencia')
                     ->schema([
                         TextEntry::make('name')
-                            ->label('Nombre'),
+                            ->label('Nombre')
+                            ->columnSpanFull(),
 
-                        TextEntry::make('code')
-                            ->label('Código Norma'),
+                        TextEntry::make('norm.code')
+                            ->label('Código Norma Laboral')
+                            ->columnSpanFull(),
 
                         TextEntry::make('competencyType.name')
                             ->label('Tipo de Competencia'),
-
-                        TextEntry::make('version')
-                            ->label('Versión'),
 
                         TextEntry::make('duration_hours')
                             ->label('Duración (Horas)')
@@ -108,18 +113,6 @@ class CompetenciesRelationManager extends RelationManager
                             ->placeholder('Sin descripción')
                             ->wrap(),
                     ]),
-
-                InfoSection::make('Metadatos')
-                    ->collapsed()
-                    ->schema([
-                        TextEntry::make('created_at')
-                            ->label('Creado el')
-                            ->dateTime('d/m/Y H:i'),
-
-                        TextEntry::make('updated_at')
-                            ->label('Actualizado el')
-                            ->dateTime('d/m/Y H:i'),
-                    ])
             ]);
     }
 
@@ -128,13 +121,14 @@ class CompetenciesRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('code')
+                TextColumn::make('norm.code')
                     ->label('Código Norma')
                     ->searchable(),
 
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->searchable()
+                    ->tooltip(fn($record) => $record->name)
                     ->limit(50),
 
                 TextColumn::make('competencyType.name')
@@ -178,25 +172,15 @@ class CompetenciesRelationManager extends RelationManager
             ])
             ->headerActions([
                 CreateAction::make(),
-                AttachAction::make()
-                    ->preloadRecordSelect()
-                    ->recordTitle(fn($record) => "{$record->code} - {$record->name}")
-                    ->recordSelectSearchColumns(['code', 'name'])
-                    ->label('Vincular Competencia'),
             ])
             ->recordActions([
                 ViewAction::make(),
                 EditAction::make(),
-                DetachAction::make(),
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DetachBulkAction::make()
-                        ->action(function ($records, $table) {
-                            $relationship = $table->getRelationship();
-                            // Aseguramos que sean IDs y no objetos
-                            $relationship->detach($records->pluck('id'));
-                        }),
+                    
                 ]),
             ]);
     }
