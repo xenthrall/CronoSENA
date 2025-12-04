@@ -20,31 +20,28 @@ class CompetencyForm
                     ->searchable()
                     ->preload(),
 
-                TextInput::make('code')
-                    ->label('Código Norma')
-                    ->required()
-                    ->unique(ignoreRecord: true)
-                    ->maxLength(50),
+                Select::make('norm_id')
+                    ->label('Código Norma Laboral')
+                    ->relationship('norm', 'code')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
 
                 TextInput::make('name')
                     ->label('Nombre')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('duration_hours')
+                    ->label('Duración (Horas)')
+                    ->integer()
+                    ->required(),
 
                 Textarea::make('description')
                     ->label('Descripción')
                     ->rows(4)
                     ->columnSpanFull(),
 
-                TextInput::make('duration_hours')
-                    ->label('Duración (Horas)')
-                    ->numeric()
-                    ->required(),
-
-                TextInput::make('version')
-                    ->label('Versión')
-                    ->maxLength(20)
-                    ->default('1'),
+                
             ]);
     }
 }

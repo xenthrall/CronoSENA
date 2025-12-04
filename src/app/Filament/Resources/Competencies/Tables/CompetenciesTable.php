@@ -15,8 +15,8 @@ class CompetenciesTable
     {
         return $table
             ->columns([
-                TextColumn::make('code')
-                    ->label('Código')
+                TextColumn::make('norm.code')
+                    ->label('Código Norma Laboral')
                     ->searchable(),
 
                 TextColumn::make('name')
@@ -41,11 +41,6 @@ class CompetenciesTable
 
                 TextColumn::make('duration_hours')
                     ->label('Horas'),
-
-                TextColumn::make('version')
-                    ->label('Versión')
-                    ->toggleable(isToggledHiddenByDefault: true),
-
 
                 TextColumn::make('created_at')
                     ->label('Creado')
