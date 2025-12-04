@@ -1,0 +1,15 @@
+{
+  "program_code": "733410",
+  "version": "101",
+  "name": "PRODUCCION AGROPECUARIA",
+  "total_duration_hours": 2200,
+  "training_level_id": 3,
+  "special_program_name_id": 3,
+  "name_file competencies": "733410_v101",
+
+  "metadata": {
+    "source": "sofía-plus",
+    "processed_by": "JhonTequia(xenthrall)",
+    "competency_count": 20
+  }
+}
