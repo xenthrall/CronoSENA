@@ -9,31 +9,53 @@ class Competency extends Model
     protected $table = 'competencies';
 
     protected $fillable = [
+        'program_id',
+        'norm_id',
         'competency_type_id',
-        'code',
         'name',
         'description',
         'duration_hours',
-        'version',
     ];
 
+    /**
+     * -----------------------------------------
+     * BelongsTo Relationships
+     * -----------------------------------------
+     */
+
+    // La competencia pertenece a un programa
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
+    }
+
+    // La competencia puede estar asociada a una norma laboral
+    public function norm()
+    {
+        return $this->belongsTo(Norm::class);
+    }
+
+    // Tipo de competencia (opcional)
     public function competencyType()
     {
         return $this->belongsTo(CompetencyType::class);
     }
 
-    public function programs()
-    {
-        return $this->belongsToMany(Program::class, 'program_competency')
-            ->withPivot([]);
-    }
 
+    /**
+     * -----------------------------------------
+     * BelongsToMany / HasMany Relationships
+     * -----------------------------------------
+     */
+
+    // Relación con instructores (se mantiene igual)
     public function instructors()
     {
         return $this->belongsToMany(Instructor::class, 'instructor_competency')
             ->withPivot([]);
     }
 
+    // Relación con fichas (competencias asignadas a fichas)
     public function fichas()
     {
         return $this->belongsToMany(Ficha::class, 'ficha_competencies')
@@ -48,6 +70,7 @@ class Competency extends Model
             ->withTimestamps();
     }
 
+    // Historial de asociaciones con fichas
     public function fichaCompetencies()
     {
         return $this->hasMany(FichaCompetency::class);

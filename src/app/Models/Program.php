@@ -15,6 +15,12 @@ class Program extends Model
         'special_program_name_id',
     ];
 
+    /**
+     * -----------------------------------------
+     * BelongsTo Relationships
+     * -----------------------------------------
+     */
+
     public function trainingLevel()
     {
         return $this->belongsTo(TrainingLevel::class);
@@ -25,9 +31,15 @@ class Program extends Model
         return $this->belongsTo(SpecialProgramName::class);
     }
 
+    /**
+     * -----------------------------------------
+     * HasMany Relationships
+     * -----------------------------------------
+     */
+
+    // Un programa tiene muchas competencias
     public function competencies()
     {
-        return $this->belongsToMany(Competency::class, 'program_competency')
-            ->withPivot([]);
+        return $this->hasMany(Competency::class, 'program_id');
     }
 }
