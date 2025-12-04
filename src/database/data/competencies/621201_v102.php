@@ -7,7 +7,6 @@ return [
         'name' => 'DIRIGIR EL TALENTO HUMANO SEGÚN NECESIDADES DE LA ORGANIZACIÓN',
         'description' => 'COORDINAR EL TALENTO HUMANO DE ACUERDO CON LOS OBJETIVOS, ESTRATEGIAS E INDICADORES DE GESTIÓN SEGÚN TIEMPOS Y RECURSOS',
         'duration_hours' => '140',
-        'version' => '1'
     ],
     [
         'competency_type_id' => 1,
@@ -15,7 +14,6 @@ return [
         'name' => 'CONTROLAR LOS INVENTARIOS SEGÚN INDICADORES DE ROTACIÓN Y MÉTODOS DE MANEJO',
         'description' => 'CONSOLIDAR LA INFORMACIÓN DEL COMPORTAMIENTO DE LOS INVENTARIOS',
         'duration_hours' => '130',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -23,7 +21,6 @@ return [
         'name' => 'ADMINISTRAR LA SALUD OCUPACIONAL DE ACUERDO CON LA NORMATIVIDAD TÉCNICA LEGAL VIGENTE Y LAS POLÍTICAS DE LA ORGANIZACIÓN.',
         'description' => 'EVALUAR EL DESARROLLO DEL PROGRAMA DE SALUD OCUPACIONAL DE ACUERDO CON LAS NORMAS TÉCNICAS, DE CALIDAD Y LEGALES VIGENTES',
         'duration_hours' => '140',
-        'version' => '1'
     ],
     [
         'competency_type_id' => 1,
@@ -31,7 +28,6 @@ return [
         'name' => 'ORGANIZAR EVENTOS QUE PROMUEVAN LAS RELACIONES EMPRESARIALES, TENIENDO EN CUENTA EL OBJETO SOCIAL DE LA EMPRESA',
         'description' => 'ORGANIZAR EVENTOS QUE PROMUEVAN LAS RELACIONES EMPRESARIALES, TENIENDO EN CUENTA EL OBJETO SOCIAL DE LA EMPRESA',
         'duration_hours' => '250',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -39,7 +35,6 @@ return [
         'name' => 'INTERVENIR EN EL DESARROLLO DE LOS PROGRAMAS DE MEJORAMIENTO ORGANIZACIONAL QUE SE DERIVEN DE LA FUNCIÓN ADMINISTRATIVA',
         'description' => 'INTERVENIR EN EL DESARROLLO DE LOS PROGRAMAS DE MEJORAMIENTO ORGANIZACIONAL QUE SE DERIVEN DE LA FUNCIÓN ADMINISTRATIVA',
         'duration_hours' => '250',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -47,7 +42,6 @@ return [
         'name' => 'GENERAR PROPUESTAS DE MEJORAMIENTO DEL AMBIENTE ORGANIZACIONAL DE ACUERDO CON LA FUNCIÓN DE LA UNIDAD ADMINISTRATIVA',
         'description' => 'IDENTIFICAR LAS CONDICIONES DEL AMBIENTE ORGANIZACIONAL DE ACUERDO CON LA FUNCIÓN DE LA UNIDAD ADMINISTRATIVA',
         'duration_hours' => '140',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -55,7 +49,6 @@ return [
         'name' => 'FACILITAR EL SERVICIO A LOS CLIENTES INTERNOS Y EXTERNOS DE ACUERDO CON LAS POLÍTICAS DE LA ORGANIZACIÓN.',
         'description' => 'UTILIZAR LOS APLICATIVOS (SOFTWARE-HARDWARE) Y SUS CARACTERÍSTICAS, EN LA SATISFACCIÓN DE LOS CLIENTES, EL MEJORAMIENTO CONTINUO, DE ACUERDO CON LAS POLÍTICAS DE LA ORGANIZACIÓN',
         'duration_hours' => '300',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -63,7 +56,6 @@ return [
         'name' => 'PROCESAR LA INFORMACIÓN DE ACUERDO CON LAS NECESIDADES DE LA ORGANIZACIÓN',
         'description' => 'PROCESAR LA INFORMACIÓN DE ACUERDO CON LAS NECESIDADES DE LA ORGANIZACIÓN',
         'duration_hours' => '110',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -71,7 +63,6 @@ return [
         'name' => 'CONTABILIZAR OPERACIONES DE ACUERDO CON LAS NORMAS VIGENTES Y LAS POLÍTICAS ORGANIZACIONALES',
         'description' => 'CONTABILIZAR OPERACIONES DE ACUERDO CON LAS NORMAS VIGENTES Y LAS POLÍTICAS ORGANIZACIONALES',
         'duration_hours' => '160',
-        'version' => '1'
     ],
     [
         'competency_type_id' => 1,
@@ -79,7 +70,6 @@ return [
         'name' => 'PROPONER ALTERNATIVAS DE SOLUCIÓN QUE CONTRIBUYAN AL LOGRO DE LOS OBJETIVOS DE ACUERDO CON EL NIVEL DE IMPORTANCIA Y RESPONSABILIDAD DE LAS FUNCIONES ASIGNADAS POR LA ORGANIZACIÓN',
         'description' => 'IDENTIFICAR LAS CAUSAS QUE ORIGINAN LAS SITUACIONES QUE AFECTAN EL LOGRO DE LOS OBJETIVOS DE ACUERDO CON EL NIVEL DE IMPORTANCIA Y RESPONSABILIDAD DE LAS FUNCIONES ASIGNADAS POR LA ORGANIZACIÓN',
         'duration_hours' => '410',
-        'version' => '1'
     ],
     [
         'competency_type_id' => 1,
@@ -87,7 +77,6 @@ return [
         'name' => 'PROYECTAR EL MERCADO DE ACUERDO CON EL TIPO DE PRODUCTO O SERVICIO Y CARACTERÍSTICAS DE LOS CONSUMIDORES Y USUARIOS',
         'description' => 'ANALIZAR EL COMPORTAMIENTO DEL MERCADO DE ACUERDO CON EL TIPO DE PRODUCTO O SERVICIO Y LAS CARACTERÍSTICAS DE LOS CONSUMIDORES Y USUARIOS',
         'duration_hours' => '140',
-        'version' => '2'
     ],
     [
         'competency_type_id' => 1,
@@ -103,7 +92,6 @@ return [
         'name' => 'PROMOVER LA INTERACCIÓN IDÓNEA CONSIGO MISMO, CON LOS DEMÁS Y CON LA NATURALEZA EN LOS CONTEXTOS LABORAL Y SOCIAL',
         'description' => '',
         'duration_hours' => '0',
-        'version' => '1'
     ],
     [
         'competency_type_id' => 1,
@@ -111,6 +99,5 @@ return [
         'name' => 'COMPRENDER TEXTOS EN INGLÉS EN FORMA ESCRITA Y AUDITIVA',
         'description' => 'INTERACTUAR EN LENGUA INGLESA DE FORMA ORAL Y ESCRITA DENTRO DE CONTEXTOS SOCIALES Y LABORALES SEGÚN LOS CRITERIOS ESTABLECIDOS POR EL MARCO COMÚN EUROPEO DE REFERENCIA PARA LAS LENGUAS',
         'duration_hours' => '180',
-        'version' => '1'
     ],
 ];
