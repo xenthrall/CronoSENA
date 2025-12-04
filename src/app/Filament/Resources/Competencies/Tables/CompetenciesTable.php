@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Competencies\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -23,6 +24,11 @@ class CompetenciesTable
                     ->label('Nombre')
                     ->limit(50) // corta el texto largo
                     ->tooltip(fn($record) => $record->name) //  muestra completo al pasar mouse
+                    ->searchable(),
+                TextColumn::make('program.name')
+                    ->label('Programa')
+                    ->limit(50) // corta el texto largo
+                    ->tooltip(fn($record) => $record->program->name) //  muestra completo
                     ->searchable(),
 
                 TextColumn::make('competencyType.name')

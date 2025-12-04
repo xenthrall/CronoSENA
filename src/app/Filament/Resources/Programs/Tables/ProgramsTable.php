@@ -20,7 +20,13 @@ class ProgramsTable
                      ->label('Codigo')
                     ->searchable(),
                 TextColumn::make('name')
+                    ->label('Nombre')
+                    ->limit(50)
+                    ->tooltip(fn ($record) => $record->name)
                     ->searchable(),
+                TextColumn::make('version')
+                    ->label('Versión')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('total_duration_hours')
                     ->label('Duración (Horas)')
                     ->numeric(),
@@ -45,10 +51,6 @@ class ProgramsTable
                     ->icons([
                         'heroicon-m-x-circle' => fn($state): bool => $state === 'Sin asignar',
                     ]),
-
-                TextColumn::make('version')
-                    ->label('Versión')
-                    ->toggleable(isToggledHiddenByDefault: true),
                     
                 TextColumn::make('created_at')
                     ->label('Creado')
