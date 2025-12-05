@@ -35,6 +35,8 @@ class TrainingLevelResource extends Resource
             ->components([
                 TextInput::make('name')
                     ->label('Nombre')
+                    ->unique()
+                    ->maxLength(50)
                     ->required(),
             ]);
     }
