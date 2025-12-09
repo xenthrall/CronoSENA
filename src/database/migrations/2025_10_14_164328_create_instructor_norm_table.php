@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('instructor_competency', function (Blueprint $table) {
+        Schema::create('instructor_norm', function (Blueprint $table) {
             $table->foreignId('instructor_id')
                 ->constrained('instructors')
                 ->cascadeOnDelete();
 
-            $table->foreignId('competency_id')
-                ->constrained('competencies')
+            $table->foreignId('norm_id')
+                ->constrained('norms')
                 ->cascadeOnDelete();
 
-            $table->primary(['instructor_id', 'competency_id']);
+            $table->primary(['instructor_id', 'norm_id']);
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('instructor_competency');
+        Schema::dropIfExists('instructor_norm');
     }
 };
