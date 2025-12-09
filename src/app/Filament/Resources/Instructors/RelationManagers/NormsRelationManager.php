@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Instructors\RelationManagers;
 
-use App\Filament\Resources\Competencies\CompetencyResource;
+use App\Filament\Resources\Norms\NormResource;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
@@ -15,11 +15,11 @@ use Filament\Actions\ViewAction;
 use Illuminate\Support\Facades\Auth;
 
 
-class CompetenciesRelationManager extends RelationManager
+class NormsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'competencies';
+    protected static string $relationship = 'norms';
 
-    protected static ?string $relatedResource = CompetencyResource::class;
+    protected static ?string $relatedResource = NormResource::class;
 
     public function table(Table $table): Table
     {
@@ -35,26 +35,9 @@ class CompetenciesRelationManager extends RelationManager
                     ->searchable()
                     ->limit(50),
 
-                TextColumn::make('competencyType.name')
-                    ->label('Tipo de Competencia')
-                    ->badge(),
-
-                TextColumn::make('duration_hours')
-                    ->label('Duración (Horas)')
-                    ->numeric()
-                    ->sortable()
-                    ->alignCenter(),
-
                 TextColumn::make('description')
                     ->label('Descripción')
                     ->limit(50)
-                    ->toggleable(isToggledHiddenByDefault: true),
-
-                TextColumn::make('version')
-                    ->label('Versión')
-                    ->alignCenter()
-                    ->badge()
-                    ->color('gray')
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
@@ -68,25 +51,18 @@ class CompetenciesRelationManager extends RelationManager
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('competency_type_id')
-                    ->label('Tipo de Competencia')
-                    ->relationship('competencyType', 'name')
-                    ->preload()
-                    ->searchable(),
+                //
             ])
             ->headerActions([
                 AttachAction::make()
                     ->preloadRecordSelect()
                     ->recordTitle(fn($record) => "{$record->code} - {$record->name}")
                     ->recordSelectSearchColumns(['code', 'name'])
-                    ->label('Vincular Competencia')
-                    ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
+                    ->label('Vincular Norma'),
             ])
             ->recordActions([
-                ViewAction::make()
-                    ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
-                DetachAction::make()
-                    ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
+                ViewAction::make(),
+                DetachAction::make(),
 
             ])
             ->toolbarActions([
@@ -96,8 +72,7 @@ class CompetenciesRelationManager extends RelationManager
                             $relationship = $table->getRelationship();
                             // Aseguramos que sean IDs y no objetos
                             $relationship->detach($records->pluck('id'));
-                        })
-                        ->visible(fn() => Auth::user()?->can('instructor.manageCompetencias')),
+                        }),
                 ]),
             ]);
     }

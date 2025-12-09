@@ -26,4 +26,10 @@ class Norm extends Model
     {
         return $this->hasMany(Competency::class, 'norm_id');
     }
+
+    public function instructors()
+    {
+        return $this->belongsToMany(Instructor::class, 'instructor_norm')
+            ->withPivot([]);
+    }
 }

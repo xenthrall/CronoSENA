@@ -48,13 +48,6 @@ class Competency extends Model
      * -----------------------------------------
      */
 
-    // Relación con instructores (se mantiene igual)
-    public function instructors()
-    {
-        return $this->belongsToMany(Instructor::class, 'instructor_competency')
-            ->withPivot([]);
-    }
-
     // Relación con fichas (competencias asignadas a fichas)
     public function fichas()
     {
