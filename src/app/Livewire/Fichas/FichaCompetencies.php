@@ -45,10 +45,19 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                 ]);
             })
             ->columns([
-                TextColumn::make('order')
-                    ->label('Orden de ejecución')
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('competency.code')
+                IconColumn::make('notes')
+                    ->label('')
+                    ->toggleable(isToggledHiddenByDefault: false)
+                    ->boolean()
+                    ->state(fn($record) => !empty($record->notes))
+                    ->trueIcon(Heroicon::ExclamationCircle)
+                    ->falseIcon(Heroicon::CheckCircle)
+                    ->trueColor('warning')
+                    ->falseColor('gray')
+                    ->tooltip(fn($record) => $record->notes ? 'Tiene observaciones' : 'Sin Observaciones')
+                    ->action(ManageNotesAction::make()),
+
+                TextColumn::make('competency.norm.code')
                     ->label('Código')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('competency.name')
@@ -64,7 +73,7 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                     ->label('Horas restantes'),
                 TextColumn::make('progress_percentage')
                     ->label('Estado (%)')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('competency.competencyType.name')
                     ->label('Tipo de Competencia')
                     ->default('Sin asignar')
@@ -72,18 +81,8 @@ class FichaCompetencies extends Component implements HasActions, HasSchemas, Has
                     ->colors([
                         'gray'    => fn($state): bool => $state === 'Sin asignar', // si no tiene tipo asignado
                     ])
-                    ->toggleable(isToggledHiddenByDefault: false),
-                IconColumn::make('notes')
-                    ->label('Observaciones')
-                    ->toggleable(isToggledHiddenByDefault: true)
-                    ->boolean()
-                    ->state(fn($record) => !empty($record->notes))
-                    ->trueIcon(Heroicon::ExclamationCircle)
-                    ->falseIcon(Heroicon::CheckCircle)
-                    ->trueColor('warning')
-                    ->falseColor('gray')
-                    ->tooltip(fn($record) => $record->notes ? 'Tiene observaciones' : 'Sin Observaciones')
-                    ->action(ManageNotesAction::make()),
+                    ->toggleable(isToggledHiddenByDefault: true),
+                
             ])
             ->filters([
                 //Filtrar por tipo de competencia

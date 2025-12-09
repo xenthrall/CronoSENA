@@ -15,11 +15,13 @@ class DatabaseSeeder extends Seeder
             #Usuarios base para el sistema
             UserSeeder::class,
             #Datos iniciales para el sistema
-            CompetencyTypeSeeder::class,
-            CompetencySeeder::class,
             TrainingLevelSeeder::class,
             SpecialProgramNameSeeder::class,
             ProgramSeeder::class,
+
+            CompetencyTypeSeeder::class,
+            CompetencySeeder::class,
+            
             MunicipalitySeeder::class,
             ShiftSeeder::class,
             FichaStatusSeeder::class,

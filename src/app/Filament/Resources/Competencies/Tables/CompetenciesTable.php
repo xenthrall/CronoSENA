@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Competencies\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -15,14 +16,19 @@ class CompetenciesTable
     {
         return $table
             ->columns([
-                TextColumn::make('code')
-                    ->label('Código')
+                TextColumn::make('norm.code')
+                    ->label('Código Norma Laboral')
                     ->searchable(),
 
                 TextColumn::make('name')
                     ->label('Nombre')
                     ->limit(50) // corta el texto largo
                     ->tooltip(fn($record) => $record->name) //  muestra completo al pasar mouse
+                    ->searchable(),
+                TextColumn::make('program.name')
+                    ->label('Programa')
+                    ->limit(50) // corta el texto largo
+                    ->tooltip(fn($record) => $record->program->name) //  muestra completo
                     ->searchable(),
 
                 TextColumn::make('competencyType.name')
@@ -41,11 +47,6 @@ class CompetenciesTable
 
                 TextColumn::make('duration_hours')
                     ->label('Horas'),
-
-                TextColumn::make('version')
-                    ->label('Versión')
-                    ->toggleable(isToggledHiddenByDefault: true),
-
 
                 TextColumn::make('created_at')
                     ->label('Creado')

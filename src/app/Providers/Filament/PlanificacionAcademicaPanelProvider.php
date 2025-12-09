@@ -35,6 +35,7 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
             ->id('planificacion')
             ->path('planificacion')
             ->login(PlanificacionLogin::class)
+            ->profile(isSimple: false)
             ->colors([
                 'primary' => Color::Indigo,
             ])

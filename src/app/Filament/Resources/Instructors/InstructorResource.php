@@ -42,7 +42,7 @@ class InstructorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\CompetenciesRelationManager::class
+            RelationManagers\NormsRelationManager::class
         ];
     }
 

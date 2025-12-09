@@ -12,16 +12,16 @@ class TrainingLevelSeeder extends Seeder
      */
     public function run(): void
     {
-        TrainingLevel::create([
+        TrainingLevel::firstOrCreate([
             'name' => 'AUXILIAR',
         ]);
-        TrainingLevel::create([
+        TrainingLevel::firstOrCreate([
             'name' => 'OPERARIO',
         ]);
-        TrainingLevel::create([
+        TrainingLevel::firstOrCreate([
             'name' => 'TECNICO',
         ]);
-        TrainingLevel::create([
+        TrainingLevel::firstOrCreate([
             'name' => 'TECNOLOGO',
         ]);
         

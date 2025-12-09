@@ -12,23 +12,23 @@ class SpecialProgramNameSeeder extends Seeder
      */
     public function run(): void
     {
-        SpecialProgramName::create([
+        SpecialProgramName::firstOrCreate([
             'name' => 'CAMPESENA',
         ]);
 
-        SpecialProgramName::create([
+        SpecialProgramName::firstOrCreate([
             'name' => 'FIC',
         ]);
 
-        SpecialProgramName::create([
+        SpecialProgramName::firstOrCreate([
             'name' => 'REGULAR',
         ]);
 
-        SpecialProgramName::create([
+        SpecialProgramName::firstOrCreate([
             'name' => 'REGULAR VIRTUAL',
         ]);
 
-        SpecialProgramName::create([
+        SpecialProgramName::firstOrCreate([
             'name' => 'VIRTUAL',
         ]);
 

@@ -100,9 +100,7 @@ class SyncPermissions extends Command
 
         $this->info('✅ Permisos sincronizados correctamente.');
 
-        if ($this->confirm('¿Deseas crear roles base y asignar permisos?')) {
-            $this->createBaseRoles($permissions);
-        }
+        $this->createBaseRoles($permissions);
 
         return self::SUCCESS;
     }
@@ -111,7 +109,7 @@ class SyncPermissions extends Command
     {
         $roles = [
             'admin' => array_merge(...array_values($permissions)), // todos los permisos
-            'viewer' => collect($permissions)
+            'usuario' => collect($permissions)
                 ->flatten(1)
                 ->filter(fn($perm) => str_contains($perm['name'], 'view'))
                 ->values()
@@ -123,6 +121,6 @@ class SyncPermissions extends Command
             $role->syncPermissions(collect($perms)->pluck('name')->toArray());
         }
 
-        $this->info('🎯 Roles base creados y sincronizados: admin, viewer');
+        $this->info('🎯 Roles base creados y sincronizados: admin, usuario');
     }
 }
