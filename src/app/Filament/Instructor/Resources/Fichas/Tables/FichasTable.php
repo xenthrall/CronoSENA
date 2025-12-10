@@ -3,16 +3,24 @@
 namespace App\Filament\Instructor\Resources\Fichas\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use App\Models\Ficha;
 
 class FichasTable
 {
     public static function configure(Table $table): Table
     {
+        $instructorId = auth()->user()->id;
         return $table
+            ->query(
+                Ficha::query()
+                    ->whereHas('instructorLeaderships', function ($q) use ($instructorId) {
+                        $q->where('instructor_id', $instructorId)
+                            ->whereNull('end_date');
+                    })
+            )
             ->columns([
                 TextColumn::make('code')
                     ->label('Ficha')
