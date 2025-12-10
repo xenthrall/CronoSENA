@@ -2,8 +2,9 @@
 
 namespace App\Filament\Instructor\Resources\Fichas;
 
-use App\Filament\Instructor\Resources\Fichas\Pages\CreateFicha;
-use App\Filament\Instructor\Resources\Fichas\Pages\EditFicha;
+use App\Filament\Instructor\Resources\Fichas\Pages\ManageFicha;
+use App\Filament\Instructor\Resources\Fichas\Pages\CompetencyExecutions;
+
 use App\Filament\Instructor\Resources\Fichas\Pages\ListFichas;
 use App\Filament\Instructor\Resources\Fichas\Schemas\FichaForm;
 use App\Filament\Instructor\Resources\Fichas\Tables\FichasTable;
@@ -43,6 +44,9 @@ class FichaResource extends Resource
     {
         return [
             'index' => ListFichas::route('/'),
+            'manage' => ManageFicha::route('/{record}/manage'),
+            'competency-executions' => CompetencyExecutions::route('/{ficha}/competency-executions/{ficha_competency}'),
+
         ];
     }
 }

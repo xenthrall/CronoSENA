@@ -10,10 +10,4 @@ class ListFichas extends ListRecords
 {
     protected static string $resource = FichaResource::class;
 
-    protected function getHeaderActions(): array
-    {
-        return [
-            CreateAction::make(),
-        ];
-    }
 }

@@ -7,20 +7,29 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use App\Models\Ficha;
+use App\Filament\Instructor\Resources\Fichas\FichaResource;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class FichasTable
 {
     public static function configure(Table $table): Table
     {
-        $instructorId = auth()->user()->id;
+        $instructorId = Auth::id();
         return $table
             ->query(
                 Ficha::query()
                     ->whereHas('instructorLeaderships', function ($q) use ($instructorId) {
                         $q->where('instructor_id', $instructorId)
-                            ->whereNull('end_date');
+                            ->whereNull('end_date'); 
                     })
             )
+
+            ->recordUrl(function (Model $record): string {
+                // Redirige a la página "manage" en lugar de "edit"
+                return FichaResource::getUrl('manage', ['record' => $record]);
+            })
+
             ->columns([
                 TextColumn::make('code')
                     ->label('Ficha')
