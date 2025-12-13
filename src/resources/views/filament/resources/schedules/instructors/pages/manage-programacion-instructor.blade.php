@@ -23,7 +23,7 @@
         <x-filament::card>
             <div
                 wire:ignore
-                id="calendar"
+                id="calendar-programacion"
                 class="min-h-[600px]"
                 data-tipo="instructor"
                 data-id="{{ $record->id }}"

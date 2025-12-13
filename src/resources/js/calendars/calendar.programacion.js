@@ -6,7 +6,7 @@ import listPlugin from "@fullcalendar/list";
 import esLocale from "@fullcalendar/core/locales/es";
 
 document.addEventListener("DOMContentLoaded", function () {
-    const calendarEl = document.getElementById("calendar");
+    const calendarEl = document.getElementById("calendar-programacion");
     if (!calendarEl) return;
 
     const tipo = calendarEl.dataset.tipo;
@@ -33,49 +33,65 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         eventContent: function (arg) {
-    const {
-        shift,
-        executed_hours,
-        execution_range,
-        location,
-        environment
-    } = arg.event.extendedProps;
+            const {
+                shift,
+                executed_hours,
+                execution_range,
+                location,
+                environment,
+            } = arg.event.extendedProps;
 
-    const isListMonth = arg.view.type === 'listMonth';
+            const isListMonth = arg.view.type === "listMonth";
 
-    return {
-            html: `
+            return {
+                html: `
                 <div class="fc-event-custom">
                     <div class="fc-event-title-main">
                         ${arg.event.title}
                     </div>
 
-                    ${execution_range ? `
+                    ${
+                        execution_range
+                            ? `
                         <div class="fc-event-range">
                             ${execution_range}
                         </div>
-                    ` : ''}
+                    `
+                            : ""
+                    }
 
                     <div class="fc-event-meta">
-                        ${location && environment ? `${location} · ${environment}` : ''}
+                        ${
+                            location && environment
+                                ? `${location} · ${environment}`
+                                : ""
+                        }
                     </div>
 
                     <div class="fc-event-footer">
                         <span class="fc-event-shift">${shift}</span>
 
-                        ${(!isListMonth && executed_hours) ? `
+                        ${
+                            !isListMonth && executed_hours
+                                ? `
                             <span class="fc-event-hours">
                                 ${executed_hours} h en este periodo
                             </span>
-                        ` : ''}
+                        `
+                                : ""
+                        }
                     </div>
                 </div>
-            `
-        };
-    },
+            `,
+            };
+        },
 
         events: `/api/events/${tipo}/${id}`,
     });
 
     calendar.render();
+
+    window.addEventListener("calendar-refresh", () => {
+        calendar.refetchEvents();
+    });
 });

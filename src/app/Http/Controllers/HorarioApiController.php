@@ -13,11 +13,45 @@ class HorarioApiController extends Controller
     public function eventsInstructor($id)
     {
         $events = FichaCompetencyExecution::where('instructor_id', $id)
-            ->with(['fichaCompetency.ficha', 'instructor'])
+            ->with([
+                'fichaCompetency.ficha.shift',
+                'fichaCompetency.competency',
+                'instructor',
+                'trainingEnvironment.location'
+            ])
             ->get()
             ->map(function ($execution) {
 
-                $shiftColor = $execution->fichaCompetency->ficha->shift->color;
+                $shift = $execution->fichaCompetency->ficha->shift;
+
+                $startDate = Carbon::parse($execution->execution_date);
+                $endDate   = Carbon::parse($execution->completion_date);
+
+                /*
+                |--------------------------------------------------------------------------
+                | Rango de ejecución legible (UX-friendly)
+                |--------------------------------------------------------------------------
+                */
+                $executionRange = match (true) {
+                    // Mismo día
+                    $startDate->isSameDay($endDate) =>
+                        $startDate->translatedFormat('j \\d\\e F'),
+
+                    // Mismo mes y año
+                    $startDate->isSameMonth($endDate) =>
+                        $startDate->translatedFormat('j') . '–' .
+                        $endDate->translatedFormat('j \\d\\e F'),
+
+                    // Mismo año
+                    $startDate->isSameYear($endDate) =>
+                        $startDate->translatedFormat('j \\d\\e F') . ' – ' .
+                        $endDate->translatedFormat('j \\d\\e F'),
+
+                    // Diferente año
+                    default =>
+                        $startDate->translatedFormat('j \\d\\e F Y') . ' – ' .
+                        $endDate->translatedFormat('j \\d\\e F Y'),
+                };
 
                 return [
                     'title' => sprintf(
@@ -26,26 +60,29 @@ class HorarioApiController extends Controller
                         $execution->fichaCompetency->competency->name ?? ''
                     ),
 
-                    'start' => Carbon::parse($execution->execution_date),
-
-                    'end' => Carbon::parse($execution->completion_date),
-
+                    // Fechas reales (FullCalendar)
+                    'start' => $startDate,
+                    'end'   => $endDate->copy()->addDay(),
                     'allDay' => true,
 
-                    'color' => $shiftColor,
+                    'color' => $shift->color,
 
+                    // Datos de dominio
                     'extendedProps' => [
-                        'shift' => $execution->fichaCompetency->ficha->shift->name,
-                        'instructor' => $execution->instructor->full_name ?? null,
-                        'notes' => $execution->notes,
-                        'ficha_competency_id' => $execution->ficha_competency_id,
+                        'execution_id'     => $execution->id,
+                        'shift'            => $shift->name,
+                        'execution_range'  => $executionRange,
+                        'instructor'       => $execution->instructor->full_name ?? null,
+                        'executed_hours'   => $execution->executed_hours,
+                        'location'         => $execution->trainingEnvironment->location->name ?? null,
+                        'environment'      => $execution->trainingEnvironment->name ?? null,
                     ],
                 ];
             });
 
         return response()->json($events);
     }
-
+    
     public function eventsFicha($id)
     {
         return response()->json([

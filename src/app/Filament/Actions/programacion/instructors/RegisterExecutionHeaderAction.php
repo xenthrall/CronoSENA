@@ -183,7 +183,7 @@ class RegisterExecutionHeaderAction extends Action
                 }
             })
 
-            ->action(function (array $data, self $action) {
+            ->action(function (array $data, self $action, $livewire) {
                 FichaCompetencyExecution::create([
                     'ficha_competency_id'     => $data['ficha_competency_id'],
                     'instructor_id'           => $action->instructorId,
@@ -193,6 +193,10 @@ class RegisterExecutionHeaderAction extends Action
                     'executed_hours'          => $data['executed_hours'],
                     'notes'                   => $data['notes'] ?? null,
                 ]);
+
+                $livewire->dispatch('calendar-refresh');
+
+
             })
 
             ->successNotificationTitle('Ejecución registrada correctamente');

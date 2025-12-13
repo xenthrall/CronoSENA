@@ -3,3 +3,17 @@
 .fc-list-event-time {
     display: none;
 }
+
+/* Rango de fechas */
+.fc-event-range {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Horas ejecutadas con contexto */
+.fc-event-hours {
+    font-size: 0.7rem;
+    font-weight: 500;
+    opacity: 0.8;
+}

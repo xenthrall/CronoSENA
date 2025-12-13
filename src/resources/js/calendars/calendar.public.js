@@ -6,7 +6,7 @@ import listPlugin from "@fullcalendar/list";
 import esLocale from "@fullcalendar/core/locales/es";
 
 document.addEventListener("DOMContentLoaded", function () {
-    const calendarEl = document.getElementById("calendar");
+    const calendarEl = document.getElementById("calendar-public");
     if (!calendarEl) return;
 
     const tipo = calendarEl.dataset.tipo;
