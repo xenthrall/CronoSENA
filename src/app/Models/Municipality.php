@@ -11,4 +11,15 @@ class Municipality extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function locations()
+    {
+        return $this->hasMany(Location::class);
+    }
+
+    public function fichas()
+    {
+        return $this->hasMany(Ficha::class);
+    }
+
 }
