@@ -139,6 +139,7 @@ class RegisterExecutionHeaderAction extends Action
                 FichaCompetencyExecution::create([
                     'ficha_competency_id' => $fichaId,
                     'instructor_id'       => $data['instructor_id'],
+                    'training_environment_id' => $data['training_environment_id'] ?? null,
                     'execution_date'      => $data['execution_date'] ?? null,
                     'completion_date'     => $data['completion_date'] ?? null,
                     'executed_hours'      => $data['executed_hours'],
