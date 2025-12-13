@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\ProgramacionInstructors;
 
 use App\Filament\Resources\ProgramacionInstructors\Pages\ListProgramacionInstructors;
+use App\Filament\Resources\ProgramacionInstructors\Pages\ManageProgramacionInstructor;
+
 use App\Filament\Resources\ProgramacionInstructors\Tables\ProgramacionInstructorsTable;
 use App\Models\Instructor;
 use Filament\Resources\Resource;
@@ -41,6 +43,7 @@ class ProgramacionInstructorResource extends Resource
     {
         return [
             'index' => ListProgramacionInstructors::route('/'),
+            'manage' => ManageProgramacionInstructor::route('/{record}'),
         ];
     }
 }

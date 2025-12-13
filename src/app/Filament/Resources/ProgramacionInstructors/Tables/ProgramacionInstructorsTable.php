@@ -7,6 +7,8 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use App\Filament\Resources\ProgramacionInstructors\ProgramacionInstructorResource;
+use Illuminate\Database\Eloquent\Model;
 
 
 class ProgramacionInstructorsTable
@@ -14,6 +16,10 @@ class ProgramacionInstructorsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->recordUrl(function (Model $record): string {
+                // Redirige a la página "manage" en lugar de "edit"
+                return ProgramacionInstructorResource::getUrl('manage', ['record' => $record]);
+            })
             ->columns([
                 ImageColumn::make('photo_url')
                     ->label('')

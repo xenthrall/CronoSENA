@@ -92,14 +92,13 @@ class AdminPanelProvider extends PanelProvider
 
 
             ])
-            ->viteTheme('resources/css/filament/theme.css')
-
-            /*
-            ->assets([
-                Css::make('custom-stylesheet', resource_path('css/custom.css')),
-                //Js::make('custom-script', resource_path('js/custom.js')),
+            ->viteTheme([
+                'resources/css/filament/theme.css',
+                'resources/js/app.js',
             ])
-                */
+
+
+
 
             //->topNavigation() //Habilitar la barra de navegación superior
 
