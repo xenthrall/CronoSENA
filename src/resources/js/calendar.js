@@ -1,6 +1,5 @@
 import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const calendar = new Calendar(calendarEl, {
         plugins: [
             dayGridPlugin,
-            timeGridPlugin,
             interactionPlugin,
             listPlugin
         ],
@@ -27,31 +25,29 @@ document.addEventListener('DOMContentLoaded', function () {
         locale: esLocale,
         timeZone: 'America/Bogota',
 
-        // Formato AM / PM
-        slotLabelFormat: {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true
-        },
-
-        eventTimeFormat: {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true
-        },
-
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+            right: 'dayGridMonth,listMonth'
         },
 
         buttonText: {
             today: 'Hoy',
             month: 'Mes',
-            week: 'Semana',
-            day: 'Día',
             list: 'Lista'
+        },
+
+        eventContent: function (arg) {
+            const shift = arg.event.extendedProps.shift;
+
+            return {
+                html: `
+                    <div>
+                        <div class="font-semibold">${arg.event.title}</div>
+                        <div class="text-xs opacity-70">${shift}</div>
+                    </div>
+                `
+            };
         },
 
         events: `/api/events/${tipo}/${id}`,

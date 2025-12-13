@@ -1,0 +1,5 @@
+
+/* Ocultar la columna de tiempo en vistas list */
+.fc-list-event-time {
+    display: none;
+}

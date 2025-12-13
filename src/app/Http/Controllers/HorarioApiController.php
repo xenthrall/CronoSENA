@@ -26,19 +26,16 @@ class HorarioApiController extends Controller
                         $execution->fichaCompetency->competency->name ?? ''
                     ),
 
-                    'start' => Carbon::parse($execution->execution_date)
-                        ->setTimeFromTimeString($execution->fichaCompetency->ficha->shift->start_time)
-                        ->toIso8601String(),
+                    'start' => Carbon::parse($execution->execution_date),
 
-                    'end' => Carbon::parse($execution->completion_date)
-                        ->setTimeFromTimeString($execution->fichaCompetency->ficha->shift->end_time)
-                        ->toIso8601String(),
+                    'end' => Carbon::parse($execution->completion_date),
 
-                    'allDay' => false,
+                    'allDay' => true,
 
                     'color' => $shiftColor,
 
                     'extendedProps' => [
+                        'shift' => $execution->fichaCompetency->ficha->shift->name,
                         'instructor' => $execution->instructor->full_name ?? null,
                         'notes' => $execution->notes,
                         'ficha_competency_id' => $execution->ficha_competency_id,
