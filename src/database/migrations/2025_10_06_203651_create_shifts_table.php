@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('description')->nullable();
+            $table->string('color')->default('#4096b8ff');
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->boolean('is_mixed')->default(false);

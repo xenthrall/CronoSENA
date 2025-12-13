@@ -1,26 +1,52 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Models\FichaCompetencyExecution;
+use Carbon\Carbon;
+
 
 class HorarioApiController extends Controller
 {
     public function eventsInstructor($id)
     {
-        return response()->json([
-            [
-                'title' => 'Clase de Programación Avanzada',
-                'start' => '2025-12-02T08:00:00',
-                'end'   => '2025-12-02T10:00:00',
-                
-            ],
-            [
-                'title' => 'Reunión de Instructores',
-                'start' => '2025-12-05T14:00:00',
-                'end'   => '2025-12-05T15:00:00',
-                
-            ],
-        ]);
+        $events = FichaCompetencyExecution::where('instructor_id', $id)
+            ->with(['fichaCompetency.ficha', 'instructor'])
+            ->get()
+            ->map(function ($execution) {
+
+                $shiftColor = $execution->fichaCompetency->ficha->shift->color;
+
+                return [
+                    'title' => sprintf(
+                        'Ficha %s - %s',
+                        $execution->fichaCompetency->ficha->code,
+                        $execution->fichaCompetency->competency->name ?? ''
+                    ),
+
+                    'start' => Carbon::parse($execution->execution_date)
+                        ->setTimeFromTimeString($execution->fichaCompetency->ficha->shift->start_time)
+                        ->toIso8601String(),
+
+                    'end' => Carbon::parse($execution->completion_date)
+                        ->setTimeFromTimeString($execution->fichaCompetency->ficha->shift->end_time)
+                        ->toIso8601String(),
+
+                    'allDay' => false,
+
+                    'color' => $shiftColor,
+
+                    'extendedProps' => [
+                        'instructor' => $execution->instructor->full_name ?? null,
+                        'notes' => $execution->notes,
+                        'ficha_competency_id' => $execution->ficha_competency_id,
+                    ],
+                ];
+            });
+
+        return response()->json($events);
     }
 
     public function eventsFicha($id)
