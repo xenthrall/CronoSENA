@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\Instructors\Tables;
+namespace App\Filament\Resources\ProgramacionInstructors\Tables;
 
 use Filament\Actions\BulkActionGroup;
-use Filament\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
-use Illuminate\Support\Facades\Auth;
+use Filament\Tables\Columns\TextColumn;
 
-class InstructorsTable
+
+class ProgramacionInstructorsTable
 {
     public static function configure(Table $table): Table
     {
@@ -23,7 +22,7 @@ class InstructorsTable
                     ->toggleable(false),
                 TextColumn::make('full_name')
                     ->label('Instructor')
-                    ->searchable() // busca en esta columna
+                    ->searchable()
                     ->wrap(),
                 TextColumn::make('document_number')
                     ->label('Documento')
@@ -62,12 +61,11 @@ class InstructorsTable
                 //
             ])
             ->recordActions([
-                EditAction::make()
-                    ->visible(fn() => Auth::user()?->can('instructor.edit')),
+                //
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-
+                    //
                 ]),
             ]);
     }

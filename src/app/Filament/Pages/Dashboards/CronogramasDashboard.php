@@ -10,11 +10,11 @@ class CronogramasDashboard extends Page
 
     protected static ?string $title = '';
 
-    protected static string|\UnitEnum|null $navigationGroup = 'gestion academica';
+    protected static string|\UnitEnum|null $navigationGroup = 'programación';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationLabel = 'Cronogramas';
+    protected static ?string $navigationLabel = 'progreso';
 
     protected static ?string $slug = 'dashboard-cronogramas';
 

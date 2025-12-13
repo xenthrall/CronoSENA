@@ -44,7 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('2.5rem')
 
 
-           // ->viteTheme('resources/css/filament/admin/theme.css')
+            // ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
@@ -71,16 +71,17 @@ class AdminPanelProvider extends PanelProvider
 
             ->navigationGroups([
                 NavigationGroup::make()
-                    ->label('gestion academica')
+                    ->label('programación')
                     ->icon('heroicon-o-calendar')
                     ->collapsed(),
+                NavigationGroup::make()
+                    ->label('fichas')
+                    ->icon('heroicon-o-pencil'),
                 NavigationGroup::make()
                     ->label('programas')
                     ->icon('heroicon-o-book-open')
                     ->collapsed(), //contraible deshabilitado -> false
-                NavigationGroup::make()
-                    ->label('fichas')
-                    ->icon('heroicon-o-pencil'),
+
                 NavigationGroup::make()
                     ->label('instructores')
                     ->icon('heroicon-o-user-group')
@@ -99,7 +100,7 @@ class AdminPanelProvider extends PanelProvider
                 //Js::make('custom-script', resource_path('js/custom.js')),
             ])
                 */
-            
+
             //->topNavigation() //Habilitar la barra de navegación superior
 
             ->sidebarCollapsibleOnDesktop()
