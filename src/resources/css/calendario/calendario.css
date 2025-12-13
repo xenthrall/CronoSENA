@@ -4,16 +4,29 @@
     display: none;
 }
 
-/* Rango de fechas */
-.fc-event-range {
-    font-size: 0.7rem;
-    font-weight: 500;
-    opacity: 0.8;
+/* GRID MONTH */
+.fc-event-grid {
+    font-size: 0.75rem;
+    line-height: 1.1;
+    overflow: hidden;
 }
 
-/* Horas ejecutadas con contexto */
-.fc-event-hours {
-    font-size: 0.7rem;
-    font-weight: 500;
-    opacity: 0.8;
+.fc-event-grid .fc-event-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
 }
+
+/* LIST MONTH */
+.fc-event-list {
+    font-size: 0.8rem;
+}
+
+.fc-event-title-main {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
