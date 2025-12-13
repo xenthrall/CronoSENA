@@ -32,6 +32,16 @@ document.addEventListener("DOMContentLoaded", function () {
             list: "Lista",
         },
         
+        eventClick: function (info) {
+            info.jsEvent.preventDefault();
+
+            const executionId = info.event.extendedProps.execution_id;
+
+            Livewire.dispatch('openExecutionAction', {
+                executionId: executionId
+            });
+
+        },
 
 
         eventContent: function (arg) {

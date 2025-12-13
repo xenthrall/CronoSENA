@@ -4,8 +4,9 @@ namespace App\Filament\Resources\ProgramacionInstructors\Pages;
 use App\Filament\Resources\ProgramacionInstructors\ProgramacionInstructorResource;
 use Filament\Resources\Pages\Page;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
-use App\Filament\Actions\programacion\instructors\RegisterExecutionHeaderAction;
-
+use App\Filament\Actions\Programacion\Instructors\RegisterExecutionHeaderAction;
+use Livewire\Attributes\On;
+use App\Filament\Actions\Programacion\Instructors\ShowExecutionTestAction;
 
 class ManageProgramacionInstructor extends Page
 {
@@ -29,7 +30,15 @@ class ManageProgramacionInstructor extends Page
         return [
             RegisterExecutionHeaderAction::make()
                 ->instructor($this->record->id),
+            ShowExecutionTestAction::make(),
         ];
+    }
+
+     #[On('openExecutionAction')]
+    public function openExecutionAction(int $executionId): void
+    {
+        // Por ahora ignoramos el ID, solo abrimos el modal
+        $this->mountAction('showExecutionTest');
     }
     
 }
