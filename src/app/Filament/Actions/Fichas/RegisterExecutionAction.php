@@ -81,7 +81,7 @@ class RegisterExecutionAction extends Action
                             ->reactive()
                             ->searchable()
                             ->required(),
-                            TextInput::make('executed_hours')
+                        TextInput::make('executed_hours')
                             ->label('Horas ejecutadas')
                             ->integer()
                             //->readOnly()
@@ -96,17 +96,17 @@ class RegisterExecutionAction extends Action
                             ->reactive()
                             ->required(),
 
-                        
+
 
                     ]),
-                    Grid::make(2)
+                Grid::make(2)
                     ->schema([
                         Select::make('location_id')
                             ->label('Sede de formación')
                             ->searchable()
                             ->reactive()
                             ->options(fn(callable $get) => self::obtenerUbicaciones()),
-                            
+
                         Select::make('training_environment_id')
                             ->label('Ambiente de formación')
                             ->searchable()
