@@ -4,6 +4,7 @@ namespace App\Traits\Executions;
 
 use App\Models\Instructor;
 use App\Models\FichaCompetencyExecution;
+use App\Models\TrainingEnvironment;
 
 trait PreventsDateOverlap
 {
@@ -47,4 +48,24 @@ trait PreventsDateOverlap
             ->pluck('full_name', 'id')
             ->toArray();
     }
+
+    public static function obtenerUbicaciones(): array
+    {
+        return \App\Models\Location::all()
+            ->pluck('name', 'id')
+            ->toArray();
+    }
+
+    public static function findAvailableTrainingEnvironments(?string $startDate = null, ?string $endDate = null, ?int $locationId = null): array
+    {
+        
+        if (empty($locationId)) {
+            return [];
+        }
+
+        return TrainingEnvironment::where('location_id', $locationId)
+            ->pluck('code', 'id')
+            ->toArray();
+    }
+
 }

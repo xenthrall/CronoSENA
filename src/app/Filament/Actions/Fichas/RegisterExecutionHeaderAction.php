@@ -106,6 +106,24 @@ class RegisterExecutionHeaderAction extends Action
                             ->placeholder($ficha ? "Máximo: {$ficha->remaining_hours} horas" : 'Ingrese horas')
                             ->required(),
                     ]),
+                    Grid::make(2)
+                    ->schema([
+                        Select::make('location_id')
+                            ->label('Sede de formación')
+                            ->searchable()
+                            ->reactive()
+                            ->options(fn(callable $get) => self::obtenerUbicaciones()),
+                            
+                        Select::make('training_environment_id')
+                            ->label('Ambiente de formación')
+                            ->searchable()
+                            ->options(fn(callable $get) => self::findAvailableTrainingEnvironments(
+                                $get('execution_date'),
+                                $get('completion_date'),
+                                $get('location_id')
+                            )),
+
+                    ]),
 
 
                 ];
