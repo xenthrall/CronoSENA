@@ -11,6 +11,7 @@ class FichaCompetencyExecution extends Model
     protected $fillable = [
         'ficha_competency_id',
         'instructor_id',
+        'training_environment_id',
         'execution_date',
         'completion_date',
         'executed_hours',
@@ -25,6 +26,11 @@ class FichaCompetencyExecution extends Model
     public function instructor()
     {
         return $this->belongsTo(Instructor::class);
+    }
+
+    public function trainingEnvironment()
+    {
+        return $this->belongsTo(TrainingEnvironment::class);
     }
 
 }
