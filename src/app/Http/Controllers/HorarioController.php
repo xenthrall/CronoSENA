@@ -41,9 +41,14 @@ class HorarioController extends Controller
 
     public function calendarInstructor($id)
     {
+        $instructor = Instructor::findOrFail($id);
+        $name_instructor = $instructor->name;
+
         return view('horario.calendario', [
             'tipo' => 'instructor',
-            'id' => $id
+            'id' => $id,
+            'title' => "Horario de Instructor",
+            'name' => $name_instructor,
         ]);
     }
 

@@ -13,19 +13,10 @@
     @stack('styles')
 </head>
 
-<body class="min-h-screen bg-gray-100 text-gray-900">
-
-    {{-- Navbar global opcional --}}
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto p-4">
-            <h1 class="text-xl font-semibold">
-                @yield('header', 'Panel')
-            </h1>
-        </div>
-    </header>
+<body>
 
     {{-- Contenido principal --}}
-    <main class="max-w-7xl mx-auto py-6 px-4">
+    <main>
         @yield('content')
     </main>
 

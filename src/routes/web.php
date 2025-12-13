@@ -16,17 +16,18 @@ Route::get('/reportes/mensual/{month}/{year}', [PdfExportController::class, 'exp
 
 
 
-Route::get('/consultar-horario', [HorarioController::class, 'index'])
-    ->name('horario.index'); // página con el formulario
+Route::controller(HorarioController::class)->group(function () {
 
-Route::post('/consultar-horario', [HorarioController::class, 'buscar'])
-    ->name('horario.buscar'); // procesa la búsqueda general
+    Route::get('/consultar-horario', 'index')
+        ->name('horario.index');
 
-Route::get('/calendario/instructor/{id}', [HorarioController::class, 'calendarInstructor'])
-    ->name('horario.instructor');
+    Route::post('/consultar-horario', 'buscar')
+        ->name('horario.buscar');
 
-Route::get('/calendario/ficha/{id}', [HorarioController::class, 'calendarFicha'])
-    ->name('horario.ficha');
+    Route::prefix('calendario')->name('horario.')->group(function () {
+        Route::get('/instructor/{id}', 'calendarInstructor')->name('instructor');
+        Route::get('/ficha/{id}', 'calendarFicha')->name('ficha');
+        Route::get('/ambiente/{id}', 'calendarAmbiente')->name('ambiente');
+    });
 
-Route::get('/calendario/ambiente/{id}', [HorarioController::class, 'calendarAmbiente'])
-    ->name('horario.ambiente');
+});

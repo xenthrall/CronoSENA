@@ -12,6 +12,9 @@
             --text-light: #fff;
             --gradient: linear-gradient(83.21deg, #3245ff 0%, #bc52ee 100%);
             --font: Inter, Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --pink-light: #ffe9f2; /* fondo rosa claro */
+            --pink-accent: #d66aa8; /* texto / hover */
+            --muted: #6b7280;
         }
 
         * {
@@ -30,6 +33,7 @@
             overflow: hidden;
             color: var(--text-dark);
             position: relative;
+            background: #fafafa;
         }
 
         #background {
@@ -43,8 +47,6 @@
             object-fit: cover;
             opacity: 1;
             animation: gradientMove 15s ease infinite;
-
-
         }
 
         main {
@@ -53,10 +55,11 @@
             padding: 2rem 3rem;
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.55);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             animation: fadeIn 0.8s ease both;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            max-width: 620px;
+            width: calc(100% - 2rem);
         }
 
         h1 {
@@ -68,8 +71,8 @@
         }
 
         p {
-            color: #4b5563;
-            opacity: 0.6;
+            color: var(--muted);
+            opacity: 0.95;
             font-size: 1rem;
             margin-bottom: 2rem;
         }
@@ -79,8 +82,9 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 16px;
+            padding: 16px 0 8px;
             position: relative;
+            flex-direction: column; /* logo arriba, crono + button abajo */
         }
 
         /* Logo */
@@ -95,21 +99,31 @@
 
         .header-container {
             position: relative;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .crono-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
         .header-crono {
-            height: 80px;
+            height: 92px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
-            transition: filter 0.3s ease;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.12));
+            transition: filter 0.25s ease, transform 0.15s ease;
             cursor: pointer;
         }
 
         .header-crono:hover {
-            filter:
-                drop-shadow(0 0 6px rgba(188, 82, 238, 0.6)) drop-shadow(0 0 12px rgba(50, 69, 255, 0.4));
+            transform: translateY(-4px);
+            filter: drop-shadow(0 6px 18px rgba(214, 106, 168, 0.18));
         }
 
         /* Mensaje de saludo */
@@ -128,14 +142,62 @@
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
+            z-index: 3;
         }
 
-        /* Estado visible */
         .crono-message.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Botón minimal rosa claro, junto a Crono */
+        .button-crono {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--pink-accent);
+            background: var(--pink-light);
+            border: 1px solid rgba(214, 106, 168, 0.14);
+            box-shadow: none;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+        }
+
+        .button-crono:hover {
+            transform: translateY(-3px);
+            background: #ffd0ea;
+            box-shadow: 0 6px 18px rgba(214, 106, 168, 0.08);
+        }
+
+        /* Mantener otros botones existentes (Planificación / Instructor) */
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        a.button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 500;
+            color: var(--text-light);
+            background: var(--gradient);
+            transition: all 0.25s ease;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        a.button:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+        }
 
         #back-button {
             position: absolute;
@@ -147,18 +209,17 @@
             border-radius: 50%;
             text-decoration: none;
             font-weight: 100;
-            opacity: 0.5;
+            opacity: 0.6;
             color: var(--text-light);
             background: var(--gradient);
             transition: all 0.25s ease;
             box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
                 inset 0 -2px 0 rgba(0, 0, 0, 0.24);
             z-index: 2;
-
         }
 
         #back-button:hover {
-            opacity: 0.9;
+            opacity: 0.95;
             transform: translateY(-2px);
         }
 
@@ -182,31 +243,7 @@
         }
 
         .button-admin:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        a.button {
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 500;
-            color: var(--text-light);
-            background: var(--gradient);
-            transition: all 0.25s ease;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.24);
-        }
-
-        a.button:hover {
-            opacity: 0.9;
+            opacity: 0.95;
             transform: translateY(-2px);
         }
 
@@ -245,47 +282,73 @@
 
         @media (max-width: 600px) {
             main {
-                padding: 1.5rem;
-                width: 90%;
+                padding: 1.2rem;
+                width: 94%;
             }
 
             h1 {
                 font-size: 1.5rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header-crono {
+                height: 84px;
+            }
+
+            .button-crono {
+                padding: 0.55rem 0.9rem;
+                font-size: 0.92rem;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Fondo SVG igual que en la landing -->
+    <!-- Fondo SVG -->
     <img id="background" src="/images/background.svg" alt="Fondo CronoSENA" />
 
     <a class="button-admin" href="{{ url('/admin') }}">Administración General</a>
+
     <main>
-        <a href="https://cronosena.site" id="back-button" title="Volver a CronoSENA">
+        <a href="https://cronosena.site" id="back-button" title="Volver a CronoSENA" aria-label="Volver a CronoSENA">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="m15 18-6-6 6-6" />
             </svg>
         </a>
+
         <div class="header-bar">
-
-
             <img src="/images/logo-cata-removebg.png" alt="CronoSENA Logo" class="header-logo">
-        </div>
 
-        <!--<h1>CATA</h1> -->
-        <div class="header-container">
-            <img src="/images/crono.svg" alt="crono Mascota" class="header-crono" id="crono-logo">
-            <div id="crono-message" class="crono-message">👋 ¡Hola! Soy Crono 🦉</div>
+            <!-- Contenedor con Crono y botón lado a lado -->
+            <div class="header-container">
+                <div class="crono-wrapper" role="group" aria-label="Crono y consultar horario">
+                    <div style="position:relative;">
+                        <img src="/images/crono.svg" alt="crono Mascota" class="header-crono" id="crono-logo">
+                        <div id="crono-message" class="crono-message">👋 ¡Hola! Soy Crono 🦉</div>
+                    </div>
+
+                    <a class="button-crono" href="{{ route('horario.index') }}" title="Consultar horarios">
+                        Consultar horarios
+                    </a>
+                </div>
+            </div>
         </div>
 
         <p>CronoSENA v{{ config('app.version', '1.0.0') }}</p>
 
         <div class="buttons">
+            <a class="button" href="{{ url('/planificacion') }}">
+                Planificación Académica
+            </a>
 
-            <a class="button" href="{{ url('/planificacion') }}">Planificación Académica</a>
-            <a class="button" href="{{ url('/instructor') }}">Espacio del Instructor</a>
+            <a class="button" href="{{ url('/instructor') }}">
+                Espacio del Instructor
+            </a>
         </div>
     </main>
 
@@ -297,7 +360,6 @@
         let timeoutId;
 
         cronoLogo.addEventListener('click', () => {
-            // Si ya está visible, reinicia el temporizador
             clearTimeout(timeoutId);
             cronoMessage.classList.add('show');
 
@@ -306,7 +368,6 @@
             }, 2000);
         });
     </script>
-
 </body>
 
 </html>
