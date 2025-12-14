@@ -52,11 +52,17 @@ class RegisterExecutionHeaderAction extends Action
                         ->required()
                         ->reactive()
                         ->options(
-                            fn() =>
-                            Ficha::query()
-                                ->orderBy('code')
-                                ->pluck('code', 'id')
+                            fn () =>
+                                Ficha::query()
+                                    ->join('programs', 'programs.id', '=', 'fichas.program_id')
+                                    ->selectRaw("
+                                        fichas.id,
+                                        CONCAT(fichas.code, ' — ', programs.name, ' v', programs.version) AS label
+                                    ")
+                                    ->orderBy('fichas.code')
+                                    ->pluck('label', 'id')
                         )
+
                         ->afterStateUpdated(fn(callable $set) => $set('ficha_competency_id', null)),
 
                     Select::make('ficha_competency_id')
@@ -65,12 +71,14 @@ class RegisterExecutionHeaderAction extends Action
                         ->searchable()
                         ->reactive()
                         ->options(
-                            fn(callable $get) =>
-                            FichaCompetency::query()
-                                ->where('ficha_id', $get('ficha_id'))
-                                ->with('competency')
-                                ->get()
-                                ->pluck('competency.name', 'id')
+                            fn (callable $get) =>
+                                FichaCompetency::query()
+                                    ->where('ficha_id', $get('ficha_id'))
+                                    ->with('competency')
+                                    ->get()
+                                    ->mapWithKeys(fn (FichaCompetency $fc) => [
+                                        $fc->id => "{$fc->competency->name} — {$fc->remaining_hours} horas disponibles",
+                                    ])
                         )
                         ->disabled(fn(callable $get) => ! $get('ficha_id')),
                 ]),

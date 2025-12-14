@@ -48,25 +48,6 @@ class EditExecutionAction extends Action
             ->modalSubmitActionLabel('Guardar cambios')
             ->modalAlignment(Alignment::Center)
 
-            ->fillForm(function ($record): array {
-                if (! $record instanceof FichaCompetencyExecution) {
-                    return [];
-                }
-
-                return [
-                    'ficha_id' => $record->fichaCompetency?->ficha->code,
-                    'ficha_competency_id' => $record->fichaCompetency?->competency->name ?? '',
-                    'execution_date' => $record->execution_date,
-                    'completion_date' => $record->completion_date,
-                    'executed_hours' => $record->executed_hours,
-                    'location_id' => $record->trainingEnvironment?->location_id,
-                    'training_environment_id' => $record->training_environment_id,
-                ];
-            })
-
-            /**
-             * 3) Formulario
-             */
             ->schema([
                 Grid::make(1)->schema([
                     TextInput::make('ficha_id')
@@ -122,16 +103,30 @@ class EditExecutionAction extends Action
 
             ])
 
-            /**
-             * 4) Validación previa (defensiva)
-             */
+
+            ->fillForm(function ($record): array {
+                if (! $record instanceof FichaCompetencyExecution) {
+                    return [];
+                }
+
+                return [
+                    'ficha_id' => $record->fichaCompetency?->ficha->code . ' - ' . $record->fichaCompetency?->ficha->program->name,
+                    'ficha_competency_id' => $record->fichaCompetency?->competency->name ?? '',
+                    'execution_date' => $record->execution_date,
+                    'completion_date' => $record->completion_date,
+                    'executed_hours' => $record->executed_hours,
+                    'location_id' => $record->trainingEnvironment?->location_id,
+                    'training_environment_id' => $record->training_environment_id,
+                ];
+            })
+
+
+
             ->before(function (array $data): void {
                 //
             })
 
-            /**
-             * 5) Persistencia
-             */
+
             ->action(function (array $data, $livewire, $record): void {
                 if (! $record instanceof FichaCompetencyExecution) {
                     Notification::make()
