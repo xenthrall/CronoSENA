@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const executionId = info.event.extendedProps.execution_id;
 
-            Livewire.dispatch('openExecutionAction', {
+            Livewire.dispatch('openEditExecutionAction', {
                 executionId: executionId
             });
 
