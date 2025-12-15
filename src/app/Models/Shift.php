@@ -9,6 +9,7 @@ class Shift extends Model
     protected $fillable = [
         'name',
         'description',
+        'color',
         'start_time',
         'end_time',
         'is_mixed',
@@ -22,7 +23,12 @@ class Shift extends Model
         'is_active' => 'boolean',
         'segments' => 'array',
         'valid_days' => 'array',
-        'start_time' => 'datetime:H:i',
-        'end_time' => 'datetime:H:i',
+        'start_time' => 'string',
+        'end_time' => 'string',
     ];
+
+    public function fichas()
+    {
+        return $this->hasMany(Ficha::class);
+    }
 }

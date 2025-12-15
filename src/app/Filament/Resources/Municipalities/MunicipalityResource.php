@@ -4,14 +4,11 @@ namespace App\Filament\Resources\Municipalities;
 
 use App\Filament\Resources\Municipalities\Pages\ManageMunicipalities;
 use App\Models\Municipality;
-use BackedEnum;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +25,7 @@ class MunicipalityResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'fichas';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
     
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -65,9 +62,7 @@ class MunicipalityResource extends Resource
                 DeleteAction::make(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-
-                ]),
+                //
             ]);
     }
 

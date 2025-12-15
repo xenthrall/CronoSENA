@@ -1,0 +1,37 @@
+
+/* Ocultar la columna de tiempo en vistas list */
+.fc-list-event-time {
+    display: none;
+}
+
+/* GRID MONTH */
+.fc-event-grid {
+    font-size: 0.75rem;
+    line-height: 1.1;
+    overflow: hidden;
+}
+
+.fc-event-grid .fc-event-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+/* LIST MONTH */
+.fc-event-list {
+    font-size: 0.8rem;
+}
+
+.fc-event-title-main {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fc-event {
+    cursor: pointer;
+}
+
+
+

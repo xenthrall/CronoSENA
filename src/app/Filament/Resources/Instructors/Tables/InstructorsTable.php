@@ -54,6 +54,7 @@ class InstructorsTable
                     ->toggleable(),
 
                 IconColumn::make('is_active')
+                    ->label('Activo')
                     ->boolean()
                     ->toggleable(isToggledHiddenByDefault: false),
             ])

@@ -37,9 +37,8 @@ class FichasTable
                 // Programa — muestra "code - name"
                 TextColumn::make('program.name')
                     ->label('Programa')
-                    /*->getStateUsing(fn ($record) => $record->programa
-                        ? "{$record->programa->codigo_programa} - {$record->programa->nombre}"
-                        : '-')*/
+                    ->limit(50)
+                    ->tooltip(fn($record) => $record->program->program_code . ' - ' . $record->program->name)
                     ->searchable(),
 
                 // Fechas

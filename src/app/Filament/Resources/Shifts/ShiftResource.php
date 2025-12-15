@@ -10,6 +10,7 @@ use Filament\Actions\EditAction;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -18,6 +19,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\CheckboxList;
+use Filament\Tables\Columns\ColorColumn;
 use Illuminate\Support\Facades\Auth;
 
 class ShiftResource extends Resource
@@ -32,7 +34,7 @@ class ShiftResource extends Resource
 
     protected static string|\UnitEnum|null $navigationGroup = 'fichas';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -101,6 +103,10 @@ class ShiftResource extends Resource
                     ->columns(4)
                     ->required()
                     ->columnSpanFull(),
+                 ColorPicker::make('color')
+                    ->label('Color')
+                    ->default('#4096b8ff')
+                    ->required(),
 
                 Toggle::make('is_mixed')
                     ->label('¿Es una jornada mixta (dividida)?')
@@ -118,6 +124,8 @@ class ShiftResource extends Resource
         return $table
             ->recordTitleAttribute('name')
             ->columns([
+                ColorColumn::make('color')
+                    ->label('Color'),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('start_time')

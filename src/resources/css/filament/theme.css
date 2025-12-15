@@ -1,6 +1,8 @@
 @import '../../../vendor/filament/filament/resources/css/theme.css';
 @import '../../../vendor/filament/filament/resources/css/index.css';
 
+@import '../calendario/calendario.css';
+
 @source '../../../app/Filament/**/*';
 @source '../../../resources/views/filament/**/*';
 

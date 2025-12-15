@@ -74,16 +74,17 @@ class PlanificacionAcademicaPanelProvider extends PanelProvider
 
             ->navigationGroups([
                 NavigationGroup::make()
-                    ->label('gestion academica')
+                    ->label('programación')
                     ->icon('heroicon-o-calendar')
                     ->collapsed(),
                 NavigationGroup::make()
-                    ->label('programas')
-                    ->icon('heroicon-o-book-open')
-                    ->collapsed(), //contraible deshabilitado -> false
-                NavigationGroup::make()
                     ->label('fichas')
                     ->icon('heroicon-o-pencil'),
+
+                NavigationGroup::make()
+                    ->label('programas')
+                    ->icon('heroicon-o-book-open')
+                    ->collapsed(),
                 NavigationGroup::make()
                     ->label('instructores')
                     ->icon('heroicon-o-user-group')

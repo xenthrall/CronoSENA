@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('ficha_competency_executions', function (Blueprint $table) {
             $table->id();
-            
+
             $table->foreignId('ficha_competency_id')->constrained('ficha_competencies')->onDelete('cascade');
             $table->foreignId('instructor_id')->constrained('instructors')->onDelete('cascade');
+
+            // Optional: the training environment where this execution took place
+            $table->foreignId('training_environment_id')
+                ->nullable()
+                ->constrained('training_environments')
+                ->nullOnDelete();
 
             $table->date('execution_date')->nullable();
             $table->date('completion_date')->nullable();
             $table->integer('executed_hours')->default(0);
-            
+
             $table->text('notes')->nullable();
 
             $table->timestamps();

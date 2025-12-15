@@ -21,7 +21,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Instructor\Pages\Auth\EditProfile;
 use App\Filament\Instructor\Pages\Auth\InstructorLogin;
-use Filament\Support\Assets\Css;
+
+use Filament\Navigation\NavigationGroup;
 
 class InstructorPanelProvider extends PanelProvider
 {
@@ -67,6 +68,26 @@ class InstructorPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('gestion academica')
+                    ->icon('heroicon-o-calendar')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('programas')
+                    ->icon('heroicon-o-book-open')
+                    ->collapsed(), //contraible deshabilitado -> false
+                NavigationGroup::make()
+                    ->label('fichas')
+                    ->icon('heroicon-o-pencil'),
+                NavigationGroup::make()
+                    ->label('instructores')
+                    ->icon('heroicon-o-user-group')
+                    ->collapsed(),
+                NavigationGroup::make()
+                    ->label('sistema')
+                    ->collapsed(),
             ])
 
             //->topNavigation() //Habilitar la barra de navegación superior

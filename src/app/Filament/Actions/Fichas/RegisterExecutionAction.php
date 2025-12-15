@@ -96,6 +96,26 @@ class RegisterExecutionAction extends Action
                             ->reactive()
                             ->required(),
 
+
+
+                    ]),
+                Grid::make(2)
+                    ->schema([
+                        Select::make('location_id')
+                            ->label('Sede de formación')
+                            ->searchable()
+                            ->reactive()
+                            ->options(fn(callable $get) => self::obtenerUbicaciones()),
+
+                        Select::make('training_environment_id')
+                            ->label('Ambiente de formación')
+                            ->searchable()
+                            ->options(fn(callable $get) => self::findAvailableTrainingEnvironments(
+                                $get('execution_date'),
+                                $get('completion_date'),
+                                $get('location_id')
+                            )),
+
                     ]),
 
             ])
@@ -104,6 +124,7 @@ class RegisterExecutionAction extends Action
                 FichaCompetencyExecution::create([
                     'ficha_competency_id' => $record->id,
                     'instructor_id'       => $data['instructor_id'],
+                    'training_environment_id' => $data['training_environment_id'] ?? null,
                     'execution_date'      => $data['execution_date'] ?? null,
                     'completion_date'     => $data['completion_date'] ?? null,
                     'executed_hours'      => $data['executed_hours'],

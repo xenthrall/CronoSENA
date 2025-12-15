@@ -48,12 +48,20 @@ class CompetencyExecutions extends Component implements HasActions, HasSchemas, 
                     ->label('Instructor'),
                 TextColumn::make('executed_hours')
                     ->label('Horas Ejecutadas'),
+
                 TextColumn::make('execution_date')
                     ->date('d/F/Y')
                     ->label('Fecha de Ejecución'),
                 TextColumn::make('completion_date')
                     ->date('d/F/Y')
                     ->label('Fecha de Finalización'),
+                
+                TextColumn::make('trainingEnvironment.code')
+                    ->label('Ambiente'),
+                TextColumn::make('trainingEnvironment.location.name')
+                    ->label('Ubicación')
+                    ->limit(35)
+                    ->tooltip(fn($record) => $record->trainingEnvironment->location->name),
             ])
 
             ->headerActions([
