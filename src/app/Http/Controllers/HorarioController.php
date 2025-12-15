@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Instructor;
 use App\Models\Ficha;
-use App\Models\Ambiente;
+use App\Models\TrainingEnvironment as Ambiente;
 use Illuminate\Http\Request;
 
 class HorarioController extends Controller
@@ -33,7 +33,7 @@ class HorarioController extends Controller
                 return redirect()->route('horario.ficha', $ficha->id);
 
             case 'ambiente':
-                $ambiente = Ficha::where('code', $request->valor)->first();
+                $ambiente = Ambiente::where('code', $request->valor)->first();
                 if (!$ambiente) return back()->with('error', 'Ambiente no encontrado');
                 return redirect()->route('horario.ambiente', $ambiente->id);
         }
@@ -53,18 +53,26 @@ class HorarioController extends Controller
     }
 
     public function calendarFicha($id)
-    {
+    {   
+        $ficha = Ficha::findOrFail($id);
+        $code_ficha = $ficha->code;
         return view('horario.calendario', [
             'tipo' => 'ficha',
-            'id' => $id
+            'id' => $id,
+            'title' => "Horario de Ficha",
+            'name' => $code_ficha,
         ]);
     }
 
     public function calendarAmbiente($id)
     {
+        $ambiente = Ambiente::findOrFail($id);
+        $name_ambiente = $ambiente->name;
         return view('horario.calendario', [
             'tipo' => 'ambiente',
-            'id' => $id
+            'id' => $id,
+            'title' => "Horario de Ambiente",
+            'name' => $name_ambiente,
         ]);
     }
 }
