@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->nullable()->unique();
+            $table->string('institutional_email')->nullable()->unique(); // correo institucional
             $table->string('phone')->nullable();
 
             // Campos de autenticación
