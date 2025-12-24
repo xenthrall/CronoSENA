@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
+
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
@@ -11,9 +14,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 
-class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, HasName
+class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, HasName, CanResetPassword
 {
     use Notifiable;
+    use CanResetPasswordTrait;
 
     protected $fillable = [
         'document_number',

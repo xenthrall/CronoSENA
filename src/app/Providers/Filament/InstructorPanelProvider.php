@@ -35,6 +35,7 @@ class InstructorPanelProvider extends PanelProvider
             ->profile(EditProfile::class, isSimple: false)
             ->passwordReset()
             ->authGuard('instructor')
+            ->authPasswordBroker('instructors')
             ->viteTheme('resources/css/filament/theme.css')
             ->colors([
                 'primary' => Color::Indigo,
