@@ -22,6 +22,7 @@ class Instructor extends Authenticatable implements FilamentUser,  HasAvatar, Ha
         'name',
         'last_name',
         'email',
+        'institutional_email',
         'phone',
         'password',
         'executing_team_id',
