@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -32,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(AdminLogin::class)
             ->profile(isSimple: false)
+            
             ->colors([
                 'primary' => Color::Indigo,
             ])
@@ -106,6 +108,8 @@ class AdminPanelProvider extends PanelProvider
             //->spa() //Habilitar la aplicación de una sola página (SPA)
             ->unsavedChangesAlerts()
             //->sidebarFullyCollapsibleOnDesktop() //Contraer la barra lateral completamente
-        ;
+        ->multiFactorAuthentication([
+                AppAuthentication::make(),
+            ]);
     }
 }
